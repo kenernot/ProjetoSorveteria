@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="javafx.mvc.controller.LoginController">
+  <children>
+    <GridPane alignment="BOTTOM_LEFT" prefHeight="274.0" prefWidth="586.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="112.0">
+      <children>
+        <Label alignment="CENTER_RIGHT" prefHeight="106.0" prefWidth="286.0" text="Usuário:" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <font>
+            <Font name="System Bold" size="15.0" fx:id="x2" />
+          </font>
+        </Label>
+        <Label alignment="CENTER_RIGHT" prefHeight="105.0" prefWidth="286.0" text="Senha:" GridPane.columnIndex="0" GridPane.rowIndex="1">
+          <font>
+            <Font name="System Bold" size="14.0" />
+          </font>
+        </Label>
+        <TextField alignment="CENTER" minHeight="5.0" prefHeight="33.0" prefWidth="237.0" styleClass="edits" GridPane.columnIndex="1" GridPane.rowIndex="0">
+          <GridPane.margin>
+            <Insets right="100.0" fx:id="x1" />
+          </GridPane.margin>
+        </TextField>
+        <PasswordField alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="299.0" styleClass="edtis" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="1" />
+        <HBox alignment="CENTER" prefHeight="140.0" prefWidth="595.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.margin="$x3" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+          <children>
+            <Button contentDisplay="CENTER" font="$x2" mnemonicParsing="false" prefHeight="44.0" prefWidth="109.0" text="Sair">
+              <HBox.margin>
+                <Insets right="50.0" />
+              </HBox.margin>
+            </Button>
+            <Button font="$x2" mnemonicParsing="false" prefHeight="67.0" prefWidth="124.0" text="Entrar">
+              <HBox.margin>
+                <Insets left="50.0" />
+              </HBox.margin>
+            </Button>
+          </children>
+          <padding>
+            <Insets right="5.0" fx:id="x3" />
+          </padding>
+        </HBox>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.0" minWidth="10.0" prefWidth="301.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="299.0" minWidth="10.0" prefWidth="299.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="149.0" minHeight="10.0" prefHeight="149.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="56.0" prefWidth="572.0" text="Efetue o Login!">
+      <font>
+        <Font name="Arial Black" size="25.0" />
+      </font>
+    </Label>
+  </children>
+</AnchorPane>
