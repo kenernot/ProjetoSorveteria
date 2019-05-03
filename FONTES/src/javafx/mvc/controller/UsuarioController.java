@@ -23,7 +23,7 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author Marlon
  */
-public class ViewUsuarioController implements Initializable {
+public class UsuarioController implements Initializable {
 
   @FXML
     private TextField txtIDCadUsuario;
