@@ -59,6 +59,8 @@ CREATE TABLE IF NOT EXISTS `projetosorveteria`.`Usuario` (
   PRIMARY KEY (`idUsuario`))
 ENGINE = InnoDB;
 
+INSERT INTO usuario(nomeFuncionario,nomeUsuario,senhaUsuario,status,cliente,usuario,produto) VALUES('Administrador','admin',SHA2('admin','256'),'A','1','1','1');
+
 
 -- -----------------------------------------------------
 -- Table `projetosorveteria`.`pedido`
