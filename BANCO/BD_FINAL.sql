@@ -66,7 +66,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `projetosorveteria`.`pedido` ;
 
 CREATE TABLE IF NOT EXISTS `projetosorveteria`.`pedido` (
-  `idpedido` INT NOT NULL AUTO_INCREMENT,
+  `idPedido` INT NOT NULL AUTO_INCREMENT,
   `idCliente` INT NOT NULL,
   `idUsuario` INT  NOT NULL,
   `dataPedido` DATE  NOT NULL,
@@ -97,7 +97,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `projetosorveteria`.`itemPedido` ;
 
 CREATE TABLE IF NOT EXISTS `projetosorveteria`.`itemPedido` (
-	`iditemPedido` INT  NOT NULL AUTO_INCREMENT,
+	`idItemPedido` INT  NOT NULL AUTO_INCREMENT,
 	`idPedido` INT NOT NULL,
 	`idProduto` INT NOT NULL,
 	`qtd` DECIMAL(8,2) NOT NULL,
