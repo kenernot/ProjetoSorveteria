@@ -10,10 +10,14 @@ import java.io.IOException;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
+import javafx.mvc.controller.LoginController;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.mvc.controller.PrincipalController;
+import javafx.mvc.services.UsuarioLogado;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 
 /**
  *
@@ -37,7 +41,7 @@ public class Main extends Application {
         primaryStage.show();
         
         // Abre a tela validar o login
-        /*
+        
             Stage login = new Stage();
             FXMLLoader loaderLogin = new FXMLLoader();
             loaderLogin.setLocation(LoginController.class.getResource("/javafx/mvc/view/Login.fxml"));
@@ -56,7 +60,9 @@ public class Main extends Application {
             if (!cLogin.isIsAllowed()) {
                 primaryStage.close();
             }
-        */
+            
+          System.out.println(UsuarioLogado.getInstance().getUser().getNomeUsuario());
+        
         
     }
 
