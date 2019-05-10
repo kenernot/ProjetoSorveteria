@@ -12,7 +12,6 @@ public class UsuarioLogado {
     private static UsuarioLogado instance = null;
 
     private UsuarioLogado() {
-
     }
 
     public UsuarioModel getUser() {

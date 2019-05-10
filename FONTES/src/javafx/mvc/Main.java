@@ -57,9 +57,9 @@ public class Main extends Application {
 
         if (!cLogin.isIsAllowed()) {
             primaryStage.close();
+        } else {
+            System.out.println(UsuarioLogado.getInstance().getUser().getNomeUsuario());
         }
-
-        System.out.println(UsuarioLogado.getInstance().getUser().getNomeUsuario());
 
     }
 
