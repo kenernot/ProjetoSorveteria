@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="599.0" prefWidth="695.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sorveteria.PedidoController">
+  <children>
+    <Pane prefHeight="599.0" prefWidth="695.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <Label layoutX="145.0" layoutY="64.0" text="Data" />
+        <Label layoutX="89.0" layoutY="151.0" text="ID Produto" />
+        <Label layoutX="36.0" layoutY="109.0" text="ID Cliente" />
+        <Label layoutX="36.0" layoutY="67.0" text="ID Pedido" />
+        <Label layoutX="195.0" layoutY="151.0" text="Quantidade" />
+        <TextField layoutX="36.0" layoutY="83.0" prefWidth="100.0" />
+        <TextField layoutX="36.0" layoutY="125.0" prefWidth="100.0" />
+        <TextField layoutX="88.0" layoutY="167.0" prefWidth="100.0" />
+        <TextField layoutX="145.0" layoutY="80.0" prefWidth="200.0" />
+        <TextField layoutX="195.0" layoutY="167.0" prefWidth="100.0" />
+        <Label layoutX="145.0" layoutY="109.0" text="Nome Cliente" />
+        <Label layoutX="36.0" layoutY="193.0" text="Valor Desconto" />
+        <Label layoutX="145.0" layoutY="193.0" text="Valor Total" />
+        <TextField layoutX="145.0" layoutY="125.0" prefWidth="200.0" />
+        <TextField layoutX="36.0" layoutY="209.0" prefWidth="100.0" />
+        <TextField layoutX="145.0" layoutY="209.0" prefWidth="200.0" />
+        <TableView layoutX="14.0" layoutY="323.0" prefHeight="262.0" prefWidth="667.0">
+          <columns>
+            <TableColumn prefWidth="75.0" text="ID produto" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="295.0" text="Nome" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="95.0" text="Valor" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="73.0" text="Qtd" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="128.0" text="Valor Total" />
+          </columns>
+        </TableView>
+        <Button layoutX="36.0" layoutY="14.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Novo" />
+        <Button layoutX="399.0" layoutY="14.0" mnemonicParsing="false" prefHeight="61.0390625" prefWidth="134.0" text="Finalizar" />
+        <Button layoutX="145.0" layoutY="14.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Cancelar" />
+        <Button layoutX="258.0" layoutY="14.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Reimprimir" />
+        <Label layoutX="37.0" layoutY="236.0" text="Forma Pagamento" />
+        <TextField layoutX="35.0" layoutY="251.0" prefWidth="200.0" />
+        <Button layoutX="37.0" layoutY="151.0" mnemonicParsing="false" prefHeight="37.9609375" text="Pesq." />
+      </children>
+    </Pane>
+  </children>
+</AnchorPane>
