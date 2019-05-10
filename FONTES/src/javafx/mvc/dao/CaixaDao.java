@@ -27,10 +27,10 @@ public class CaixaDao implements InterfaceDAO {
         CaixaModel model = (CaixaModel) o;
         String sql;
 
-        if (model.getIdCaixa()> 0) {
-            sql = "update caixa set idUsuario = ?, dataAbertura = ?, valorAbertura = ?, valorFinal = ?, dataFechamento = ?, formaRecebimento = ?, valor = ?, valorCliente = ?, valorTroco = ? where idCaixa = ?";
+        if (model.getIdCaixa() > 0) {
+            sql = "update caixa set idUsuario = ?, dataAbertura = ?, valorAbertura = ?, valorFinal = ?, dataFechamento = ? where idCaixa = ?";
         } else {
-            sql = "insert into caixa (idUsuario, dataAbertura, valorAbertura, valorFinal, dataFechamento, formaRecebimento, valor, valorCliente, valorTroco, idCaixa) values (?,?,?,?,?,?,?,?,?,?)";
+            sql = "insert into caixa (idUsuario, dataAbertura, valorAbertura, valorFinal, dataFechamento, idCaixa) values (?,?,?,?,?,?)";
         }
 
         try {
@@ -40,11 +40,7 @@ public class CaixaDao implements InterfaceDAO {
             ps.setDouble(3, model.getValorAbertura());
             ps.setDouble(4, model.getValorFinal());
             ps.setString(5, model.getDataFechamento());
-            ps.setString(6, model.getFormaRecebimento());
-            ps.setDouble(7, model.getValor());
-            ps.setDouble(8, model.getValorCliente());
-            ps.setDouble(9, model.getValorTroco());
-            ps.setInt(10, model.getIdCaixa());
+            ps.setInt(6, model.getIdCaixa());
             ps.execute();
             ps.close();
         } catch (SQLException e) {
@@ -71,8 +67,8 @@ public class CaixaDao implements InterfaceDAO {
     }
 
     @Override
-    public ArrayList<?> buscar(String w) throws SQLException {
-        String sql = "select * from caixa ";
+    public ArrayList<CaixaModel> buscar(String w) throws SQLException {
+        String sql = "select * from caixa";
 
         if (!w.isEmpty()) {
             sql += " where " + w;
@@ -91,19 +87,15 @@ public class CaixaDao implements InterfaceDAO {
                     model.setValorAbertura(rs.getDouble("valorAbertura"));
                     model.setValorFinal(rs.getDouble("valorFinal"));
                     model.setDataFechamento(rs.getDate("dataFechamento").toString());
-                    model.setFormaRecebimento(rs.getString("formaRecebimento"));
-                    model.setValor(rs.getDouble("valor"));
-                    model.setValorCliente(rs.getDouble("valorCliente"));
-                    model.setValorTroco(rs.getDouble("valorCliente"));
                     al.add(model);
                 }
             }
             rs.close();
             ps.close();
-            return al;
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
+        return al;
     }
-    
+
 }

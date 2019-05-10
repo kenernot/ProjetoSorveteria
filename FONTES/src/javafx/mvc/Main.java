@@ -5,7 +5,6 @@
  */
 package javafx.mvc;
 
-
 import java.io.IOException;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -24,10 +23,10 @@ import javafx.stage.Modality;
  * @author Marlon
  */
 public class Main extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) throws IOException {
-       FXMLLoader loader = new FXMLLoader();
+        FXMLLoader loader = new FXMLLoader();
         loader.setLocation(PrincipalController.class.getResource("/javafx/mvc/view/Principal.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
@@ -39,31 +38,29 @@ public class Main extends Application {
 
         primaryStage.setTitle("Sistema sorveteria");
         primaryStage.show();
-        
+
         // Abre a tela validar o login
-        
-            Stage login = new Stage();
-            FXMLLoader loaderLogin = new FXMLLoader();
-            loaderLogin.setLocation(LoginController.class.getResource("/javafx/mvc/view/Login.fxml"));
-            AnchorPane pageLogin = (AnchorPane) loaderLogin.load();
-            login.setTitle("Login");
-            Scene sceneLogin = new Scene(pageLogin);
-            login.setScene(sceneLogin);
+        Stage login = new Stage();
+        FXMLLoader loaderLogin = new FXMLLoader();
+        loaderLogin.setLocation(LoginController.class.getResource("/javafx/mvc/view/Login.fxml"));
+        AnchorPane pageLogin = (AnchorPane) loaderLogin.load();
+        login.setTitle("Login");
+        Scene sceneLogin = new Scene(pageLogin);
+        login.setScene(sceneLogin);
 
-            LoginController cLogin = loaderLogin.getController();
-            cLogin.setDialogStage(login);
+        LoginController cLogin = loaderLogin.getController();
+        cLogin.setDialogStage(login);
 
-            login.initOwner(primaryStage);
-            login.initModality(Modality.APPLICATION_MODAL);
-            login.showAndWait();
+        login.initOwner(primaryStage);
+        login.initModality(Modality.APPLICATION_MODAL);
+        login.showAndWait();
 
-            if (!cLogin.isIsAllowed()) {
-                primaryStage.close();
-            }
-            
-          System.out.println(UsuarioLogado.getInstance().getUser().getNomeUsuario());
-        
-        
+        if (!cLogin.isIsAllowed()) {
+            primaryStage.close();
+        }
+
+        System.out.println(UsuarioLogado.getInstance().getUser().getNomeUsuario());
+
     }
 
     /**
@@ -72,5 +69,5 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

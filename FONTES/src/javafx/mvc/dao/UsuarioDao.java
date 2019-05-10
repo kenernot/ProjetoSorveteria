@@ -70,7 +70,7 @@ public class UsuarioDao implements InterfaceDAO {
 
     @Override
     public ArrayList<UsuarioModel> buscar(String w) throws SQLException {
-        String sql = "select * from usuario ";
+        String sql = "select * from usuario";
 
         if (!w.isEmpty()) {
             sql += " where " + w;
@@ -94,9 +94,11 @@ public class UsuarioDao implements InterfaceDAO {
                     al.add(model);
                 }
             }
-            return al;
+            rs.close();
+            ps.close();
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
+        return al;
     }
 }

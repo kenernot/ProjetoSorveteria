@@ -67,7 +67,7 @@ public class ClienteDao implements InterfaceDAO {
 
     @Override
     public ArrayList<ClienteModel> buscar(String w) throws SQLException {
-        String sql = "select * from cliente ";
+        String sql = "select * from cliente";
 
         if (!w.isEmpty()) {
             sql += " where " + w;
@@ -92,9 +92,9 @@ public class ClienteDao implements InterfaceDAO {
             }
             rs.close();
             ps.close();
-            return al;
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
+        return al;
     }
 }

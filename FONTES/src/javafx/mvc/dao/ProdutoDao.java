@@ -69,7 +69,7 @@ public class ProdutoDao implements InterfaceDAO {
 
     @Override
     public ArrayList<ProdutoModel> buscar(String w) throws SQLException {
-        String sql = "select * from produto ";
+        String sql = "select * from produto";
 
         if (!w.isEmpty()) {
             sql += " where " + w;
@@ -94,10 +94,10 @@ public class ProdutoDao implements InterfaceDAO {
             }
             rs.close();
             ps.close();
-            return al;
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
+        return al;
     }
 
 }
