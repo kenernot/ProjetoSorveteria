@@ -78,18 +78,18 @@ public class CaixaDao implements InterfaceDAO {
         try {
             PreparedStatement ps = this.conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            if (rs.first()) {
-                while (rs.next()) {
-                    CaixaModel model = new CaixaModel();
-                    model.setIdCaixa(rs.getInt("idCaixa"));
-                    model.setIdUsuario(rs.getInt("idUsuario"));
-                    model.setDataAbertura(rs.getDate("dataAbertura").toString());
-                    model.setValorAbertura(rs.getDouble("valorAbertura"));
-                    model.setValorFinal(rs.getDouble("valorFinal"));
-                    model.setDataFechamento(rs.getDate("dataFechamento").toString());
-                    al.add(model);
-                }
+            
+            while (rs.next()) {
+                CaixaModel model = new CaixaModel();
+                model.setIdCaixa(rs.getInt("idCaixa"));
+                model.setIdUsuario(rs.getInt("idUsuario"));
+                model.setDataAbertura(rs.getDate("dataAbertura").toString());
+                model.setValorAbertura(rs.getDouble("valorAbertura"));
+                model.setValorFinal(rs.getDouble("valorFinal"));
+                model.setDataFechamento(rs.getDate("dataFechamento").toString());
+                al.add(model);
             }
+            
             rs.close();
             ps.close();
         } catch (SQLException e) {

@@ -77,19 +77,19 @@ public class ClienteDao implements InterfaceDAO {
         try {
             PreparedStatement ps = this.conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            if (rs.first()) {
-                while (rs.next()) {
-                    ClienteModel model = new ClienteModel();
-                    model.setIdCliente(rs.getInt("idCliente"));
-                    model.setNomeCliente(rs.getString("nomeCliente"));
-                    model.setCpf(rs.getString("cpf"));
-                    model.setRg(rs.getString("rg"));
-                    model.setGenero(rs.getString("genero"));
-                    model.setCelular(rs.getString("celular"));
-                    model.setStatus(rs.getString("status"));
-                    al.add(model);
-                }
+                
+            while (rs.next()) {
+                ClienteModel model = new ClienteModel();
+                model.setIdCliente(rs.getInt("idCliente"));
+                model.setNomeCliente(rs.getString("nomeCliente"));
+                model.setCpf(rs.getString("cpf"));
+                model.setRg(rs.getString("rg"));
+                model.setGenero(rs.getString("genero"));
+                model.setCelular(rs.getString("celular"));
+                model.setStatus(rs.getString("status"));
+                al.add(model);
             }
+            
             rs.close();
             ps.close();
         } catch (SQLException e) {

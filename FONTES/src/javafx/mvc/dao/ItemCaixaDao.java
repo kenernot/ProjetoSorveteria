@@ -78,18 +78,18 @@ public class ItemCaixaDao implements InterfaceDAO {
         try {
             PreparedStatement ps = this.conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            if (rs.first()) {
-                while (rs.next()) {
-                    ItemCaixaModel model = new ItemCaixaModel();
-                    model.setIdItemCaixa(rs.getInt("idItemCaixa"));
-                    model.setIdCaixa(rs.getInt("idCaixa"));
-                    model.setIdPedido(rs.getInt("idPedido"));
-                    model.setDescricao(rs.getString("descricao"));
-                    model.setTipoMov(rs.getString("tipoMov"));
-                    model.setValor(rs.getDouble("valor"));
-                    al.add(model);
-                }
+            
+            while (rs.next()) {
+                ItemCaixaModel model = new ItemCaixaModel();
+                model.setIdItemCaixa(rs.getInt("idItemCaixa"));
+                model.setIdCaixa(rs.getInt("idCaixa"));
+                model.setIdPedido(rs.getInt("idPedido"));
+                model.setDescricao(rs.getString("descricao"));
+                model.setTipoMov(rs.getString("tipoMov"));
+                model.setValor(rs.getDouble("valor"));
+                al.add(model);
             }
+            
             rs.close();
             ps.close();
         } catch (SQLException e) {

@@ -79,19 +79,19 @@ public class ItemPedidoDao implements InterfaceDAO {
         try {
             PreparedStatement ps = this.conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            if (rs.first()) {
-                while (rs.next()) {
-                    ItemPedidoModel model = new ItemPedidoModel();
-                    model.setIdItemPedido(rs.getInt("idItemPedido"));
-                    model.setIdPedido(rs.getInt("idPedido"));
-                    model.setIdProduto(rs.getInt("idProduto"));
-                    model.setQtd(rs.getDouble("qtd"));
-                    model.setValorUnitario(rs.getDouble("valorUnitario"));
-                    model.setValorDesconto(rs.getDouble("valorDesconto"));
-                    model.setValorTotal(rs.getDouble("valorTotal"));
-                    al.add(model);
-                }
+
+            while (rs.next()) {
+                ItemPedidoModel model = new ItemPedidoModel();
+                model.setIdItemPedido(rs.getInt("idItemPedido"));
+                model.setIdPedido(rs.getInt("idPedido"));
+                model.setIdProduto(rs.getInt("idProduto"));
+                model.setQtd(rs.getDouble("qtd"));
+                model.setValorUnitario(rs.getDouble("valorUnitario"));
+                model.setValorDesconto(rs.getDouble("valorDesconto"));
+                model.setValorTotal(rs.getDouble("valorTotal"));
+                al.add(model);
             }
+            
             rs.close();
             ps.close();
         } catch (SQLException e) {

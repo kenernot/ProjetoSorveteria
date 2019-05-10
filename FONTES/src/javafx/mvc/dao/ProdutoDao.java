@@ -79,19 +79,19 @@ public class ProdutoDao implements InterfaceDAO {
         try {
             PreparedStatement ps = this.conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            if (rs.first()) {
-                while (rs.next()) {
-                    ProdutoModel model = new ProdutoModel();
-                    model.setIdProduto(rs.getInt("idProduto"));
-                    model.setNomeProduto(rs.getString("nomeProduto"));
-                    model.setValorCompra(rs.getDouble("valorCompra"));
-                    model.setValorVenda(rs.getDouble("valorVenda"));
-                    model.setObservacao(rs.getString("observacao"));
-                    model.setStatus(rs.getString("status"));
-                    model.setTipoProduto(rs.getString("tipoProduto"));
-                    al.add(model);
-                }
+            
+            while (rs.next()) {
+                ProdutoModel model = new ProdutoModel();
+                model.setIdProduto(rs.getInt("idProduto"));
+                model.setNomeProduto(rs.getString("nomeProduto"));
+                model.setValorCompra(rs.getDouble("valorCompra"));
+                model.setValorVenda(rs.getDouble("valorVenda"));
+                model.setObservacao(rs.getString("observacao"));
+                model.setStatus(rs.getString("status"));
+                model.setTipoProduto(rs.getString("tipoProduto"));
+                al.add(model);
             }
+            
             rs.close();
             ps.close();
         } catch (SQLException e) {
