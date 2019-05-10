@@ -69,7 +69,7 @@ public class ProdutoDao implements InterfaceDAO {
 
     @Override
     public ArrayList<ProdutoModel> buscar(String w) throws SQLException {
-        String sql = "select * from produto ";
+        String sql = "select * from produto";
 
         if (!w.isEmpty()) {
             sql += " where " + w;
@@ -79,25 +79,25 @@ public class ProdutoDao implements InterfaceDAO {
         try {
             PreparedStatement ps = this.conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            if (rs.first()) {
-                while (rs.next()) {
-                    ProdutoModel model = new ProdutoModel();
-                    model.setIdProduto(rs.getInt("idProduto"));
-                    model.setNomeProduto(rs.getString("nomeProduto"));
-                    model.setValorCompra(rs.getDouble("valorCompra"));
-                    model.setValorVenda(rs.getDouble("valorVenda"));
-                    model.setObservacao(rs.getString("observacao"));
-                    model.setStatus(rs.getString("status"));
-                    model.setTipoProduto(rs.getString("tipoProduto"));
-                    al.add(model);
-                }
+            
+            while (rs.next()) {
+                ProdutoModel model = new ProdutoModel();
+                model.setIdProduto(rs.getInt("idProduto"));
+                model.setNomeProduto(rs.getString("nomeProduto"));
+                model.setValorCompra(rs.getDouble("valorCompra"));
+                model.setValorVenda(rs.getDouble("valorVenda"));
+                model.setObservacao(rs.getString("observacao"));
+                model.setStatus(rs.getString("status"));
+                model.setTipoProduto(rs.getString("tipoProduto"));
+                al.add(model);
             }
+            
             rs.close();
             ps.close();
-            return al;
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
+        return al;
     }
 
 }

@@ -11,7 +11,7 @@ package javafx.mvc.model;
  */
 public class ItemPedidoModel {
 
-    private int iditemPedido;
+    private int idItemPedido;
     private int idPedido;
     private int idProduto;
     private double qtd;
@@ -19,12 +19,12 @@ public class ItemPedidoModel {
     private double valorDesconto;
     private double valorTotal;
 
-    public int getIditemPedido() {
-        return iditemPedido;
+    public int getIdItemPedido() {
+        return idItemPedido;
     }
 
-    public void setIditemPedido(int iditemPedido) {
-        this.iditemPedido = iditemPedido;
+    public void setIdItemPedido(int idItemPedido) {
+        this.idItemPedido = idItemPedido;
     }
 
     public int getIdPedido() {
