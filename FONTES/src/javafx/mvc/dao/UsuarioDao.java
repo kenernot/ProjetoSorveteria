@@ -70,7 +70,7 @@ public class UsuarioDao implements InterfaceDAO {
 
     @Override
     public ArrayList<UsuarioModel> buscar(String w) throws SQLException {
-        String sql = "select * from usuario ";
+        String sql = "select * from usuario";
 
         if (!w.isEmpty()) {
             sql += " where " + w;
@@ -80,23 +80,25 @@ public class UsuarioDao implements InterfaceDAO {
         try {
             PreparedStatement ps = this.conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            if (rs.first()) {
-                while (rs.next()) {
-                    UsuarioModel model = new UsuarioModel();
-                    model.setIdUsuario(rs.getInt("idUsuario"));
-                    model.setNomeFuncionario(rs.getString("nomeFuncionario"));
-                    model.setNomeUsuario(rs.getString("nomeUsuario"));
-                    model.setSenhaUsuario(rs.getString("senhaUsuario"));
-                    model.setStatus(rs.getString("status"));
-                    model.setCliente(rs.getString("cliente"));
-                    model.setUsuario(rs.getString("usuario"));
-                    model.setProduto(rs.getString("produto"));
-                    al.add(model);
-                }
+            
+            while (rs.next()) {
+                UsuarioModel model = new UsuarioModel();
+                model.setIdUsuario(rs.getInt("idUsuario"));
+                model.setNomeFuncionario(rs.getString("nomeFuncionario"));
+                model.setNomeUsuario(rs.getString("nomeUsuario"));
+                model.setSenhaUsuario(rs.getString("senhaUsuario"));
+                model.setStatus(rs.getString("status"));
+                model.setCliente(rs.getString("cliente"));
+                model.setUsuario(rs.getString("usuario"));
+                model.setProduto(rs.getString("produto"));
+                al.add(model);
             }
-            return al;
+            
+            rs.close();
+            ps.close();
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
+        return al;
     }
 }
