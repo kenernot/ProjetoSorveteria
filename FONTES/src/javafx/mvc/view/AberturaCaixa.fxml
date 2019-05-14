@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+
 <AnchorPane id="AnchorPane" prefHeight="223.0" prefWidth="409.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="javafx.mvc.controller.AberturaCaixaController">
   <children>
     <Label alignment="CENTER" layoutX="0.0" layoutY="0.0" prefHeight="56.0" prefWidth="409.0001220703125" text="INFORME O VALOR DE ABERTURA DE CAIXA">
