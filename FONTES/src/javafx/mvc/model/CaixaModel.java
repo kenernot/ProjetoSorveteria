@@ -12,10 +12,6 @@ public class CaixaModel {
     private double valorAbertura;
     private double valorFinal;
     private String dataFechamento;
-    private String formaRecebimento;
-    private double valor;
-    private double valorCliente;
-    private double valorTroco;
 
     public int getIdCaixa() {
         return idCaixa;
@@ -32,7 +28,6 @@ public class CaixaModel {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
-
 
     public String getDataAbertura() {
         return dataAbertura;
@@ -65,38 +60,5 @@ public class CaixaModel {
     public void setDataFechamento(String dataFechamento) {
         this.dataFechamento = dataFechamento;
     }
-
-    public String getFormaRecebimento() {
-        return formaRecebimento;
-    }
-
-    public void setFormaRecebimento(String formaRecebimento) {
-        this.formaRecebimento = formaRecebimento;
-    }
-
-    public double getValor() {
-        return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
-
-    public double getValorCliente() {
-        return valorCliente;
-    }
-
-    public void setValorCliente(double valorCliente) {
-        this.valorCliente = valorCliente;
-    }
-
-    public double getValorTroco() {
-        return valorTroco;
-    }
-
-    public void setValorTroco(double valorTroco) {
-        this.valorTroco = valorTroco;
-    }
-    
     
 }

@@ -98,8 +98,6 @@ public class LoginController implements Initializable {
 
         List<UsuarioModel> resultadosDao = (List<UsuarioModel>) daoUsuario.buscar(c);
 
-        
-        //       System.out.println("minha senha: " + digitedUser.getSenha());
         if (!resultadosDao.isEmpty()) {
             isValid = true;
             digitedUser = resultadosDao.get(0);
