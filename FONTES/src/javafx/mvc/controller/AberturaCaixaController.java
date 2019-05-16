@@ -26,9 +26,6 @@ public class AberturaCaixaController implements Initializable {
     private TextField edt_valorInic;
     
     @FXML
-    private Button btn_cancelar;
-
-    @FXML
     private Button btn_salvar;
     
     

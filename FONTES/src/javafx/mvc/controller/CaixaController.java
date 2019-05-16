@@ -40,6 +40,9 @@ public class CaixaController implements Initializable {
 
     @FXML
     private Button btPesquisar;
+    
+    @FXML
+    private Button btnGerarRelatorio;
 
     @FXML
     private Button btSalvar;
