@@ -1,0 +1,10 @@
+1- Como dono cadastro o usuário;
+2- Como funcionário logo no sistema;
+3- Como sistema abro o caixa do usuário;
+4- Como usuário informo o saldo inicial do caixa;
+5- Como funcionário cadastro clientes;
+6- Como funcionário cadastro produtos;
+7- Como cliente peço um sorvete;
+8- Como funcionário adiciono os produtos;
+9- Como funcionário finalizo os pedidos;
+10- Como funcionário fecho o caixa.
