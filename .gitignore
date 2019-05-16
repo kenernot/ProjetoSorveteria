@@ -3,4 +3,4 @@ build/
 dist/
 nbproject/
 lib/
-*Conexao.java
+db.properties

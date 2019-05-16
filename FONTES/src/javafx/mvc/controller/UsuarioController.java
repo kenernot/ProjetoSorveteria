@@ -27,12 +27,6 @@ public class UsuarioController implements Initializable {
 
  
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
     private ComboBox<?> ComboPesquisarUsuario;
 
     @FXML
@@ -104,7 +98,7 @@ public class UsuarioController implements Initializable {
     void btInserirClickUsuario(ActionEvent event) {
 
     }
-
+    
     @FXML
     void btSalvarClickUsuario(ActionEvent event) {
 
@@ -123,17 +117,18 @@ public class UsuarioController implements Initializable {
     @FXML
     void btnFecharClickUsuario(ActionEvent event) {
 
-    this.p.getChildren().remove(this);
-        
+        this.p.getChildren().remove(this);
+
     }
     private AnchorPane p;
-    public void setTelaPrincipal(AnchorPane principal){
+
+    public void setTelaPrincipal(AnchorPane principal) {
         this.p = principal;
     }
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-      
+
     }
 
 }
