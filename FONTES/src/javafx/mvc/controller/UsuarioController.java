@@ -10,8 +10,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -25,56 +25,75 @@ import javafx.scene.layout.AnchorPane;
  */
 public class UsuarioController implements Initializable {
 
-  @FXML
-    private TextField txtIDCadUsuario;
+ 
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
 
     @FXML
     private ComboBox<?> ComboPesquisarUsuario;
 
     @FXML
+    private TableColumn<?, ?> TableViewColumnID;
+
+    @FXML
     private TableColumn<?, ?> TableViewColumnNome;
 
     @FXML
-    private Button btExcluirUsuario;
+    private TableColumn<?, ?> TableViewColumnNomeUsuario;
 
     @FXML
-    private TextField txtPesquisarUsuario;
+    private TableColumn<?, ?> TableViewColumnStatus;
 
     @FXML
     private TableView<?> TableViewUsuario;
 
     @FXML
-    private Button btSalvarUsuario;
-
-    @FXML
-    private Button btPesquisarUsuario;
-
-    @FXML
     private Button btAlterarUsuario;
+
+    @FXML
+    private Button btExcluirUsuario;
+
+    @FXML
+    private Button btFecharUsuario;
 
     @FXML
     private Button btInserirUsuario;
 
     @FXML
+    private Button btPesquisarUsuario;
+
+    @FXML
+    private Button btSalvarUsuario;
+
+    @FXML
+    private CheckBox checkPermitirCliente;
+
+    @FXML
+    private CheckBox checkPermitirProduto;
+
+    @FXML
+    private CheckBox checkPermitirUsuario;
+
+    @FXML
     private ComboBox<?> comboCadUsuario;
 
     @FXML
-    private Button btFecharUsuario;
-    
+    private TextField txtCadNomeUsuario;
+
+    @FXML
+    private TextField txtCadSenhaUsuario;
+
     @FXML
     private TextField txtCadUsuario;
 
     @FXML
-    private Insets x1;
+    private TextField txtIDCadUsuario;
 
     @FXML
-    private Insets x2;
-
-    @FXML
-    private TableColumn<?, ?> TableViewColumnID;
-
-    @FXML
-    private TextField txtCadSenha;
+    private TextField txtPesquisarUsuario;
 
     @FXML
     void btPesquisarClickUsuario(ActionEvent event) {
@@ -98,7 +117,7 @@ public class UsuarioController implements Initializable {
 
     @FXML
     void btExcluirClickExcluir(ActionEvent event) {
-
+        
     }
 
     @FXML
