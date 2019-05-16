@@ -1,8 +1,13 @@
 package javafx.mvc.services;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,15 +23,14 @@ public class Conexao {
     }
 
     private static Connection createConnection() {
-        Properties config = new Properties();
-        config.put("user", "root");
-        config.put("password", "");
+        Properties config = getConfig();
+        
         Connection conn = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName(config.getProperty("conndriver"));
 
             conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/projetosorveteria",
+                    config.getProperty("connurl"),
                     config
             );
 
@@ -45,5 +49,17 @@ public class Conexao {
 
     public Connection getConn() {
         return conn;
+    }
+    
+    public static Properties getConfig() {
+        Properties config = new Properties();
+        try {
+            config.load(new FileInputStream(System.getProperty("user.dir").concat("/db.properties")));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return config; 
     }
 }
