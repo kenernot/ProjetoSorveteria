@@ -1,15 +1,17 @@
 # Projeto integrador
 
-## DescriÁ„o
+## Descri√ß√£o
 
-- implementaÁ„o de um sistema de PDV para sorveterias
+- implementa√ß√£o de um sistema de PDV para sorveterias
 
 ## Requisitos
 
-- Cadastro de Usu·rio/Funcion·rio
+- Cadastro de Usu√°rio/Funcion√°rio
 - Cadastro de Produto
 - Cadastro de Cliente
 - PDV
 - Abertura de caixa
 - Registro de Caixa
 - Fechamento de caixa
+- Relat√≥rio de vendas *
+- Painel de Chamada de Ticket *
