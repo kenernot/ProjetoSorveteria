@@ -25,7 +25,7 @@ import javafx.scene.layout.AnchorPane;
  */
 public class UsuarioController implements Initializable {
 
-  @FXML
+    @FXML
     private TextField txtIDCadUsuario;
 
     @FXML
@@ -60,7 +60,7 @@ public class UsuarioController implements Initializable {
 
     @FXML
     private Button btFecharUsuario;
-    
+
     @FXML
     private TextField txtCadUsuario;
 
@@ -85,7 +85,7 @@ public class UsuarioController implements Initializable {
     void btInserirClickUsuario(ActionEvent event) {
 
     }
-
+    
     @FXML
     void btSalvarClickUsuario(ActionEvent event) {
 
@@ -104,17 +104,18 @@ public class UsuarioController implements Initializable {
     @FXML
     void btnFecharClickUsuario(ActionEvent event) {
 
-    this.p.getChildren().remove(this);
-        
+        this.p.getChildren().remove(this);
+
     }
     private AnchorPane p;
-    public void setTelaPrincipal(AnchorPane principal){
+
+    public void setTelaPrincipal(AnchorPane principal) {
         this.p = principal;
     }
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-      
+
     }
 
 }
