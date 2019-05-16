@@ -25,7 +25,7 @@ import javafx.scene.layout.AnchorPane;
  */
 public class UsuarioController implements Initializable {
 
-  @FXML
+    @FXML
     private TextField txtIDCadUsuario;
 
     @FXML
