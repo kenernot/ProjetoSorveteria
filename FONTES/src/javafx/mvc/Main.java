@@ -5,10 +5,13 @@
  */
 package javafx.mvc;
 
+import java.io.File;
 import java.io.IOException;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.mvc.controller.ConfigBancoController;
 import javafx.mvc.controller.LoginController;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,6 +29,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(PrincipalController.class.getResource("/javafx/mvc/view/Principal.fxml"));
         Parent root = loader.load();
@@ -38,6 +42,35 @@ public class Main extends Application {
 
         primaryStage.setTitle("Sistema sorveteria");
         primaryStage.show();
+
+        File config = new File(System.getProperty("user.dir").concat("/db.properties"));
+        if (!config.exists()) {
+            // Abre a tela validar o login
+            Stage cfStage = new Stage();
+            FXMLLoader loaderConfig = new FXMLLoader();
+            loaderConfig.setLocation(LoginController.class.getResource("/javafx/mvc/view/ConfigBanco.fxml"));
+            AnchorPane pageConfig = (AnchorPane) loaderConfig.load();
+            cfStage.setTitle("Config");
+            Scene sceneConfig = new Scene(pageConfig);
+            cfStage.setScene(sceneConfig);
+
+            ConfigBancoController cConfig = loaderConfig.getController();
+            cConfig.setDialogStage(cfStage);
+            
+            cfStage.initOwner(primaryStage);
+           //cfStage.setMaximized(true);
+           //cfStage.setFullScreen(true);
+            cfStage.initModality(Modality.APPLICATION_MODAL);
+            cfStage.showAndWait();
+            
+            if (!cConfig.isConfigurado()) {
+                primaryStage.close();
+                Platform.exit();
+                System.exit(0);
+            }
+            
+
+        }
 
         // Abre a tela validar o login
         Stage login = new Stage();
