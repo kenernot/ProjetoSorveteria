@@ -15,6 +15,6 @@
       </font>
     </Label>
     <TextField fx:id="edt_valorInic" layoutX="118.0" layoutY="90.0" prefWidth="187.0" />
-    <Button fx:id="btn_salvar" layoutX="118.0" layoutY="167.0" mnemonicParsing="false" prefWidth="187.0" text="Salvar" />
+    <Button fx:id="btn_salvar" layoutX="118.0" layoutY="167.0" mnemonicParsing="false" onAction="#btnSalvarClick" prefWidth="187.0" text="Salvar" />
   </children>
 </AnchorPane>

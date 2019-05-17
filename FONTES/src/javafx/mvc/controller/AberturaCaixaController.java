@@ -7,8 +7,10 @@ package javafx.mvc.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.mvc.model.CaixaModel;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
@@ -28,11 +30,17 @@ public class AberturaCaixaController implements Initializable {
     @FXML
     private Button btn_salvar;
     
+      @FXML
+    void btnSalvarClick(ActionEvent event) {
+        this.caixa.setValorAbertura(Double.valueOf(edt_valorInic.getText()));
+    }
+    private CaixaModel caixa;
+
     
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
     
 }
