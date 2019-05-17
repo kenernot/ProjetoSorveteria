@@ -18,16 +18,14 @@
         <Label layoutX="195.0" layoutY="151.0" text="Quantidade" />
         <TextField id="txtId" fx:id="txtIDPedido" layoutX="36.0" layoutY="83.0" prefWidth="100.0" />
         <TextField id="txtIDCliente" fx:id="txtIDCliPedido" layoutX="36.0" layoutY="125.0" prefWidth="100.0" />
-        <TextField fx:id="txtIDProdPedido" layoutX="88.0" layoutY="167.0" prefWidth="100.0" />
+        <TextField fx:id="txtIDProdPedido" layoutX="86.0" layoutY="167.0" prefWidth="100.0" />
         <TextField fx:id="txtDataPedido" layoutX="145.0" layoutY="80.0" prefWidth="200.0" />
         <TextField fx:id="txtQtdPedido" layoutX="195.0" layoutY="167.0" prefWidth="100.0" />
-        <Label layoutX="145.0" layoutY="109.0" text="Nome Cliente" />
         <Label layoutX="36.0" layoutY="193.0" text="Valor Desconto" />
         <Label layoutX="145.0" layoutY="193.0" text="Valor Total" />
-        <TextField fx:id="txtNomePedido" layoutX="145.0" layoutY="125.0" prefWidth="200.0" />
         <TextField fx:id="txtValorDescPedido" layoutX="36.0" layoutY="209.0" prefWidth="100.0" />
         <TextField fx:id="txtValorTotalPedido" layoutX="145.0" layoutY="209.0" prefWidth="200.0" />
-        <TableView layoutX="14.0" layoutY="323.0" prefHeight="262.0" prefWidth="667.0">
+        <TableView fx:id="tableViewPedido" layoutX="14.0" layoutY="323.0" prefHeight="262.0" prefWidth="667.0">
           <columns>
             <TableColumn prefWidth="75.0" text="ID produto" fx:id="TableViewColumnID" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="90.0" text="Nome" fx:id="TableViewColumnNome" />
