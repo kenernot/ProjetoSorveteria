@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="javafx.mvc.controller.InitialConfigController">
+  <children>
+    <TabPane fx:id="tabPane" layoutX="14.0" layoutY="7.0" prefHeight="379.0" prefWidth="572.0" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab fx:id="tabDbProperties" closable="true" disable="false" text="db.properties">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <GridPane layoutX="48.0" layoutY="103.0" prefHeight="164.0" prefWidth="476.0">
+                  <children>
+                    <Label alignment="CENTER_RIGHT" prefHeight="72.0" prefWidth="237.0" text="connurl" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                      <font>
+                        <Font name="System Bold" size="20.0" fx:id="x1" />
+                      </font>
+                    </Label>
+                    <Label alignment="CENTER_RIGHT" font="$x1" prefHeight="101.0" prefWidth="220.0" text="password" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Label alignment="CENTER_RIGHT" font="$x1" prefHeight="151.0" prefWidth="192.0" text="user" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField fx:id="txtConnurl" prefHeight="35.0" prefWidth="200.0" text="jdbc:mysql://localhost:3306/nome_banco" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                      <GridPane.margin>
+                        <Insets left="5.0" right="5.0" fx:id="x2" />
+                      </GridPane.margin>
+                    </TextField>
+                    <TextField fx:id="txtPassword" prefHeight="35.0" prefWidth="200.0" promptText="senha_banco" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="1" />
+                    <TextField fx:id="txtUser" prefHeight="35.0" prefWidth="281.0" promptText="usuario_banco" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="0" />
+                    <Button fx:id="btSalvar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btSalvarClick" prefHeight="35.0" prefWidth="84.0" text="Salvar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                      <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x3" />
+                      </GridPane.margin>
+                    </Button>
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="137.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.0" minWidth="10.0" prefWidth="279.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <Label layoutX="61.0" layoutY="14.0" prefHeight="79.0" prefWidth="441.0" text="Não foi encontrado arquivo de configuração, por favor, digite as informações abaixo para prosseguir" textAlignment="CENTER" wrapText="true" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab fx:id="tabDbConn" disable="false" text="db.conn">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <GridPane layoutX="86.0" layoutY="76.0" prefHeight="162.0" prefWidth="401.0">
+                  <children>
+                    <Label prefHeight="130.0" prefWidth="316.0" text="Testar conexão" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                      <font>
+                        <Font name="System Bold" size="22.0" />
+                      </font>
+                    </Label>
+                    <Button fx:id="btTestar" font="$x1" mnemonicParsing="false" onAction="#btTestarClick" prefHeight="83.0" prefWidth="220.0" text="TESTAR" GridPane.columnIndex="1" GridPane.margin="$x3" GridPane.rowIndex="0" />
+                    <Label fx:id="lbTeste" prefHeight="120.0" prefWidth="472.0" text="" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                      <font>
+                        <Font size="25.0" />
+                      </font>
+                    </Label>
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="83.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <Button fx:id="btProsseguir" layoutX="355.0" layoutY="257.0" mnemonicParsing="false" onAction="#btProsseguirClick" prefHeight="48.0" prefWidth="127.0" text="Prosseguir" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </children>
+</AnchorPane>

@@ -5,10 +5,12 @@
  */
 package javafx.mvc;
 
+import java.io.File;
 import java.io.IOException;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
+import javafx.mvc.controller.InitialConfigController;
 import javafx.mvc.controller.LoginController;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -39,6 +41,32 @@ public class Main extends Application {
         primaryStage.setTitle("Sistema sorveteria");
         primaryStage.show();
 
+        //
+        //verifica db.properties
+        File file = new File("db.properties");
+        if (!file.exists()) {
+            Stage initialConfig = new Stage();
+            FXMLLoader loaderConfig = new FXMLLoader();
+            loaderConfig.setLocation(InitialConfigController.class.getResource("/javafx/mvc/view/InitialConfig.fxml"));
+            AnchorPane pageConfig = (AnchorPane) loaderConfig.load();
+            initialConfig.setTitle("Config");
+            Scene sceneConfig = new Scene(pageConfig);
+            initialConfig.setScene(sceneConfig);
+
+            InitialConfigController cConfig = loaderConfig.getController();
+            cConfig.setDialogStage(initialConfig);
+
+            initialConfig.initOwner(primaryStage);
+            initialConfig.initModality(Modality.APPLICATION_MODAL);
+            initialConfig.showAndWait();
+
+            if (!cConfig.isFinished()) {
+                primaryStage.close();
+            } else {
+
+            }
+        }
+
         // Abre a tela validar o login
         Stage login = new Stage();
         FXMLLoader loaderLogin = new FXMLLoader();
@@ -58,7 +86,7 @@ public class Main extends Application {
         if (!cLogin.isIsAllowed()) {
             primaryStage.close();
         } else {
-            System.out.println(UsuarioLogado.getInstance().getUser().getNomeUsuario());
+            c.setLabelUsuario();
         }
 
     }

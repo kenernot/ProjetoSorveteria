@@ -30,5 +30,10 @@
       </menus>
     </MenuBar>
     <AnchorPane fx:id="anchorPane" prefHeight="570.0" prefWidth="800.0" />
+    <ToolBar prefWidth="800.0">
+      <items>
+        <Label fx:id="lbUsuario" text="" />
+      </items>
+    </ToolBar>
   </children>
 </VBox>

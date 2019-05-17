@@ -6,8 +6,10 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.mvc.services.UsuarioLogado;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -31,6 +33,9 @@ public class PrincipalController implements Initializable {
     private MenuItem menuItemSistemaSair;
 
     @FXML
+    private Label lbUsuario;
+
+    @FXML
     public void menuItemSistemaSairClicked() {
         stagePrincipal.close();
     }
@@ -44,7 +49,6 @@ public class PrincipalController implements Initializable {
 
         //PrincipalController c = loader.getController();
         //c.setStagePrincipal(primaryStage);
-
         anchorPane.getChildren().add(root);
     }
 
@@ -59,6 +63,10 @@ public class PrincipalController implements Initializable {
 
     public void setStagePrincipal(Stage stagePrincipal) {
         this.stagePrincipal = stagePrincipal;
+    }
+
+    public void setLabelUsuario() {
+        this.lbUsuario.setText("Usuario: "+UsuarioLogado.getInstance().getUser().getNomeUsuario());
     }
 
 }
