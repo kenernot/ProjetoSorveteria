@@ -10,46 +10,44 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.mvc.model.CaixaModel;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
- * @author thiag
+ * @author ngnic
  */
-public class FechamentoCaixaController implements Initializable {
+public class PesquisaProdutoController implements Initializable {
 
     @FXML
-    private Button btn_cancelar;
-
+    private TextField ftPesquisa;
     @FXML
-    private Button btn_salvar;
-
+    private Insets x1;
     @FXML
-    private TextField edt_entradas;
-
+    private TextField ftDescicao;
     @FXML
-    private TextField edt_saidas;
-
+    private Button btnFiltrar;
     @FXML
-    private TextField edt_saldoFinal;
-    
-     @FXML
-    void btnSalvarClick(ActionEvent event) {
-        this.caixa.set 
-   }
-    
-     @FXML
-    void btnCancelarClick(ActionEvent event) {
-    }
+    private TableView<?> tableViewProduto;
+    @FXML
+    private TableColumn<?, ?> tableViewPeodutoNome;
+    @FXML
+    private TableColumn<?, ?> tableViewPeodutoDescricao;
 
-   private CaixaModel caixa;
-
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void btnFiltrarClick(ActionEvent event) {
+    }
     
 }

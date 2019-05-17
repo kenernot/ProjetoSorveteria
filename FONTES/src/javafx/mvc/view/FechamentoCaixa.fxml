@@ -33,7 +33,7 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <Button fx:id="btn_salvar" layoutX="108.0" layoutY="323.0" mnemonicParsing="false" text="Salvar" />
-    <Button fx:id="btn_cancelar" layoutX="339.0" layoutY="323.0" mnemonicParsing="false" text="Cancelar" />
+    <Button fx:id="btn_salvar" layoutX="108.0" layoutY="323.0" mnemonicParsing="false" onAction="#btnSalvarClick" text="Salvar" />
+    <Button fx:id="btn_cancelar" layoutX="339.0" layoutY="323.0" mnemonicParsing="false" onAction="#btnCancelarClick" text="Cancelar" />
   </children>
 </AnchorPane>
