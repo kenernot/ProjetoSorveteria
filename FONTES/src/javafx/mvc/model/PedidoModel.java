@@ -86,8 +86,6 @@ public class PedidoModel {
 
     public void setQtdTotal(int qtdTotal) {
         this.qtdTotal = qtdTotal;
-    }
-    
-    
+    }   
     
 }
