@@ -1,18 +1,14 @@
 package javafx.mvc.controller;
 
-import com.sun.istack.internal.logging.Logger;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.mvc.dao.PedidoDao;
 import javafx.mvc.model.ItemPedidoModel;
 import javafx.mvc.model.PedidoModel;
-import javafx.mvc.services.Conexao;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -172,12 +168,12 @@ public class PedidoController implements Initializable {
         camposEnabled(true);
         limparCampos();
         
-        pd = new PedidoDao(Conexao.getInstance().getConn());
-        try{
-            listarProdutos();
-        } catch (Exception ex){
-           //ERRO AQUI Logger.getLogger(PedidoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        pd = new PedidoDao(Conexao.getInstance().getConn());
+//        try{
+//            listarProdutos();
+//        } catch (Exception ex){
+//           ERRO AQUI Logger.getLogger(PedidoController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }    
 
     private PedidoDao pd;
@@ -192,6 +188,7 @@ public class PedidoController implements Initializable {
         //--------------ABRIR NOVA TELA PARA SELECIONAR PRODUTO--------------
     }
 
+    //-------------- OK --------------
     private void camposEnabled(boolean b) {
         txtIDPedido.setDisable(true);
         txtDataPedido.setDisable(b);
@@ -203,6 +200,7 @@ public class PedidoController implements Initializable {
         comboPedido.setDisable(b);        
     }
 
+    //-------------- OK --------------
     private void btEnabled(int id) {
         switch (id) {
             case 1:
@@ -231,6 +229,7 @@ public class PedidoController implements Initializable {
         }
     }
 
+    //-------------- OK --------------
     private void limparCampos() {
         txtIDPedido.setText("");
         txtDataPedido.setText("");
