@@ -101,4 +101,14 @@ public class UsuarioDao implements InterfaceDAO {
         }
         return al;
     }
+
+    public void remove(UsuarioModel um) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+   
+
+   
+
+   
 }

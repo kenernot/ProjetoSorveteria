@@ -48,6 +48,7 @@
                             <TextField fx:id="txtPesquisaDataAbertura" alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="159.00009999999747" GridPane.columnIndex="1" GridPane.margin="$x4" GridPane.rowIndex="1" />
                             <Label alignment="BOTTOM_CENTER" font="$x3" prefHeight="47.0" prefWidth="133.0" text="Data Fechamento" textAlignment="LEFT" GridPane.columnIndex="2" GridPane.rowIndex="0" />
                             <TextField fx:id="txtPesquisaDataFechamento" prefWidth="200.0" GridPane.columnIndex="2" GridPane.margin="$x4" GridPane.rowIndex="1" />
+                            <Button fx:id="btnGerarRelatorio" mnemonicParsing="false" prefWidth="131.0" text="Gerar Relatório" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                           </children>
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -101,116 +102,6 @@
                     <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
-              </children>
-            </AnchorPane>
-          </content>
-        </Tab>
-        <Tab text="Cadastro">
-          <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-              <children>
-                <VBox prefHeight="464.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                  <children>
-                    <TitledPane animated="false" prefHeight="89.0" prefWidth="801.0" text="Operações">
-                      <content>
-                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="38.0" prefWidth="796.0">
-                          <children>
-                            <FlowPane prefHeight="49.0" prefWidth="796.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                              <children>
-                                <Button fx:id="btInserir" mnemonicParsing="false" onAction="#btInserirClick" text="Inserir">
-                                  <FlowPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
-                                  </FlowPane.margin>
-                                </Button>
-                                <Button fx:id="btSalvar" mnemonicParsing="false" onAction="#btSalvarClick" text="Salvar" FlowPane.margin="$x1" />
-                                <Button fx:id="btAlterar" mnemonicParsing="false" onAction="#btAlterarClick" text="Alterar" FlowPane.margin="$x1" />
-                                <Button fx:id="btExcluir" mnemonicParsing="false" onAction="#btExcluirClick" text="Excluir" FlowPane.margin="$x1" />
-                                <Button id="idFechar" fx:id="btFechar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Fechar">
-                                  <FlowPane.margin>
-                                    <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-                                  </FlowPane.margin>
-                                </Button>
-                              </children>
-                            </FlowPane>
-                          </children>
-                        </AnchorPane>
-                      </content>
-                    </TitledPane>
-                    <AnchorPane prefHeight="405.0" prefWidth="800.0">
-                      <children>
-                        <GridPane prefHeight="405.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <children>
-                            <Label alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="96.0" text="ID:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-                              <GridPane.margin>
-                                <Insets right="5.0" fx:id="x2" />
-                              </GridPane.margin>
-                            </Label>
-                            <Label alignment="CENTER_RIGHT" prefHeight="33.0" prefWidth="96.0" text="Nome:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.margin="$x2" GridPane.rowIndex="2" />
-                            <TextField fx:id="txtId" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                            <TextField fx:id="txtNome" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" />
-                            <Label alignment="CENTER" prefHeight="36.0" prefWidth="89.0" text="USUARIO" GridPane.columnIndex="6" GridPane.rowIndex="0" />
-                            <Label prefHeight="35.0" prefWidth="178.0" text="Label" GridPane.columnIndex="8" GridPane.columnSpan="2" GridPane.rowIndex="0" />
-                            <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="141.0" text="Valor Final:" GridPane.columnIndex="5" GridPane.rowIndex="3">
-                              <GridPane.margin>
-                                <Insets right="10.0" />
-                              </GridPane.margin>
-                            </Label>
-                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="29.0" prefWidth="138.0" text="Forma Recebimento:" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                            <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="117.0" text="Data Fechamento:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                            <Label alignment="CENTER_RIGHT" prefHeight="33.0" prefWidth="140.0" text="Valor Cliente:" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                            <Label alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="101.0" text="Valor:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                            <Label alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="98.0" text="Valor Abertura:" GridPane.columnIndex="0" GridPane.rowIndex="3">
-                              <GridPane.margin>
-                                <Insets left="10.0" />
-                              </GridPane.margin>
-                            </Label>
-                            <Label alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="134.0" text="Data Abertura:" GridPane.columnIndex="5" GridPane.rowIndex="2">
-                              <GridPane.margin>
-                                <Insets left="5.0" right="5.0" />
-                              </GridPane.margin>
-                            </Label>
-                            <TextField fx:id="txtDtAbertura" prefWidth="137.0" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-                            <TextField fx:id="txtVlAbertura" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-                            <TextField fx:id="txtVlFinal" prefWidth="105.0" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-                            <TextField fx:id="txtDtFechamento" prefWidth="140.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-                            <TextField fx:id="txtFormaRec" prefWidth="133.0" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-                            <TextField fx:id="txtValor" prefWidth="126.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-                            <TextField fx:id="TxtValorCliente" prefWidth="143.0" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-                            <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="99.0" text="Valor Troco:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-                            <TextField fx:id="txtValorTroco" prefWidth="132.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6" />
-                          </children>
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="136.0" minWidth="10.0" prefWidth="101.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="76.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="63.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="80.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="42.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="139.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="78.0" minWidth="10.0" prefWidth="73.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="66.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="80.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="80.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                        </GridPane>
-                      </children>
-                    </AnchorPane>
-                  </children>
-                </VBox>
               </children>
             </AnchorPane>
           </content>
