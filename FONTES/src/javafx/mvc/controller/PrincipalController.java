@@ -2,10 +2,12 @@ package javafx.mvc.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.mvc.model.UsuarioModel;
 import javafx.mvc.services.UsuarioLogado;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,6 +22,8 @@ import javafx.stage.Stage;
  * @author lukas
  */
 public class PrincipalController implements Initializable {
+
+    private ArrayList<Scene> sceneList;
 
     private Stage stagePrincipal;
 
@@ -54,7 +58,7 @@ public class PrincipalController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
     }
 
     public Stage getStagePrincipal() {
@@ -66,7 +70,38 @@ public class PrincipalController implements Initializable {
     }
 
     public void setLabelUsuario() {
-        this.lbUsuario.setText("Usuario: "+UsuarioLogado.getInstance().getUser().getNomeUsuario());
+        this.lbUsuario.setText("Usuario: " + UsuarioLogado.getInstance().getUser().getNomeUsuario());
+    }
+
+    private ArrayList<Scene> loadScenes() throws IOException {
+        ArrayList<Scene> lista = new ArrayList<>();
+
+        ArrayList<String> listaNomes = new ArrayList<>();
+
+        listaNomes.add("Caixa");
+        listaNomes.add("FechamentoCaixa");
+        listaNomes.add("Pedido");
+        
+        UsuarioModel user = UsuarioLogado.getInstance().getUser();
+        
+        if () {
+            
+        }
+        listaNomes.add("Usuario");
+        listaNomes.add("Produto");
+        listaNomes.add("Cliente");
+        
+        
+
+        for (String str : listaNomes) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(PrincipalController.class.getResource("/javafx/mvc/view/" + str + ".fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            lista.add(scene);
+        }
+
+        return lista;
     }
 
 }
