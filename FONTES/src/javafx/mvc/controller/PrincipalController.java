@@ -81,17 +81,19 @@ public class PrincipalController implements Initializable {
         listaNomes.add("Caixa");
         listaNomes.add("FechamentoCaixa");
         listaNomes.add("Pedido");
-        
+
         UsuarioModel user = UsuarioLogado.getInstance().getUser();
-        
-        if () {
-            
+
+        if (user.getUsuario().equals("1")) {
+            listaNomes.add("Usuario");
         }
-        listaNomes.add("Usuario");
-        listaNomes.add("Produto");
-        listaNomes.add("Cliente");
-        
-        
+        if (user.getProduto().equals("1")) {
+            listaNomes.add("Produto");
+        }
+
+        if (user.getCliente().equals("1")) {
+            listaNomes.add("Cliente");
+        }
 
         for (String str : listaNomes) {
             FXMLLoader loader = new FXMLLoader();
