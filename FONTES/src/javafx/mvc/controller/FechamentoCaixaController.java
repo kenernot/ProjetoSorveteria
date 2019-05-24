@@ -6,11 +6,20 @@
 package javafx.mvc.controller;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.mvc.dao.ItemCaixaDao;
 import javafx.mvc.model.CaixaModel;
+import javafx.mvc.model.ItemCaixaModel;
+import javafx.mvc.model.UsuarioModel;
+import javafx.mvc.services.CaixaAberto;
+import javafx.mvc.services.Conexao;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
@@ -31,25 +40,37 @@ public class FechamentoCaixaController implements Initializable {
     private TextField edt_entradas;
 
     @FXML
+    private TextField edt_informarSaldo;
+
+    @FXML
     private TextField edt_saidas;
 
     @FXML
     private TextField edt_saldoFinal;
-    
-     @FXML
+
+    @FXML
     void btnSalvarClick(ActionEvent event) {
-        this.caixa.set 
-   }
-    
-     @FXML
+        this.caixa.setValorFinal(Double.valueOf(edt_saldoFinal.getText()));
+    }
+
+    @FXML
     void btnCancelarClick(ActionEvent event) {
     }
 
-   private CaixaModel caixa;
+    private CaixaModel caixa;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+
+        this.caixa = CaixaAberto.getInstance().getCaixa();
+        ItemCaixaDao icd = new ItemCaixaDao(Conexao.getInstance().getConn());
+
+        try {
+            icd.buscar("idCaixa=" + this.caixa.getIdCaixa());
+            List<ItemCaixaModel> resultadosDao = (List<ItemCaixaModel>) icd.buscar("idCaixa=" + this.caixa.getIdCaixa());
+        } catch (SQLException ex) {
+            Logger.getLogger(FechamentoCaixaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }
