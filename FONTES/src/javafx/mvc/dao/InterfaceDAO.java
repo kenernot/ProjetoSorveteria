@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public interface InterfaceDAO {
 
-    public void salvar(Object o) throws SQLException;
+    public Object salvar(Object o) throws SQLException;
 
     public void excluir(Object o) throws SQLException;
 
