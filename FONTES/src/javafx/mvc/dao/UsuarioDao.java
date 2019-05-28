@@ -20,9 +20,9 @@ public class UsuarioDao implements InterfaceDAO {
     }
 
     @Override
-    public void salvar(Object o) throws SQLException {
+    public UsuarioModel salvar(Object o) throws SQLException {
         if (!(o instanceof UsuarioModel)) {
-            return;
+            return new UsuarioModel();
         }
         UsuarioModel model = (UsuarioModel) o;
         String sql;
@@ -44,10 +44,18 @@ public class UsuarioDao implements InterfaceDAO {
             ps.setString(7, model.getProduto());
             ps.setInt(8, model.getIdUsuario());
             ps.execute();
+            
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                model.setIdUsuario(rs.getInt(1));
+            }
+            
+            rs.close();
             ps.close();
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
+        return model;
     }
 
     @Override
