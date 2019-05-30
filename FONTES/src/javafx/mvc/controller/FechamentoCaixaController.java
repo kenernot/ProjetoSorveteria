@@ -62,7 +62,7 @@ public class FechamentoCaixaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        this.caixa = CaixaAberto.getInstance().getCaixa();
+        /*this.caixa = CaixaAberto.getInstance().getCaixa();
         ItemCaixaDao icd = new ItemCaixaDao(Conexao.getInstance().getConn());
 
         try {
@@ -70,7 +70,7 @@ public class FechamentoCaixaController implements Initializable {
             List<ItemCaixaModel> resultadosDao = (List<ItemCaixaModel>) icd.buscar("idCaixa=" + this.caixa.getIdCaixa());
         } catch (SQLException ex) {
             Logger.getLogger(FechamentoCaixaController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
 
 }

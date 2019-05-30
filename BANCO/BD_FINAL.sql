@@ -2,6 +2,7 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
+DROP SCHEMA projetosorveteria;
 CREATE SCHEMA IF NOT EXISTS `projetosorveteria` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 USE `projetosorveteria` ;
 
@@ -23,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `projetosorveteria`.`cliente` (
   UNIQUE INDEX `CPF_UNIQUE` (`cpf` ASC))
 ENGINE = InnoDB;
 
+INSERT INTO cliente (nomeCliente, cpf, rg, genero, celular, status) values ('Consumidor', '000.000.000-00', '00.000.000-0','N', '00000000000000','A');
 
 -- -----------------------------------------------------
 -- Table `projetosorveteria`.`produto`
@@ -134,6 +136,7 @@ CREATE TABLE IF NOT EXISTS `projetosorveteria`.`caixa` (
   `dataAbertura` DATETIME NOT NULL,
   `valorAbertura` DECIMAL(8,2) NOT NULL,
   `valorFinal` DECIMAL(8,2) NULL,
+  `informarSaldo` DECIMAL(8,2) NULL,
   `dataFechamento` DATETIME NULL,
   PRIMARY KEY (`idCaixa`),
   UNIQUE INDEX `idcaixa_UNIQUE` (`idCaixa` ASC),

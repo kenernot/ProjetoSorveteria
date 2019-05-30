@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
@@ -24,6 +25,13 @@ import javafx.scene.control.TextField;
  * @author Marlon
  */
 public class ClienteController implements Initializable {
+
+ 
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
 
     @FXML
     private Button btAlterar;
@@ -43,27 +51,42 @@ public class ClienteController implements Initializable {
     @FXML
     private Button btSalvar;
 
-   @FXML
+    @FXML
+    private ComboBox<?> cbGenero;
+
+    @FXML
+    private ComboBox<?> cbStatus;
+
+    @FXML
+    private TableColumn<?, ?> tableViewCPF;
+
+    @FXML
+    private TableColumn<?, ?> tableViewCelular;
+
+    @FXML
+    private TableView<?> tableViewCliente;
+
+    @FXML
+    private TableColumn<?, ?> tableViewGenero;
+
+    @FXML
     private TableColumn<?, ?> tableViewIdCliente;
 
     @FXML
     private TableColumn<?, ?> tableViewNomeCliente;
 
     @FXML
-    private TableColumn<?, ?> tableViewCPF;
-    
-    @FXML
     private TableColumn<?, ?> tableViewRg;
-    
-    @FXML
-    private TableColumn<?, ?> tableViewGenero;
-    
-    @FXML
-    private TableColumn<?, ?> tableViewCelular;
-    
+
     @FXML
     private TableColumn<?, ?> tableViewStatusCliente;
-    
+
+    @FXML
+    private TextField txtCelular;
+
+    @FXML
+    private TextField txtCpf;
+
     @FXML
     private TextField txtIdCliente;
 
@@ -71,41 +94,25 @@ public class ClienteController implements Initializable {
     private TextField txtNomeCliente;
 
     @FXML
-    private TextField txtCpf;
-    
-    @FXML
-    private TextField txtRg;
-    
-   @FXML
-    private Checkbox cbGenero;
-   
-    @FXML
-    private TextField txtCelular;
-    
-    @FXML
-    private TextField cbStatus;
-    
+    private TextField txtPesquisarCpf;
+
     @FXML
     private TextField txtPesquisarNomeCliente;
 
     @FXML
-    private TextField txtPesquisarCpf;
+    private TextField txtRg;
+
 
     @FXML
     void btAlterarClick(ActionEvent event) {
-        TableColumn<?, ?> cli = tableViewIdCliente;
     }
 
     @FXML
     void btExcluirClick(ActionEvent event) {
-        
     }
 
     @FXML
     void btInserirClick(ActionEvent event) {
-                ClienteModel cli = new ClienteModel();
-        boolean okClicked = showDialog(cli);
-    
     }
 
     @FXML
@@ -125,5 +132,27 @@ public class ClienteController implements Initializable {
     private boolean showDialog(ClienteModel cli) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    private void listarUsuario() throws  Exception{
+        tableViewIdCliente.setCellValueFactory(new PropertyValueFactory<>("idCliente"));
+        tableViewNomeCliente.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
+        tableViewCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+        tableViewRg.setCellValueFactory(new PropertyValueFactory<>("RG"));
+        tableViewGenero.setCellValueFactory(new PropertyValueFactory<>("genero"));
+        tableViewCelular.setCellValueFactory(new PropertyValueFactory<>("celular"));
+        tableViewStatusCliente.setCellValueFactory(new PropertyValueFactory<>("status"));
+        
+        String criterios;
+        
+        if(!txtPesquisarNomeCliente.getText().trim().isEmpty()){
+        
+            String par = txtPesquisarNomeCliente.getText();
+            if(!par.matches("[^´~%';-_\\/\\*]+")) {
+            
+        }
+    }
+        
+
+}
 
 }

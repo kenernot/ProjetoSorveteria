@@ -38,8 +38,8 @@ public class AberturaCaixaController implements Initializable {
     void btnSalvarClick(ActionEvent event) throws SQLException {
         CaixaDao dao = new CaixaDao(Conexao.getInstance().getConn());
         this.caixa.setValorAbertura(Double.valueOf(edt_valorInic.getText()));
-        dao.salvar(this.caixa);
-        //this.caixa.setIdCaixa(dao.getIdCaixa());
+        CaixaModel cm = dao.salvar(this.caixa);
+        this.caixa.setIdCaixa(cm.getIdCaixa());
         CaixaAberto.getInstance().setCaixa(this.caixa);
     }
     private CaixaModel caixa;
