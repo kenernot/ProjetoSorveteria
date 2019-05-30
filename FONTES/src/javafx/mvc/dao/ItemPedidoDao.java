@@ -20,9 +20,9 @@ public class ItemPedidoDao implements InterfaceDAO {
     }
 
     @Override
-    public void salvar(Object o) throws SQLException {
+    public ItemPedidoModel salvar(Object o) throws SQLException {
         if (!(o instanceof ItemPedidoModel)) {
-            return;
+            return new ItemPedidoModel();
         }
         ItemPedidoModel model = (ItemPedidoModel) o;
         String sql;
@@ -43,10 +43,18 @@ public class ItemPedidoDao implements InterfaceDAO {
             ps.setDouble(6, model.getValorTotal());
             ps.setInt(7, model.getIdItemPedido());
             ps.execute();
+            
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                model.setIdItemPedido(rs.getInt(1));
+            }
+            
+            rs.close();
             ps.close();
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
+        return model;
     }
 
     @Override

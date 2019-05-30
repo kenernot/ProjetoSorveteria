@@ -20,9 +20,9 @@ public class CaixaDao implements InterfaceDAO {
     }
 
     @Override
-    public void salvar(Object o) throws SQLException {
+    public CaixaModel salvar(Object o) throws SQLException {
         if (!(o instanceof CaixaModel)) {
-            return;
+            return new CaixaModel();
         }
         CaixaModel model = (CaixaModel) o;
         String sql;
@@ -41,10 +41,18 @@ public class CaixaDao implements InterfaceDAO {
             ps.setString(4, model.getDataFechamento());
             ps.setInt(5, model.getIdCaixa());
             ps.execute();
+            
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                model.setIdCaixa(rs.getInt(1));
+            }
+            
+            rs.close();
             ps.close();
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
+        return model;
     }
 
     @Override

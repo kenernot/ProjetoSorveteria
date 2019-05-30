@@ -20,9 +20,9 @@ public class ItemCaixaDao implements InterfaceDAO {
     }
 
     @Override
-    public void salvar(Object o) throws SQLException {
+    public ItemCaixaModel salvar(Object o) throws SQLException {
         if (!(o instanceof ItemCaixaModel)) {
-            return;
+            return new ItemCaixaModel();
         }
         ItemCaixaModel model = (ItemCaixaModel) o;
         String sql;
@@ -42,10 +42,18 @@ public class ItemCaixaDao implements InterfaceDAO {
             ps.setDouble(5, model.getValor());
             ps.setInt(6, model.getIdItemCaixa());
             ps.execute();
+            
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                model.setIdItemCaixa(rs.getInt(1));
+            }
+            
+            rs.close();
             ps.close();
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
+        return model;
     }
 
     @Override
