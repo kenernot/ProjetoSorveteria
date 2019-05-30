@@ -11,6 +11,7 @@ public class CaixaModel {
     private String dataAbertura;
     private double valorAbertura;
     private double valorFinal;
+    private double informarSaldo;
     private String dataFechamento;
 
     public int getIdCaixa() {
@@ -53,6 +54,14 @@ public class CaixaModel {
         this.valorFinal = valorFinal;
     }
 
+    public double getInformarSaldo() {
+        return informarSaldo;
+    }
+
+    public void setInformarSaldo(double informarSaldo) {
+        this.informarSaldo = informarSaldo;
+    }
+
     public String getDataFechamento() {
         return dataFechamento;
     }
@@ -60,5 +69,5 @@ public class CaixaModel {
     public void setDataFechamento(String dataFechamento) {
         this.dataFechamento = dataFechamento;
     }
-    
+
 }

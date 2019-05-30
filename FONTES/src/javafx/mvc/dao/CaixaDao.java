@@ -28,9 +28,9 @@ public class CaixaDao implements InterfaceDAO {
         String sql;
 
         if (model.getIdCaixa() > 0) {
-            sql = "update caixa set idUsuario = ?, valorAbertura = ?, valorFinal = ?, dataFechamento = ? where idCaixa = ?";
+            sql = "update caixa set idUsuario = ?, valorAbertura = ?, valorFinal = ?, informarSaldo = ?, dataFechamento = ? where idCaixa = ?";
         } else {
-            sql = "insert into caixa (idUsuario, dataAbertura, valorAbertura, valorFinal, dataFechamento, idCaixa) values (?,NOW(),?,?,?,?)";
+            sql = "insert into caixa (idUsuario, dataAbertura, valorAbertura, valorFinal, informarSaldo, dataFechamento, idCaixa) values (?,NOW(),?,?,?,?,?)";
         }
 
         try {
@@ -38,8 +38,9 @@ public class CaixaDao implements InterfaceDAO {
             ps.setInt(1, model.getIdUsuario());
             ps.setDouble(2, model.getValorAbertura());
             ps.setDouble(3, model.getValorFinal());
-            ps.setString(4, model.getDataFechamento());
-            ps.setInt(5, model.getIdCaixa());
+            ps.setDouble(4, model.getInformarSaldo());
+            ps.setString(5, model.getDataFechamento());
+            ps.setInt(6, model.getIdCaixa());
             ps.execute();
             
             ResultSet rs = ps.getGeneratedKeys();
@@ -93,6 +94,7 @@ public class CaixaDao implements InterfaceDAO {
                 model.setDataAbertura(rs.getDate("dataAbertura").toString());
                 model.setValorAbertura(rs.getDouble("valorAbertura"));
                 model.setValorFinal(rs.getDouble("valorFinal"));
+                model.setInformarSaldo(rs.getDouble("informarSaldo"));
                 model.setDataFechamento(rs.getDate("dataFechamento").toString());
                 al.add(model);
             }
