@@ -13,13 +13,20 @@
         <Menu mnemonicParsing="false" text="Cadastros">
           <items>
             <MenuItem mnemonicParsing="false" onAction="#menuItemCadastroClienteClick" text="Cliente" fx:id="menuItemCadastroCliente" />
-            <MenuItem mnemonicParsing="false" text="Produto" />
-            <MenuItem mnemonicParsing="false" text="Usuario" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemCadastroUsuarioClick" text="Usuario" fx:id="menuItemCadastroUsuario" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemCadastroProdutoClick" text="Produto " fx:id="menuItemCadastroProduto" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Pedido">
           <items>
-            <MenuItem mnemonicParsing="false" text="Action 1" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemPedidoAbrirClick" text="Abrir" fx:id="menuItemPedidoAbrir" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Financeiro">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#menuItemFinanceiroItemCaixaClick" text="Item Caixa" fx:id="menuItemFinanceiroItemCaixa" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemFinanceiroFecharCaixaClick" text="Fechar Caixa" fx:id="menuItemFinanceiroFecharCaixa" />
+            <MenuItem mnemonicParsing="false" onAction="#menuItemFinanceiroRelatorioCaixaClick" text="Relatório Caixa" fx:id="menuItemFinanceiroRelatorioCaixa" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Sistema">
