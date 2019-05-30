@@ -20,9 +20,9 @@ public class PedidoDao implements InterfaceDAO {
     }
 
     @Override
-    public void salvar(Object o) throws SQLException {
+    public PedidoModel salvar(Object o) throws SQLException {
         if (!(o instanceof PedidoModel)) {
-            return;
+            return new PedidoModel();
         }
         PedidoModel model = (PedidoModel) o;
         String sql;
@@ -45,10 +45,18 @@ public class PedidoDao implements InterfaceDAO {
             ps.setInt(8, model.getQtdTotal());
             ps.setInt(9, model.getIdPedido());
             ps.execute();
+            
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                model.setIdPedido(rs.getInt(1));
+            }
+            
+            rs.close();
             ps.close();
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
+        return model;
     }
 
     @Override
