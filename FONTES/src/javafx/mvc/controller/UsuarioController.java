@@ -32,7 +32,7 @@ import javafx.scene.layout.AnchorPane;
 /**
  * FXML Controller class
  *
- * @author Marlon
+ * @author Erica
  */
 public class UsuarioController implements Initializable {
 
