@@ -20,9 +20,9 @@ public class ProdutoDao implements InterfaceDAO {
     }
 
     @Override
-    public void salvar(Object o) throws SQLException {
+    public ProdutoModel salvar(Object o) throws SQLException {
         if (!(o instanceof ProdutoModel)) {
-            return;
+            return new ProdutoModel();
         }
         ProdutoModel model = (ProdutoModel) o;
         String sql;
@@ -43,10 +43,18 @@ public class ProdutoDao implements InterfaceDAO {
             ps.setString(6, model.getTipoProduto());
             ps.setInt(7, model.getIdProduto());
             ps.execute();
+            
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                model.setIdProduto(rs.getInt(1));
+            }
+            
+            rs.close();
             ps.close();
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
+        return model;
     }
 
     @Override

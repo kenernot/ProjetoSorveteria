@@ -20,9 +20,9 @@ public class ClienteDao implements InterfaceDAO {
     }
 
     @Override
-    public void salvar(Object o) throws SQLException {
+    public ClienteModel salvar(Object o) throws SQLException {
         if (!(o instanceof ClienteModel)) {
-            return;
+            return new ClienteModel();
         }
         ClienteModel model = (ClienteModel) o;
         String sql;
@@ -41,10 +41,18 @@ public class ClienteDao implements InterfaceDAO {
             ps.setString(6, model.getStatus());
             ps.setInt(7, model.getIdCliente());
             ps.execute();
+            
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                model.setIdCliente(rs.getInt(1));
+            }
+            
+            rs.close();
             ps.close();
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
+        return model;
     }
 
     @Override

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="379.0000999999975" prefWidth="484.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="javafx.mvc.controller.FechamentoCaixaController">
+<AnchorPane id="AnchorPane" prefHeight="372.0000999999975" prefWidth="484.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="javafx.mvc.controller.FechamentoCaixaController">
   <children>
     <Label alignment="CENTER" layoutX="0.0" layoutY="30.0" prefHeight="42.0" prefWidth="484.0" text="FECHAMENTO CAIXA">
       <font>
@@ -18,16 +18,19 @@
       <children>
         <Label alignment="CENTER" prefHeight="69.0" prefWidth="223.0" text="Entradas" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <Label alignment="CENTER" prefHeight="67.0" prefWidth="223.0" text="Saidas" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <Label alignment="CENTER" prefHeight="67.0" prefWidth="223.0" text="Saldo Final" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <TextField fx:id="edt_entradas" prefWidth="183.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <TextField fx:id="edt_saidas" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label alignment="CENTER" prefHeight="67.0" prefWidth="223.0" text="Saldo Final" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <TextField fx:id="edt_saldoFinal" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label alignment="CENTER" prefHeight="52.0" prefWidth="174.0" text="Informar Saldo" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextField fx:id="edt_informarSaldo" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       </columnConstraints>
       <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
