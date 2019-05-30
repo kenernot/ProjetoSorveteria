@@ -145,6 +145,8 @@ public class PrincipalController implements Initializable, Ouvinte {
         listaNomes.add("ItemCaixa");
         listaNomes.add("Pedido");
 
+        // Burger R$10
+        
         UsuarioModel user = UsuarioLogado.getInstance().getUser();
 
         this.menuItemCadastroCliente.setVisible(false);
