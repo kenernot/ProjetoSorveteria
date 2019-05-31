@@ -20,7 +20,7 @@
         <TextField id="txtIDCliente" fx:id="txtIDCliPedido" layoutX="36.0" layoutY="125.0" prefWidth="100.0" />
         <TextField fx:id="txtIDProdPedido" layoutX="86.0" layoutY="167.0" prefWidth="100.0" />
         <TextField fx:id="txtDataPedido" layoutX="145.0" layoutY="80.0" prefWidth="200.0" />
-        <TextField fx:id="txtQtdPedido" layoutX="195.0" layoutY="167.0" prefWidth="100.0" />
+        <TextField fx:id="txtQtdPedido" layoutX="195.0" layoutY="167.0" onKeyReleased="#txtQtdPedidoReleased" prefWidth="100.0" />
         <Label layoutX="36.0" layoutY="193.0" text="Valor Desconto" />
         <Label layoutX="145.0" layoutY="193.0" text="Valor Total" />
         <TextField fx:id="txtValorDescPedido" layoutX="36.0" layoutY="209.0" prefWidth="100.0" />
