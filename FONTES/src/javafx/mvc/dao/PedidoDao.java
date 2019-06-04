@@ -28,9 +28,9 @@ public class PedidoDao implements InterfaceDAO {
         String sql;
 
         if (model.getIdPedido() > 0) {
-            sql = "update pedido set idCliente = ?, idUsuario = ?, dataPedido = ?, descricaoPedido = ?, valorTotal = ?, valorDesconto = ?, valorPagar = ?, qtdTotal = ? where idPedido = ?";
+            sql = "update pedido set idCliente = ?, idUsuario = ?, dataPedido = ?, descricaoPedido = ?, valorTotal = ?, valorDesconto = ?, valorPagar = ?, qtdTotal = ?, status = ? where idPedido = ?";
         } else {
-            sql = "insert into pedido (idCliente, idUsuario, dataPedido, descricaoPedido, valorTotal, valorDesconto, valorPagar, qtdTotal, idPedido) values (?,?,?,?,?,?,?,?,?)";
+            sql = "insert into pedido (idCliente, idUsuario, dataPedido, descricaoPedido, valorTotal, valorDesconto, valorPagar, qtdTotal, idPedido, status) values (?,?,?,?,?,?,?,?,?,?)";
         }
 
         try {
@@ -44,6 +44,7 @@ public class PedidoDao implements InterfaceDAO {
             ps.setDouble(7, model.getValorPagar());
             ps.setInt(8, model.getQtdTotal());
             ps.setInt(9, model.getIdPedido());
+            ps.setString(10, model.getStatus());
             ps.execute();
             
             ResultSet rs = ps.getGeneratedKeys();
@@ -101,6 +102,7 @@ public class PedidoDao implements InterfaceDAO {
                 model.setValorDesconto(rs.getDouble("valorDesconto"));
                 model.setValorPagar(rs.getDouble("valorPagar"));
                 model.setQtdTotal(rs.getInt("qtdTotal"));
+                model.setStatus(rs.getString("status"));
                 al.add(model);
             }
             
