@@ -39,6 +39,9 @@ public class PrincipalController implements Initializable, Ouvinte {
     private URL location;
 
     @FXML
+    private MenuItem menuItemFinanceiroAberturaCaixa;
+
+    @FXML
     private AnchorPane anchorPane;
 
     @FXML
@@ -52,7 +55,7 @@ public class PrincipalController implements Initializable, Ouvinte {
 
     @FXML
     private MenuItem menuItemCadastroUsuario;
-    
+
     @FXML
     private MenuItem menuItemFinanceiroFecharCaixa;
 
@@ -131,6 +134,11 @@ public class PrincipalController implements Initializable, Ouvinte {
         this.stagePrincipal = stagePrincipal;
     }
 
+    @FXML
+    void menuItemFinanceiroAberturaCaixaClick() {
+        chamaTela("AberturaCaixa");
+    }
+
     public void setLabelUsuario() {
         this.lbUsuario.setText("Usuario: " + UsuarioLogado.getInstance().getUser().getNomeUsuario());
     }
@@ -142,11 +150,11 @@ public class PrincipalController implements Initializable, Ouvinte {
 
         listaNomes.add("Caixa");
         listaNomes.add("FechamentoCaixa");
+        listaNomes.add("AberturaCaixa");
         listaNomes.add("ItemCaixa");
         listaNomes.add("Pedido");
 
         // Burger R$10
-        
         UsuarioModel user = UsuarioLogado.getInstance().getUser();
 
         this.menuItemCadastroCliente.setVisible(false);
@@ -202,7 +210,7 @@ public class PrincipalController implements Initializable, Ouvinte {
             fecharTela((String) evento.getDados());
         }
     }
-    
+
     private void fecharTela(String nomeTela) {
         Scene get = this.sceneList.get(nomeTela);
         anchorPane.getChildren().remove(anchorPane.getChildren().indexOf(get.getRoot()));

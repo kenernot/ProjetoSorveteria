@@ -30,7 +30,7 @@ public class UsuarioDao implements InterfaceDAO {
         if (model.getIdUsuario() > 0) {
             sql = "update usuario set nomeFuncionario = ?, nomeUsuario = ?, senhaUsuario = ?, status = ?, cliente = ?, usuario = ?, produto = ? where idUsuario = ?";
         } else {
-            sql = "insert into usuario (nomeFuncionario,nomeUsuario,senhaUsuario,status,cliente,usuario,produto,idUsuario) values (?,?,?,?,?,?,?)";
+            sql = "insert into usuario (nomeFuncionario,nomeUsuario,senhaUsuario,status,cliente,usuario,produto,idUsuario) values (?,?,?,?,?,?,?,?)";
         }
 
         try {

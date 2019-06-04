@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CaixaReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b448c1b2-f96a-4c11-9e43-d7f029b5e44e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_USUARIO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DATA_ABERTURA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DATA_FECHAMENTO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     caixa.`idCaixa` AS caixa_idCaixa,
+     caixa.`dataAbertura` AS caixa_dataAbertura,
+     caixa.`valorAbertura` AS caixa_valorAbertura,
+     caixa.`valorFinal` AS caixa_valorFinal,
+     caixa.`dataFechamento` AS caixa_dataFechamento,
+     usuario.`nomeFuncionario` AS usuario_nomeFuncionario
+FROM
+     `usuario` usuario INNER JOIN `caixa` caixa ON usuario.`idUsuario` = caixa.`idUsuario`
+WHERE usuario.`idUsuario` = $P{ID_USUARIO} and caixa.`dataAbertura` >= $P{DATA_ABERTURA} and caixa.`dataFechamento` <= $P{DATA_FECHAMENTO}]]>
+	</queryString>
+	<field name="caixa_idCaixa" class="java.lang.Integer"/>
+	<field name="caixa_dataAbertura" class="java.sql.Timestamp"/>
+	<field name="caixa_valorAbertura" class="java.math.BigDecimal"/>
+	<field name="caixa_valorFinal" class="java.math.BigDecimal"/>
+	<field name="caixa_dataFechamento" class="java.sql.Timestamp"/>
+	<field name="usuario_nomeFuncionario" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="d7f9eaf9-2e0a-439e-989a-ba6621f97223"/>
+				<staticText>
+					<reportElement x="20" y="20" width="302" height="43" forecolor="#FFFFFF" uuid="b1375b76-e03c-448e-afec-6568871bd4a8"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Relatório de Caixa]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="def0e16f-8f13-4335-94ff-e6c106574c5f"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Sorveteria TADS]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="8ba6db2f-61fb-4a75-9713-c4638fc23ae7"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="60" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="4aba665c-5b29-4fb9-a64a-98a258258956"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="60" y="0" width="79" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="05ccc7e2-cc4b-48b0-aad3-a3ac1d2821e2"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[D. Abertura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="139" y="0" width="100" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="798ed183-f3fd-4b47-aa1d-8805b968134f"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[D. Fechamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="239" y="0" width="126" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="0501d501-653b-4e7a-a7d3-7808064310d8"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Funcionário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="365" y="0" width="83" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="1175831e-c8b6-4542-bb53-2d991a649bee"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[V. Abertura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="448" y="0" width="107" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="96770b97-d99e-47fb-9ab9-f563ff5e0ce0"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[V. Fechamento]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="2f7bf2f9-2278-4c44-9bc7-b69f0fa775f0"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="60" height="20" uuid="208ef21a-566e-448a-9b62-bfea311c6537"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{caixa_idCaixa}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="60" y="0" width="79" height="20" uuid="6bba487b-fdfa-4e90-9973-e9f9e749d4c5"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{caixa_dataAbertura}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="239" y="0" width="126" height="20" uuid="116d3d1b-419f-406c-85d0-1e370fdd2758"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuario_nomeFuncionario}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="365" y="0" width="83" height="20" uuid="5fa5cc72-71ac-40a3-a5f1-c4c6cfc5a4fb"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{caixa_valorAbertura}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="448" y="0" width="107" height="20" uuid="f7c1ed10-cf58-4f93-935b-6ca846519d6c"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{caixa_valorFinal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="139" y="0" width="100" height="20" uuid="d1bf3bf7-5af5-4163-98da-48cc28f5be6e"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{caixa_dataFechamento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="92faa065-8cdf-40d9-ba01-5d57b0818ce6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="780f89d1-1533-445a-81a4-6b3b60078903"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="5bc07c2e-6fab-4873-b4a9-df5cb8033706"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
