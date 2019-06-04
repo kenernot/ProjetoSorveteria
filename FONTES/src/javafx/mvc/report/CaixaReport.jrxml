@@ -3,7 +3,16 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<queryString language="SQL">
+	<parameter name="ID_USUARIO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DATA_ABERTURA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DATA_FECHAMENTO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<queryString>
 		<![CDATA[SELECT
      caixa.`idCaixa` AS caixa_idCaixa,
      caixa.`dataAbertura` AS caixa_dataAbertura,
@@ -12,14 +21,15 @@
      caixa.`dataFechamento` AS caixa_dataFechamento,
      usuario.`nomeFuncionario` AS usuario_nomeFuncionario
 FROM
-     `usuario` usuario INNER JOIN `caixa` caixa ON usuario.`idUsuario` = caixa.`idUsuario`]]>
+     `usuario` usuario INNER JOIN `caixa` caixa ON usuario.`idUsuario` = caixa.`idUsuario`
+WHERE usuario.`idUsuario` = $P{ID_USUARIO} and caixa.`dataAbertura` >= $P{DATA_ABERTURA} and caixa.`dataFechamento` <= $P{DATA_FECHAMENTO}]]>
 	</queryString>
 	<field name="caixa_idCaixa" class="java.lang.Integer"/>
 	<field name="caixa_dataAbertura" class="java.sql.Timestamp"/>
-	<field name="caixa_dataFechamento" class="java.sql.Timestamp"/>
-	<field name="usuario_nomeFuncionario" class="java.lang.String"/>
 	<field name="caixa_valorAbertura" class="java.math.BigDecimal"/>
 	<field name="caixa_valorFinal" class="java.math.BigDecimal"/>
+	<field name="caixa_dataFechamento" class="java.sql.Timestamp"/>
+	<field name="usuario_nomeFuncionario" class="java.lang.String"/>
 	<background>
 		<band/>
 	</background>

@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[SELECT
      produto.`idProduto` AS produto_idProduto,
      produto.`nomeProduto` AS produto_nomeProduto,
@@ -13,15 +13,16 @@
      produto.`status` AS produto_status,
      produto.`tipoProduto` AS produto_tipoProduto
 FROM
-     `produto` produto]]>
+     `produto` produto
+ORDER BY produto.`status`, produto.`nomeProduto`]]>
 	</queryString>
 	<field name="produto_idProduto" class="java.lang.Integer"/>
-	<field name="produto_tipoProduto" class="java.lang.String"/>
 	<field name="produto_nomeProduto" class="java.lang.String"/>
-	<field name="produto_observacao" class="java.lang.String"/>
 	<field name="produto_valorCompra" class="java.math.BigDecimal"/>
 	<field name="produto_valorVenda" class="java.math.BigDecimal"/>
+	<field name="produto_observacao" class="java.lang.String"/>
 	<field name="produto_status" class="java.lang.String"/>
+	<field name="produto_tipoProduto" class="java.lang.String"/>
 	<background>
 		<band/>
 	</background>

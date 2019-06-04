@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[SELECT
      usuario.`idUsuario` AS usuario_idUsuario,
      usuario.`nomeFuncionario` AS usuario_nomeFuncionario,
@@ -13,7 +13,8 @@
      usuario.`produto` AS usuario_produto,
      usuario.`status` AS usuario_status
 FROM
-     `usuario` usuario]]>
+     `usuario` usuario
+ORDER BY usuario.`status`, usuario.`nomeUsuario`]]>
 	</queryString>
 	<field name="usuario_idUsuario" class="java.lang.Integer"/>
 	<field name="usuario_nomeFuncionario" class="java.lang.String"/>
@@ -66,7 +67,7 @@ FROM
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Nome]]></text>
+				<text><![CDATA[Nome do Funcionário]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="254" y="0" width="90" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="c42a0e6a-4bc5-409e-8910-f47c696c4ad3"/>

@@ -3,6 +3,12 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="DATAI" class="java.lang.String">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DATAF" class="java.lang.String">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT
      pedido.`idPedido` AS pedido_idPedido,
@@ -13,7 +19,8 @@
      pedido.`valorDesconto` AS pedido_valorDesconto,
      pedido.`valorPagar` AS pedido_valorPagar
 FROM
-     `pedido` pedido]]>
+     `pedido` pedido
+WHERE pedido.`dataPedido` BETWEEN $P{DATAI} and $P{DATAF}]]>
 	</queryString>
 	<field name="pedido_idPedido" class="java.lang.Integer"/>
 	<field name="pedido_dataPedido" class="java.sql.Date"/>
