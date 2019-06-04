@@ -4,3 +4,5 @@ dist/
 nbproject/
 lib/
 db.properties
+FONTES/src/javafx/mvc/testes/
+FONTES/src/javafx/mvc/report/*.jasper
