@@ -1,5 +1,6 @@
 package javafx.mvc.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,6 +8,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.mvc.dao.ClienteDao;
 import javafx.mvc.dao.InterfaceDAO;
@@ -14,7 +16,9 @@ import javafx.mvc.dao.PedidoDao;
 import javafx.mvc.model.ClienteModel;
 import javafx.mvc.model.ItemPedidoModel;
 import javafx.mvc.model.PedidoModel;
+import javafx.mvc.model.ProdutoModel;
 import javafx.mvc.services.Conexao;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -25,6 +29,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class PedidoController implements Initializable {
 
@@ -93,11 +100,21 @@ public class PedidoController implements Initializable {
 
     @FXML
     private TextField txtValorTotalPedido;
+    
+    
+    private ProdutoModel produto;
 
+    PesquisaProdutoController produtoController;
+   
+    
     @FXML
     void btAdicionarItemClickPedido(ActionEvent event) {
 
     }
+
+
+    
+    
 
     @FXML
     void txtQtdPedidoReleased(KeyEvent event) {
@@ -190,7 +207,15 @@ public class PedidoController implements Initializable {
     //--------------FAZER A TELINHA DE PESQUISA DE PRODUTO--------------
     @FXML
     void btPesquisarClickPedido(ActionEvent event) throws Exception {
-        listarProdutos();
+                    boolean okClicked = showDialog();
+
+            if (okClicked) {
+                this.txtIDProdPedido.setText(String.valueOf(produto.getIdProduto()) );
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Seleciona ! ! ! ! !   ");
+                alert.show();
+            }
     }
 
     @Override
@@ -269,6 +294,33 @@ public class PedidoController implements Initializable {
         txtQtdPedido.setText("");
         txtValorDescPedido.setText("");
         txtValorTotalPedido.setText("");
+    }
+
+    private boolean showDialog() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+
+        loader.setLocation(PesquisaProdutoController.class.getResource("/javafx/mvc/view/PesquisaProduto.fxml"));
+
+        AnchorPane anchor = (AnchorPane) loader.load();
+        Scene scene = new Scene(anchor);
+        //System.out.println("Passei AQUI 1");
+
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Busca de produto!");
+        dialogStage.setScene(scene);
+        
+        this.produtoController = loader.getController();
+        
+ 
+        this.produtoController.setDialogStage(dialogStage);
+
+        // Mostra Tela //
+        dialogStage.initModality(Modality.APPLICATION_MODAL);
+        dialogStage.showAndWait();
+
+        this.produto = this.produtoController.getProduto();
+        
+        return this.produtoController.isOkClicked();
     }
 
 }
