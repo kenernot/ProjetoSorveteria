@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javafx.mvc.model.ItemPedidoModel;
 
@@ -34,7 +35,7 @@ public class ItemPedidoDao implements InterfaceDAO {
         }
 
         try {
-            PreparedStatement ps = this.conn.prepareStatement(sql);
+            PreparedStatement ps = this.conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, model.getIdPedido());
             ps.setInt(2, model.getIdProduto());
             ps.setDouble(3, model.getQtd());
