@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -36,11 +37,14 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane fx:id="anchorPane" prefHeight="570.0" prefWidth="800.0" />
-    <ToolBar prefWidth="800.0">
+    <StackPane fx:id="anchorPane" prefHeight="556.0" prefWidth="800.0" />
+    <ToolBar prefWidth="800.0" VBox.vgrow="NEVER">
       <items>
         <Label fx:id="lbUsuario" text="" />
       </items>
+      <VBox.margin>
+        <Insets />
+      </VBox.margin>
     </ToolBar>
   </children>
 </VBox>

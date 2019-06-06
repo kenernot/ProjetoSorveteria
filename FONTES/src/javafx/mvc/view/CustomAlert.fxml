@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" fx:id="alertPane" prefHeight="259.0000999999975" prefWidth="530.0" style="-fx-background-color: #59c3d2;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="javafx.mvc.controller.CustomAlertController">
+  <children>
+    <Label alignment="CENTER" layoutX="55.0" layoutY="38.0" prefHeight="70.0" prefWidth="402.0" text="This is my cool message alert!" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <font>
+        <Font name="Roboto" size="24.0" />
+      </font>
+    </Label>
+    <Button fx:id="btnOk" layoutX="164.0" layoutY="150.0" mnemonicParsing="false" onAction="#btnOkCkick" prefHeight="46.0" prefWidth="185.0" style="-fx-background-color: #eee;&#10;-fx-text-fill: #333;&#10;-fx-border-radius: 0px;" text="Ok" textFill="BLACK">
+      <font>
+        <Font name="Raleway" size="20.0" />
+      </font>
+    </Button>
+  </children>
+</AnchorPane>

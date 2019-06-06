@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,6 +21,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -32,14 +36,9 @@ public class PrincipalController implements Initializable, Ouvinte {
 
     private Stage stagePrincipal;
 
-    @FXML
-    private ResourceBundle resources;
 
     @FXML
-    private URL location;
-
-    @FXML
-    private AnchorPane anchorPane;
+    private StackPane anchorPane;
 
     @FXML
     private Label lbUsuario;
@@ -116,6 +115,17 @@ public class PrincipalController implements Initializable, Ouvinte {
     @FXML
     void menuItemPedidoAbrirClick() {
         chamaTela("Pedido");
+        
+        try { 
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(PrincipalController.class.getResource("/javafx/mvc/view/CustomAlert.fxml"));
+            Parent root;
+            root = loader.load();            
+            anchorPane.getChildren().add(root);
+        } catch (IOException ex) {
+            Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
     }
 
     @Override
