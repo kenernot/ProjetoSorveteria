@@ -15,6 +15,7 @@ public class PedidoModel {
     private double valorDesconto;
     private double valorPagar;
     private int qtdTotal;
+    private String status;
 
     public int getIdPedido() {
         return idPedido;
@@ -86,6 +87,14 @@ public class PedidoModel {
 
     public void setQtdTotal(int qtdTotal) {
         this.qtdTotal = qtdTotal;
-    }   
-    
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 }

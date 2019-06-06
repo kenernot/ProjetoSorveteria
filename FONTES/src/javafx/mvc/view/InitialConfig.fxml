@@ -30,13 +30,17 @@
                         <Insets left="5.0" right="5.0" fx:id="x2" />
                       </GridPane.margin>
                     </TextField>
-                    <TextField fx:id="txtPassword" prefHeight="35.0" prefWidth="200.0" promptText="senha_banco" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="1" />
                     <TextField fx:id="txtUser" prefHeight="35.0" prefWidth="281.0" promptText="usuario_banco" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="0" />
                     <Button fx:id="btSalvar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btSalvarClick" prefHeight="35.0" prefWidth="84.0" text="Salvar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                       <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x3" />
                       </GridPane.margin>
                     </Button>
+                    <PasswordField fx:id="txtPassword" prefHeight="35.0" prefWidth="281.0" promptText="senha_banco" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                      <GridPane.margin>
+                        <Insets left="5.0" right="5.0" fx:id="x2" />
+                      </GridPane.margin>
+                    </PasswordField>
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="137.0" />

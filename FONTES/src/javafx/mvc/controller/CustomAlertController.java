@@ -12,7 +12,6 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
@@ -34,6 +33,7 @@ public class CustomAlertController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // Exemplo de transição com opacidade
         this.alertPane.setOpacity(0);
         FadeTransition ft = new FadeTransition();
         ft.setDuration(Duration.millis(500));
@@ -41,6 +41,7 @@ public class CustomAlertController implements Initializable {
         ft.setToValue(1);
         ft.setNode(alertPane);
         ft.play();
+        // Exemplo de transição de translação
         TranslateTransition tt = new TranslateTransition();
         tt.setFromX(-1000);
         tt.setToX(0);
@@ -62,6 +63,7 @@ public class CustomAlertController implements Initializable {
         ft.setFromValue(1);
         ft.setToValue(0);
         ft.onFinishedProperty().addListener((observable) -> {
+            // exemplo de fechamento da tela 
             AnchorPane parent = (AnchorPane) btnOk.getScene().getRoot().getParent();
             parent.getChildren().remove(btnOk.getScene().getRoot());
         });

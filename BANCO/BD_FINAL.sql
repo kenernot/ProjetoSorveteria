@@ -79,6 +79,7 @@ CREATE TABLE IF NOT EXISTS `projetosorveteria`.`pedido` (
   `valorDesconto` DECIMAL(8,2) NULL,
   `valorPagar` DECIMAL(8,2)  NOT NULL,
   `qtdTotal` INT  NOT NULL,
+  `status` CHAR(1) NOT NULL,
   PRIMARY KEY (`idpedido`),
   INDEX `fk_pedido_cliente_idx` (`idCliente` ASC),
   INDEX `fk_pedido_usuario_idx` (`idUsuario` ASC),

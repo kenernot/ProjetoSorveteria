@@ -25,6 +25,7 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Financeiro">
           <items>
+            <MenuItem mnemonicParsing="false" onAction="#menuItemFinanceiroAberturaCaixaClick" text="Abertura Caixa" fx:id="menuItemFinanceiroAberturaCaixa" />
             <MenuItem mnemonicParsing="false" onAction="#menuItemFinanceiroItemCaixaClick" text="Item Caixa" fx:id="menuItemFinanceiroItemCaixa" />
             <MenuItem mnemonicParsing="false" onAction="#menuItemFinanceiroFecharCaixaClick" text="Fechar Caixa" fx:id="menuItemFinanceiroFecharCaixa" />
             <MenuItem mnemonicParsing="false" onAction="#menuItemFinanceiroRelatorioCaixaClick" text="Relatório Caixa" fx:id="menuItemFinanceiroRelatorioCaixa" />
