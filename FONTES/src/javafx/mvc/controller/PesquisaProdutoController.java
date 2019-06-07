@@ -65,8 +65,6 @@ public class PesquisaProdutoController implements Initializable {
         return okClicked;
     }
 
-    
-
     public ProdutoModel getProduto() {
         return produto;
     }
@@ -77,8 +75,10 @@ public class PesquisaProdutoController implements Initializable {
 
     @FXML
     void btnFiltrarClick(ActionEvent event) {
-        this.okClicked = true;
-        this.dialogStage.close();
+        if (this.produto != null) {
+            this.okClicked = true;
+            this.dialogStage.close();
+        }        
     }
 
     @FXML
@@ -136,8 +136,6 @@ public class PesquisaProdutoController implements Initializable {
     public Stage getDialogStage() {
         return dialogStage;
     }
-    
-    
 
     private void selecionaProduto(ProdutoModel c) {
         if (c == null) {

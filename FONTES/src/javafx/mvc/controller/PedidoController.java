@@ -2,17 +2,22 @@ package javafx.mvc.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.mvc.dao.ClienteDao;
 import javafx.mvc.dao.InterfaceDAO;
-import javafx.mvc.dao.PedidoDao;
+import javafx.mvc.dao.ProdutoDao;
 import javafx.mvc.model.ClienteModel;
 import javafx.mvc.model.ItemPedidoModel;
 import javafx.mvc.model.PedidoModel;
@@ -57,7 +62,7 @@ public class PedidoController implements Initializable {
     private TableColumn<?, ?> TableViewColumnValorTotal;
 
     @FXML
-    private TableView<?> tableViewPedido;
+    private TableView<ItemPedidoModel> tableViewPedido;
 
     @FXML
     private Button btCancelarPedido;
@@ -100,21 +105,46 @@ public class PedidoController implements Initializable {
 
     @FXML
     private TextField txtValorTotalPedido;
-    
-    
+
     private ProdutoModel produto;
 
     PesquisaProdutoController produtoController;
-   
-    
+    private ObservableList<ItemPedidoModel> listaObserver;
+    private ProdutoDao pd;
+    private ArrayList<ItemPedidoModel> lista;
+
     @FXML
-    void btAdicionarItemClickPedido(ActionEvent event) {
+    void btAdicionarItemClickPedido(ActionEvent event) throws SQLException {
+        if (txtQtdPedido.getText().matches("^[0-9]*$") && !txtIDProdPedido.getText().isEmpty()) {
+            TableViewColumnID.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
+            TableViewColumnNome.setCellValueFactory(new PropertyValueFactory<>("nomeProduto"));
+            TableViewColumnValor.setCellValueFactory(new PropertyValueFactory<>("valorUnitario"));
+            TableViewColumnQtd.setCellValueFactory(new PropertyValueFactory<>("qtd"));
+            TableViewColumnValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
 
+            ItemPedidoModel pm = new ItemPedidoModel();
+            pm.setIdProduto(Integer.parseInt(this.txtIDProdPedido.getText()));
+            pm.setQtd(Double.parseDouble(this.txtQtdPedido.getText()));
+
+            ProdutoModel prm = new ProdutoModel();
+            ArrayList<ProdutoModel> myProduto = pd.buscar(" idProduto = " + txtIDProdPedido.getText());
+            if (myProduto.size() > 0) {
+                prm = myProduto.get(0);
+            }
+            pm.setNomeProduto(prm.getNomeProduto());
+            pm.setValorUnitario(prm.getValorVenda());
+
+            Double valorTotal = pm.getQtd() * pm.getValorUnitario();
+            pm.setValorTotal(valorTotal);
+
+            lista.add(pm);
+            listaObserver = FXCollections.observableArrayList(lista);
+
+            tableViewPedido.setItems(listaObserver);
+
+            txtValorTotalPedido.setText(String.valueOf(getSomaValorTotal()));
+        }
     }
-
-
-    
-    
 
     @FXML
     void txtQtdPedidoReleased(KeyEvent event) {
@@ -122,6 +152,15 @@ public class PedidoController implements Initializable {
         if (!event.getText().matches("[0-9]")) {
             txtQtdPedido.setText(txtAntes.replaceAll("[^0-9]", ""));
         }
+    }
+
+    @FXML
+    void txtDescPedidoReleased(KeyEvent event) {
+        String txtAntes = txtValorDescPedido.getText();
+        if (!event.getText().matches("[0-9]")) {
+            txtValorDescPedido.setText(txtAntes.replaceAll("[^0-9]", ""));
+        }
+        txtValorTotalPedido.setText(String.valueOf(getSomaValorTotal()));
     }
 
     //--------------DELETAR OK--------------
@@ -207,15 +246,15 @@ public class PedidoController implements Initializable {
     //--------------FAZER A TELINHA DE PESQUISA DE PRODUTO--------------
     @FXML
     void btPesquisarClickPedido(ActionEvent event) throws Exception {
-                    boolean okClicked = showDialog();
+        boolean okClicked = showDialog();
 
-            if (okClicked) {
-                this.txtIDProdPedido.setText(String.valueOf(produto.getIdProduto()) );
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Seleciona ! ! ! ! !   ");
-                alert.show();
-            }
+        if (okClicked) {
+            this.txtIDProdPedido.setText(String.valueOf(produto.getIdProduto()));
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Seleciona ! ! ! ! !   ");
+            alert.show();
+        }
     }
 
     @Override
@@ -224,6 +263,9 @@ public class PedidoController implements Initializable {
         camposEnabled(true);
         limparCampos();
 
+        this.pd = new ProdutoDao(Conexao.getInstance().getConn());
+
+        lista = new ArrayList<ItemPedidoModel>();
 //        pd = new PedidoDao(Conexao.getInstance().getConn());
 //        try{
 //            listarProdutos();
@@ -231,8 +273,6 @@ public class PedidoController implements Initializable {
 //           ERRO AQUI Logger.getLogger(PedidoController.class.getName()).log(Level.SEVERE, null, ex);
 //        }
     }
-
-    private PedidoDao pd;
 
     private void listarProdutos() throws Exception {
         TableViewColumnID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -242,6 +282,22 @@ public class PedidoController implements Initializable {
         TableViewColumnValorTotal.setCellValueFactory(new PropertyValueFactory<>("valortotal"));
 
         //--------------ABRIR NOVA TELA PARA SELECIONAR PRODUTO--------------
+    }
+
+    public double getSomaValorTotal() {
+        double resultado = 0;
+        for (ItemPedidoModel item : lista) {
+            resultado += item.getValorTotal();
+        }
+        if (isDouble(txtValorDescPedido.getText())) {
+            resultado -= Double.valueOf(txtValorDescPedido.getText());
+        }
+        return resultado;
+    }
+
+    @FXML
+    void valorDescontoKeyReleased(KeyEvent event) {
+        txtValorTotalPedido.setText(String.valueOf(getSomaValorTotal()));
     }
 
     //-------------- OK --------------
@@ -308,10 +364,9 @@ public class PedidoController implements Initializable {
         Stage dialogStage = new Stage();
         dialogStage.setTitle("Busca de produto!");
         dialogStage.setScene(scene);
-        
+
         this.produtoController = loader.getController();
-        
- 
+
         this.produtoController.setDialogStage(dialogStage);
 
         // Mostra Tela //
@@ -319,8 +374,20 @@ public class PedidoController implements Initializable {
         dialogStage.showAndWait();
 
         this.produto = this.produtoController.getProduto();
-        
+
         return this.produtoController.isOkClicked();
+    }
+
+    public boolean isDouble(String s) {
+        boolean bool = true;
+        try {
+            Double.parseDouble(s);
+        } catch (Exception ex) {
+            bool = false;
+            return bool;
+        }
+
+        return bool;
     }
 
 }
