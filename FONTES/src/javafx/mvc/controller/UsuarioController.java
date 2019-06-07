@@ -15,8 +15,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.mvc.dao.UsuarioDao;
 import javafx.mvc.model.UsuarioModel;
+import javafx.mvc.services.Conexao;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -28,6 +30,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 
 /**
  * FXML Controller class
@@ -69,6 +72,9 @@ public class UsuarioController implements Initializable {
 
     @FXML
     private Button btPesquisarUsuario;
+    
+     @FXML
+    private Button btnCancelarUsuario;
 
     @FXML
     private Button btSalvarUsuario;
@@ -99,6 +105,14 @@ public class UsuarioController implements Initializable {
 
     @FXML
     private TextField txtPesquisarUsuario;
+    @FXML
+    private Font x3;
+    @FXML
+    private Insets x1;
+    @FXML
+    private Insets x2;
+    @FXML
+    private AnchorPane APCampos;
 
     @FXML
     void btPesquisarClickUsuario(ActionEvent event) throws Exception {
@@ -107,42 +121,29 @@ public class UsuarioController implements Initializable {
 
     @FXML
     void btInserirClickUsuario(ActionEvent event) throws Exception {
-        boolean okClicked = showDialog(um);
-        if (okClicked){
-            this.ud.salvar(um);
-            listarUsuario();
-        }
+        this.habilitar();
     }
     
     private UsuarioModel um;
+    
     @FXML
     void btSalvarClickUsuario(ActionEvent event) throws Exception{
-        this.um.setNomeFuncionario(txtCadNomeUsuario.getText());
-        this.um.setNomeUsuario(txtCadUsuario.getText());
-        this.um.setSenhaUsuario(txtCadSenhaUsuario.getText());
-        this.um.setStatus(comboCadUsuario.getSelectionModel().getSelectedItem().toString());
-       
-       //this.um.setCliente(checkPermitirCliente.isSelected());
-       //this.um.setUsuario(checkPermitirUsuario.isSelected());
-       //this.um.setProduto(checkPermitirProduto.isSelected());
+        UsuarioModel usuario = new UsuarioModel();
+        usuario.setNomeFuncionario(txtCadNomeUsuario.getText());
+        usuario.setNomeUsuario(txtCadUsuario.getText());
+        usuario.setSenhaUsuario(txtCadSenhaUsuario.getText());
+       // usuario.setStatus(comboCadUsuario.getSelectionModel().getSelectedItem().toString()); 
+       usuario.setCliente(Boolean.valueOf(checkPermitirCliente.isSelected()).toString());
+      usuario.setUsuario(Boolean.valueOf(checkPermitirUsuario.isSelected()).toString());
+       usuario.setProduto(Boolean.valueOf(checkPermitirProduto.isSelected()).toString());
                 
+       this.ud.salvar(usuario);
 
     }
 
     @FXML
     void btAlterarClickUsuario(ActionEvent event) throws Exception{
-        UsuarioModel um = (UsuarioModel) TableViewUsuario.getSelectionModel().getSelectedItem();
-        if (um != null) {
-            boolean okClicked = showDialog(um);
-            if (okClicked){
-                this.ud.salvar(um);
-                listarUsuario();
-            }
-        } else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Seleciona!!!");
-            alert.show();
-        }
+        this.ud.salvar(um);
     }
 
     @FXML
@@ -164,6 +165,12 @@ public class UsuarioController implements Initializable {
         }
         
     }
+    
+     @FXML
+    void btnCancelarClickUsuario(ActionEvent event) {
+        this.Desabilitar(); 
+    }
+
 
     @FXML
     void btnFecharClickUsuario(ActionEvent event) {
@@ -179,7 +186,7 @@ public class UsuarioController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        this.ud = new UsuarioDao(Conexao.getInstance().getConn()); 
     }
     
     private UsuarioDao ud;
@@ -212,8 +219,13 @@ public class UsuarioController implements Initializable {
         
     }
 
-    private boolean showDialog(UsuarioModel um) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void habilitar() {
+        this.APCampos.setDisable(false);
+        //o cancelar será setDisable como true
+    }
+
+    private void Desabilitar() {
+        this.APCampos.setDisable(true);
     }
 
 }
