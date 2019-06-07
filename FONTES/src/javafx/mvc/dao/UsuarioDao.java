@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javafx.mvc.model.UsuarioModel;
 
@@ -30,11 +31,11 @@ public class UsuarioDao implements InterfaceDAO {
         if (model.getIdUsuario() > 0) {
             sql = "update usuario set nomeFuncionario = ?, nomeUsuario = ?, senhaUsuario = ?, status = ?, cliente = ?, usuario = ?, produto = ? where idUsuario = ?";
         } else {
-            sql = "insert into usuario (nomeFuncionario,nomeUsuario,senhaUsuario,status,cliente,usuario,produto,idUsuario) values (?,?,?,?,?,?,?)";
+            sql = "insert into usuario (nomeFuncionario,nomeUsuario,senhaUsuario,status,cliente,usuario,produto,idUsuario) values (?,?,?,?,?,?,?,?)";
         }
 
         try {
-            PreparedStatement ps = this.conn.prepareStatement(sql);
+            PreparedStatement ps = this.conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, model.getNomeFuncionario());
             ps.setString(2, model.getNomeUsuario());
             ps.setString(3, model.getSenhaUsuario());
