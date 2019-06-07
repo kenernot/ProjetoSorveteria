@@ -6,6 +6,7 @@
 package javafx.mvc.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Optional;
@@ -56,7 +57,7 @@ public class UsuarioController implements Initializable {
     private TableColumn<?, ?> TableViewColumnStatus;
 
     @FXML
-    private TableView<?> TableViewUsuario;
+    private TableView<UsuarioModel> TableViewUsuario;
 
     @FXML
     private Button btAlterarUsuario;
@@ -89,7 +90,7 @@ public class UsuarioController implements Initializable {
     private CheckBox checkPermitirUsuario;
 
     @FXML
-    private ComboBox<?> comboCadUsuario;
+    private ComboBox<String> comboCadUsuario;
 
     @FXML
     private TextField txtCadNomeUsuario;
@@ -132,10 +133,10 @@ public class UsuarioController implements Initializable {
         usuario.setNomeFuncionario(txtCadNomeUsuario.getText());
         usuario.setNomeUsuario(txtCadUsuario.getText());
         usuario.setSenhaUsuario(txtCadSenhaUsuario.getText());
-       // usuario.setStatus(comboCadUsuario.getSelectionModel().getSelectedItem().toString()); 
-       usuario.setCliente(Boolean.valueOf(checkPermitirCliente.isSelected()).toString());
-      usuario.setUsuario(Boolean.valueOf(checkPermitirUsuario.isSelected()).toString());
-       usuario.setProduto(Boolean.valueOf(checkPermitirProduto.isSelected()).toString());
+        usuario.setStatus(comboCadUsuario.getValue().substring(0, 1).toUpperCase()); 
+       usuario.setCliente(Boolean.valueOf(checkPermitirCliente.isSelected()).toString().substring(0, 1).toUpperCase());
+      usuario.setUsuario(Boolean.valueOf(checkPermitirUsuario.isSelected()).toString().substring(0, 1).toUpperCase());
+       usuario.setProduto(Boolean.valueOf(checkPermitirProduto.isSelected()).toString().substring(0, 1).toUpperCase());
                 
        this.ud.salvar(usuario);
 
@@ -187,11 +188,12 @@ public class UsuarioController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.ud = new UsuarioDao(Conexao.getInstance().getConn()); 
+        this.comboCadUsuario.getItems().add("Ativo");
+        this.comboCadUsuario.getItems().add("Inativo");
     }
     
     private UsuarioDao ud;
-    //private List<UsuarioModel> lista;
-    //private ObservableList<UsuarioModel> listaObserver;
+    private ObservableList<UsuarioModel> listaObserver;
     
     
     private void listarUsuario() throws Exception{
@@ -201,7 +203,7 @@ public class UsuarioController implements Initializable {
         TableViewColumnNomeUsuario.setCellValueFactory(new PropertyValueFactory<>("nomeUsuario"));
         TableViewColumnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         
-        String criterio; 
+        String criterio = ""; 
         
         if (!txtPesquisarUsuario.getText().trim().isEmpty()) {
             
@@ -213,10 +215,13 @@ public class UsuarioController implements Initializable {
                 return;
             }
             
-            criterio = "where nomeUsuario like'%" + par + "%'";
+            criterio = " where nomeUsuario like '%" + par + "%'";
         }
-        //listaObserver = FXCollections.observableArrayList();
-        
+        ArrayList<UsuarioModel> buscar = this.ud.buscar(criterio); 
+        listaObserver = FXCollections.observableArrayList();
+        listaObserver.clear();
+        listaObserver.addAll(buscar); 
+        TableViewUsuario.setItems(listaObserver);
     }
 
     private void habilitar() {
