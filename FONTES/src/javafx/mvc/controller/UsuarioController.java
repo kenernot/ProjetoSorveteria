@@ -153,7 +153,7 @@ public class UsuarioController implements Initializable {
             confirm.setContentText("Deseja excluir?");
             Optional<ButtonType> opcao = confirm.showAndWait();
             if(opcao.get().getButtonData().equals(ButtonBar.ButtonData.OK_DONE)) {
-                this.ud.remove(um);
+                /*this.ud.remove(um);*/
                 listarUsuario();
             }
         } else {
