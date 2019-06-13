@@ -83,7 +83,7 @@ public class PedidoController implements Initializable {
     private Button btPesquisarPedido;
 
     @FXML
-    private ComboBox<?> comboPedido;
+    private ComboBox<String> comboPedido;
 
     @FXML
     private TextField txtDataPedido;
@@ -115,34 +115,36 @@ public class PedidoController implements Initializable {
 
     @FXML
     void btAdicionarItemClickPedido(ActionEvent event) throws SQLException {
-        if (txtQtdPedido.getText().matches("^[0-9]*$") && !txtIDProdPedido.getText().isEmpty()) {
-            TableViewColumnID.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
-            TableViewColumnNome.setCellValueFactory(new PropertyValueFactory<>("nomeProduto"));
-            TableViewColumnValor.setCellValueFactory(new PropertyValueFactory<>("valorUnitario"));
-            TableViewColumnQtd.setCellValueFactory(new PropertyValueFactory<>("qtd"));
-            TableViewColumnValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
+        if (!txtQtdPedido.getText().isEmpty()) {
+            if (txtQtdPedido.getText().matches("^[0-9]*$") && !txtIDProdPedido.getText().isEmpty()) {
+                TableViewColumnID.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
+                TableViewColumnNome.setCellValueFactory(new PropertyValueFactory<>("nomeProduto"));
+                TableViewColumnValor.setCellValueFactory(new PropertyValueFactory<>("valorUnitario"));
+                TableViewColumnQtd.setCellValueFactory(new PropertyValueFactory<>("qtd"));
+                TableViewColumnValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
 
-            ItemPedidoModel pm = new ItemPedidoModel();
-            pm.setIdProduto(Integer.parseInt(this.txtIDProdPedido.getText()));
-            pm.setQtd(Double.parseDouble(this.txtQtdPedido.getText()));
+                ItemPedidoModel pm = new ItemPedidoModel();
+                pm.setIdProduto(Integer.parseInt(this.txtIDProdPedido.getText()));
+                pm.setQtd(Double.parseDouble(this.txtQtdPedido.getText()));
 
-            ProdutoModel prm = new ProdutoModel();
-            ArrayList<ProdutoModel> myProduto = pd.buscar(" idProduto = " + txtIDProdPedido.getText());
-            if (myProduto.size() > 0) {
-                prm = myProduto.get(0);
+                ProdutoModel prm = new ProdutoModel();
+                ArrayList<ProdutoModel> myProduto = pd.buscar(" idProduto = " + txtIDProdPedido.getText());
+                if (myProduto.size() > 0) {
+                    prm = myProduto.get(0);
+                }
+                pm.setNomeProduto(prm.getNomeProduto());
+                pm.setValorUnitario(prm.getValorVenda());
+
+                Double valorTotal = pm.getQtd() * pm.getValorUnitario();
+                pm.setValorTotal(valorTotal);
+
+                lista.add(pm);
+                listaObserver = FXCollections.observableArrayList(lista);
+
+                tableViewPedido.setItems(listaObserver);
+
+                txtValorTotalPedido.setText(String.valueOf(getSomaValorTotal()));
             }
-            pm.setNomeProduto(prm.getNomeProduto());
-            pm.setValorUnitario(prm.getValorVenda());
-
-            Double valorTotal = pm.getQtd() * pm.getValorUnitario();
-            pm.setValorTotal(valorTotal);
-
-            lista.add(pm);
-            listaObserver = FXCollections.observableArrayList(lista);
-
-            tableViewPedido.setItems(listaObserver);
-
-            txtValorTotalPedido.setText(String.valueOf(getSomaValorTotal()));
         }
     }
 
@@ -163,24 +165,21 @@ public class PedidoController implements Initializable {
         txtValorTotalPedido.setText(String.valueOf(getSomaValorTotal()));
     }
 
-    //--------------DELETAR OK--------------
     @FXML
     void btDeletarItemClickPedido(ActionEvent event) throws Exception {
-        PedidoModel pedido = new PedidoModel();
-        pedido.setIdPedido(Integer.parseInt(txtIDPedido.getText()));
+        if (lista.size() != 0) {
+            PedidoModel pedido = new PedidoModel();
+            pedido.setIdPedido(Integer.parseInt(txtIDPedido.getText()));
 
-        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
-        confirm.setContentText("Deseja realmente excluir o item?");
-        Optional<ButtonType> opcao = confirm.showAndWait();
-        if (opcao.get().getButtonData().equals(ButtonBar.ButtonData.OK_DONE)) {
-            this.pd.excluir(pedido);
-            listarProdutos();
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setContentText("Deseja realmente excluir o item?");
+            Optional<ButtonType> opcao = confirm.showAndWait();
+            if (opcao.get().getButtonData().equals(ButtonBar.ButtonData.OK_DONE)) {
+                Object obj = tableViewPedido.getSelectionModel().getSelectedItem();
+                listaObserver.remove(obj);
+                lista.remove(obj);
+            }
         }
-
-        camposEnabled(true);
-        btEnabled(1);
-        limparCampos();
-        listarProdutos();
     }
 
     //--------------CANCELAR OK--------------
@@ -195,23 +194,36 @@ public class PedidoController implements Initializable {
     //--------------FINALIZAR OK--------------
     @FXML
     void btFinalizarClickPedido(ActionEvent event) throws Exception {
-        PedidoModel pedido = new PedidoModel();
-        ItemPedidoModel itemPedido = new ItemPedidoModel();
+        if (lista.size() != 0) {
 
-        pedido.setIdPedido(Integer.parseInt(txtIDPedido.getText()));
-        pedido.setDataPedido(txtDataPedido.getText());
-        pedido.setIdCliente(Integer.parseInt(txtIDCliPedido.getText()));
-        itemPedido.setIdProduto(Integer.parseInt(txtIDProdPedido.getText()));
-        itemPedido.setQtd(Integer.parseInt(txtQtdPedido.getText()));
-        pedido.setValorDesconto(Integer.parseInt(txtValorDescPedido.getText()));
-        pedido.setValorTotal(Integer.parseInt(txtValorTotalPedido.getText()));
+            PedidoModel pedido = new PedidoModel();
+            ItemPedidoModel itemPedido = new ItemPedidoModel();
 
-        this.pd.salvar(pedido);
+            pedido.setIdPedido(Integer.parseInt(txtIDPedido.getText()));
+            pedido.setDataPedido(txtDataPedido.getText());
+            pedido.setIdCliente(Integer.parseInt(txtIDCliPedido.getText()));
+            pedido.setValorDesconto(Integer.parseInt(txtValorDescPedido.getText()));
+            pedido.setValorTotal(Integer.parseInt(txtValorTotalPedido.getText()));
 
-        camposEnabled(true);
-        btEnabled(1);
-        limparCampos();
-        listarProdutos();
+            String tipo = comboPedido.getValue();
+
+            comboPedido.setValue("Finalizado");
+
+            if (tipo.equals("Finalizado")) {
+                tipo = "F";
+            } else if (tipo.equals("Aberto")) {
+                tipo = "A";
+            } else if (tipo.equals("Em andamento")) {
+                tipo = "E";
+            }
+
+            pedido.setStatus(tipo);
+
+            camposEnabled(true);
+            btEnabled(1);
+            limparCampos();
+            listarProdutos();
+        }
     }
 
     //--------------NOVO OK--------------
@@ -237,7 +249,7 @@ public class PedidoController implements Initializable {
 
             txtIDPedido.setText("0");
 
-            comboPedido.getSelectionModel().selectFirst();
+            comboPedido.setValue("Em andamento");
 
             txtIDCliPedido.setText(String.valueOf(cliente.getIdCliente()));
         }
@@ -266,12 +278,12 @@ public class PedidoController implements Initializable {
         this.pd = new ProdutoDao(Conexao.getInstance().getConn());
 
         lista = new ArrayList<ItemPedidoModel>();
-//        pd = new PedidoDao(Conexao.getInstance().getConn());
-//        try{
-//            listarProdutos();
-//        } catch (Exception ex){
-//           ERRO AQUI Logger.getLogger(PedidoController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
+        comboPedido.getItems().clear();
+        comboPedido.getItems().add("Finalizado");
+        comboPedido.getItems().add("Aberto");
+        comboPedido.getItems().add("Em andamento");
+
     }
 
     private void listarProdutos() throws Exception {
@@ -309,7 +321,7 @@ public class PedidoController implements Initializable {
         txtQtdPedido.setDisable(b);
         txtValorDescPedido.setDisable(b);
         txtValorTotalPedido.setDisable(true);
-        comboPedido.setDisable(b);
+        comboPedido.setDisable(true);
     }
 
     //-------------- OK --------------
