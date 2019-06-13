@@ -3,6 +3,12 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<style name="striped">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></conditionExpression>
+			<style backcolor="#EEEEEE" fill="Solid"/>
+		</conditionalStyle>
+	</style>
 	<queryString language="SQL">
 		<![CDATA[SELECT
      cliente.`idCliente` AS cliente_idCliente,
@@ -89,7 +95,7 @@ FROM
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="474" y="0" width="81" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="f5ab9fcc-fc83-4352-94a4-0da116b659bb"/>
-				<textElement textAlignment="Center">
+				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Celular]]></text>
@@ -98,6 +104,12 @@ FROM
 	</columnHeader>
 	<detail>
 		<band height="20">
+			<rectangle>
+				<reportElement style="striped" x="0" y="0" width="555" height="20" uuid="263ee3ad-f9c5-4e0a-8a1a-b9c2317cad50"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="3c09d070-8f26-443a-9b1b-5e82268d412e"/>
 			</line>

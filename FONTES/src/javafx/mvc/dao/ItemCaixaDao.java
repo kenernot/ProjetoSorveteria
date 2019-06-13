@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javafx.mvc.model.ItemCaixaModel;
 
@@ -27,27 +28,31 @@ public class ItemCaixaDao implements InterfaceDAO {
         ItemCaixaModel model = (ItemCaixaModel) o;
         String sql;
 
-        if (model.getIdItemCaixa()> 0) {
+        if (model.getIdItemCaixa() > 0) {
             sql = "update itemcaixa set idCaixa = ?, idPedido = ?, descricao = ?, tipoMov = ?, valor = ? where idItemCaixa = ?";
         } else {
             sql = "insert into itemcaixa (idCaixa, idPedido, descricao, tipoMov, valor, idItemCaixa) values (?,?,?,?,?,?)";
         }
 
         try {
-            PreparedStatement ps = this.conn.prepareStatement(sql);
+            PreparedStatement ps = this.conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, model.getIdCaixa());
-            ps.setInt(2, model.getIdPedido());
+            if (model.getIdPedido() == 0) {
+                ps.setNull(2, java.sql.Types.INTEGER);
+            } else {
+                ps.setInt(2, model.getIdPedido());
+            }
             ps.setString(3, model.getDescricao());
             ps.setString(4, model.getTipoMov());
             ps.setDouble(5, model.getValor());
             ps.setInt(6, model.getIdItemCaixa());
             ps.execute();
-            
+
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 model.setIdItemCaixa(rs.getInt(1));
             }
-            
+
             rs.close();
             ps.close();
         } catch (SQLException e) {
@@ -86,7 +91,7 @@ public class ItemCaixaDao implements InterfaceDAO {
         try {
             PreparedStatement ps = this.conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 ItemCaixaModel model = new ItemCaixaModel();
                 model.setIdItemCaixa(rs.getInt("idItemCaixa"));
@@ -97,7 +102,7 @@ public class ItemCaixaDao implements InterfaceDAO {
                 model.setValor(rs.getDouble("valor"));
                 al.add(model);
             }
-            
+
             rs.close();
             ps.close();
         } catch (SQLException e) {

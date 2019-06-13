@@ -79,7 +79,4 @@ public class UsuarioModel {
         this.produto = produto;
     }
 
-    public void remover() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

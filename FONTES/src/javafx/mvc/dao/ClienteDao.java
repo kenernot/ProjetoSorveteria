@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javafx.mvc.model.ClienteModel;
 
@@ -32,7 +33,7 @@ public class ClienteDao implements InterfaceDAO {
             sql = "insert into cliente (nomeCliente,cpf,rg,genero,celular,status,idCliente) values (?,?,?,?,?,?,?)";
         }
         try {
-            PreparedStatement ps = this.conn.prepareStatement(sql);
+            PreparedStatement ps = this.conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, model.getNomeCliente());
             ps.setString(2, model.getCpf());
             ps.setString(3, model.getRg());

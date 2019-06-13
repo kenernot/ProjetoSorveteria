@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javafx.mvc.model.ProdutoModel;
 
@@ -34,7 +35,7 @@ public class ProdutoDao implements InterfaceDAO {
         }
 
         try {
-            PreparedStatement ps = this.conn.prepareStatement(sql);
+            PreparedStatement ps = this.conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, model.getNomeProduto());
             ps.setDouble(2, model.getValorCompra());
             ps.setDouble(3, model.getValorVenda());
@@ -43,12 +44,12 @@ public class ProdutoDao implements InterfaceDAO {
             ps.setString(6, model.getTipoProduto());
             ps.setInt(7, model.getIdProduto());
             ps.execute();
-            
+
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 model.setIdProduto(rs.getInt(1));
             }
-            
+
             rs.close();
             ps.close();
         } catch (SQLException e) {
@@ -87,7 +88,7 @@ public class ProdutoDao implements InterfaceDAO {
         try {
             PreparedStatement ps = this.conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 ProdutoModel model = new ProdutoModel();
                 model.setIdProduto(rs.getInt("idProduto"));
@@ -99,7 +100,7 @@ public class ProdutoDao implements InterfaceDAO {
                 model.setTipoProduto(rs.getString("tipoProduto"));
                 al.add(model);
             }
-            
+
             rs.close();
             ps.close();
         } catch (SQLException e) {

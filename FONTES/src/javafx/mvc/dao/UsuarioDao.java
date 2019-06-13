@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javafx.mvc.model.UsuarioModel;
 
@@ -28,13 +29,18 @@ public class UsuarioDao implements InterfaceDAO {
         String sql;
 
         if (model.getIdUsuario() > 0) {
-            sql = "update usuario set nomeFuncionario = ?, nomeUsuario = ?, senhaUsuario = ?, status = ?, cliente = ?, usuario = ?, produto = ? where idUsuario = ?";
+            sql = "update usuario set nomeFuncionario = ?, nomeUsuario = ?, "
+                    //
+                    + "senhaUsuario = case when senhaUsuario = '" + model.getSenhaUsuario() + "'"
+                    + "then SHA2(?,'256') else senhaUsuario = senhaUsuario end, "
+                    //
+                    + "status = ?, cliente = ?, usuario = ?, produto = ? where idUsuario = ?";
         } else {
-            sql = "insert into usuario (nomeFuncionario,nomeUsuario,senhaUsuario,status,cliente,usuario,produto,idUsuario) values (?,?,?,?,?,?,?,?)";
+            sql = "insert into usuario (nomeFuncionario, nomeUsuario, senhaUsuario, status, cliente, usuario, produto, idUsuario) values (?,?,SHA2(?,'256'),?,?,?,?,?)";
         }
 
         try {
-            PreparedStatement ps = this.conn.prepareStatement(sql);
+            PreparedStatement ps = this.conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, model.getNomeFuncionario());
             ps.setString(2, model.getNomeUsuario());
             ps.setString(3, model.getSenhaUsuario());
@@ -44,12 +50,12 @@ public class UsuarioDao implements InterfaceDAO {
             ps.setString(7, model.getProduto());
             ps.setInt(8, model.getIdUsuario());
             ps.execute();
-            
+
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 model.setIdUsuario(rs.getInt(1));
             }
-            
+
             rs.close();
             ps.close();
         } catch (SQLException e) {
@@ -88,7 +94,7 @@ public class UsuarioDao implements InterfaceDAO {
         try {
             PreparedStatement ps = this.conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 UsuarioModel model = new UsuarioModel();
                 model.setIdUsuario(rs.getInt("idUsuario"));
@@ -101,7 +107,7 @@ public class UsuarioDao implements InterfaceDAO {
                 model.setProduto(rs.getString("produto"));
                 al.add(model);
             }
-            
+
             rs.close();
             ps.close();
         } catch (SQLException e) {
@@ -110,13 +116,4 @@ public class UsuarioDao implements InterfaceDAO {
         return al;
     }
 
-    public void remove(UsuarioModel um) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-   
-
-   
-
-   
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javafx.mvc.model.CaixaModel;
 
@@ -34,7 +35,7 @@ public class CaixaDao implements InterfaceDAO {
         }
 
         try {
-            PreparedStatement ps = this.conn.prepareStatement(sql);
+            PreparedStatement ps = this.conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, model.getIdUsuario());
             ps.setDouble(2, model.getValorAbertura());
             ps.setDouble(3, model.getValorFinal());
@@ -42,12 +43,12 @@ public class CaixaDao implements InterfaceDAO {
             ps.setString(5, model.getDataFechamento());
             ps.setInt(6, model.getIdCaixa());
             ps.execute();
-            
+
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 model.setIdCaixa(rs.getInt(1));
             }
-            
+
             rs.close();
             ps.close();
         } catch (SQLException e) {
@@ -86,7 +87,7 @@ public class CaixaDao implements InterfaceDAO {
         try {
             PreparedStatement ps = this.conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 CaixaModel model = new CaixaModel();
                 model.setIdCaixa(rs.getInt("idCaixa"));
@@ -98,7 +99,7 @@ public class CaixaDao implements InterfaceDAO {
                 model.setDataFechamento(rs.getDate("dataFechamento").toString());
                 al.add(model);
             }
-            
+
             rs.close();
             ps.close();
         } catch (SQLException e) {
