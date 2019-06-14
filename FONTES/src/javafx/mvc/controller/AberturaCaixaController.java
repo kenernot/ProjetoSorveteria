@@ -40,6 +40,7 @@ public class AberturaCaixaController implements Initializable {
         CaixaDao dao = new CaixaDao(Conexao.getInstance().getConn());
         this.caixa.setValorAbertura(Double.valueOf(edt_valorInic.getText()));
         CaixaModel cm = dao.salvar(this.caixa);
+          System.out.println(cm.getIdCaixa());
         this.caixa.setIdCaixa(cm.getIdCaixa());
         CaixaAberto.getInstance().setCaixa(this.caixa);
     }

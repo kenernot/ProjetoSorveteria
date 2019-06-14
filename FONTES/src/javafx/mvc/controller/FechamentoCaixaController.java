@@ -52,8 +52,11 @@ public class FechamentoCaixaController implements Initializable {
     private TextField edt_saldoFinal;
 
     @FXML
-    void btnSalvarClick(ActionEvent event) {
+    void btnSalvarClick(ActionEvent event) throws SQLException {
+        System.out.println(this.caixa.getIdCaixa());
         this.caixa.setValorFinal(Double.valueOf(edt_saldoFinal.getText()));
+        this.caixa.setInformarSaldo(Double.valueOf(edt_informarSaldo.getText()));
+        this.cd.salvar(this.caixa);
     }
 
     @FXML
@@ -92,10 +95,11 @@ public class FechamentoCaixaController implements Initializable {
         
         ArrayList<CaixaModel> arrayCaixa = new ArrayList<>();
        
-        arrayCaixa = cd.buscar("dataAbertura like '%"+dHoje+"%' limit 1 ");
+        arrayCaixa = cd.buscar("dataAbertura like '%"+dHoje+"%' order by dataAbertura DESC limit 1");
         
         if (arrayCaixa.size() > 0) {
             CaixaAberto.getInstance().setCaixa(arrayCaixa.get(0));
+            System.out.println(arrayCaixa.get(0).getIdCaixa());
         }
     }
 }
