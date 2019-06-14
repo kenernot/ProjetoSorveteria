@@ -120,8 +120,6 @@ public class PesquisaProdutoController implements Initializable {
             sql += " OR nomeProduto like '%" + txtPesquisa.getText() + "%' ";
             sql += " order by nomeProduto ASC limit 100;";
         }
-        
-        System.out.println(sql);
 
         List<ProdutoModel> lista = pd.buscar(sql);
         listaObserver = FXCollections.observableArrayList(lista);

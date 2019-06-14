@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -15,14 +14,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.mvc.Main;
 import javafx.mvc.dao.ClienteDao;
 import javafx.mvc.dao.InterfaceDAO;
+import javafx.mvc.dao.PedidoDao;
 import javafx.mvc.dao.ProdutoDao;
+import javafx.mvc.events.EventoOcorrido;
+import javafx.mvc.events.EventoPedidoFinalizado;
 import javafx.mvc.model.ClienteModel;
 import javafx.mvc.model.ItemPedidoModel;
 import javafx.mvc.model.PedidoModel;
 import javafx.mvc.model.ProdutoModel;
 import javafx.mvc.services.Conexao;
+import javafx.mvc.services.UsuarioLogado;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -194,20 +198,25 @@ public class PedidoController implements Initializable {
     //--------------FINALIZAR OK--------------
     @FXML
     void btFinalizarClickPedido(ActionEvent event) throws Exception {
-        if (lista.size() != 0) {
-
+        if (lista.size() != 0 && Double.parseDouble(txtValorTotalPedido.getText()) > 0)  {
+            if (txtValorDescPedido.getText().trim().isEmpty()) {
+                txtValorDescPedido.setText("0");
+            }
             PedidoModel pedido = new PedidoModel();
             ItemPedidoModel itemPedido = new ItemPedidoModel();
 
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date oHoje = new Date();
+            String hoje = sdf.format(oHoje);
+
             pedido.setIdPedido(Integer.parseInt(txtIDPedido.getText()));
-            pedido.setDataPedido(txtDataPedido.getText());
+            pedido.setDataPedido(hoje);
             pedido.setIdCliente(Integer.parseInt(txtIDCliPedido.getText()));
-            pedido.setValorDesconto(Integer.parseInt(txtValorDescPedido.getText()));
-            pedido.setValorTotal(Integer.parseInt(txtValorTotalPedido.getText()));
+            pedido.setIdUsuario(UsuarioLogado.getInstance().getUser().getIdUsuario());
+            pedido.setValorDesconto(Double.parseDouble(txtValorDescPedido.getText()));
+            pedido.setValorTotal(Double.parseDouble(txtValorTotalPedido.getText()));
 
             String tipo = comboPedido.getValue();
-
-            comboPedido.setValue("Finalizado");
 
             if (tipo.equals("Finalizado")) {
                 tipo = "F";
@@ -219,14 +228,24 @@ public class PedidoController implements Initializable {
 
             pedido.setStatus(tipo);
 
+            pedido.setListaItemPedido(lista);
+            PedidoDao pd = new PedidoDao(Conexao.getInstance().getConn());
+
+            pd.salvar(pedido);
+
             camposEnabled(true);
             btEnabled(1);
             limparCampos();
             listarProdutos();
+            lista.clear();
+            listaObserver.clear();
+            EventoOcorrido evt = new EventoPedidoFinalizado(pedido);
+            evt.setSource(this);
+            Main.avisaOuvintes(evt);
+
         }
     }
 
-    //--------------NOVO OK--------------
     @FXML
     void btNovoClickPedido(ActionEvent event) throws Exception {
 
@@ -255,7 +274,6 @@ public class PedidoController implements Initializable {
         }
     }
 
-    //--------------FAZER A TELINHA DE PESQUISA DE PRODUTO--------------
     @FXML
     void btPesquisarClickPedido(ActionEvent event) throws Exception {
         boolean okClicked = showDialog();
@@ -292,8 +310,6 @@ public class PedidoController implements Initializable {
         TableViewColumnValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
         TableViewColumnQtd.setCellValueFactory(new PropertyValueFactory<>("qtd"));
         TableViewColumnValorTotal.setCellValueFactory(new PropertyValueFactory<>("valortotal"));
-
-        //--------------ABRIR NOVA TELA PARA SELECIONAR PRODUTO--------------
     }
 
     public double getSomaValorTotal() {
@@ -312,7 +328,6 @@ public class PedidoController implements Initializable {
         txtValorTotalPedido.setText(String.valueOf(getSomaValorTotal()));
     }
 
-    //-------------- OK --------------
     private void camposEnabled(boolean b) {
         txtIDPedido.setDisable(true);
         txtDataPedido.setDisable(true);
@@ -322,9 +337,9 @@ public class PedidoController implements Initializable {
         txtValorDescPedido.setDisable(b);
         txtValorTotalPedido.setDisable(true);
         comboPedido.setDisable(true);
+        tableViewPedido.setDisable(b);
     }
 
-    //-------------- OK --------------
     private void btEnabled(int id) {
         switch (id) {
             case 1:
@@ -353,7 +368,6 @@ public class PedidoController implements Initializable {
         }
     }
 
-    //-------------- OK --------------
     private void limparCampos() {
         txtIDPedido.setText("");
         txtDataPedido.setText("");
@@ -371,7 +385,6 @@ public class PedidoController implements Initializable {
 
         AnchorPane anchor = (AnchorPane) loader.load();
         Scene scene = new Scene(anchor);
-        //System.out.println("Passei AQUI 1");
 
         Stage dialogStage = new Stage();
         dialogStage.setTitle("Busca de produto!");
@@ -381,7 +394,6 @@ public class PedidoController implements Initializable {
 
         this.produtoController.setDialogStage(dialogStage);
 
-        // Mostra Tela //
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogStage.showAndWait();
 
