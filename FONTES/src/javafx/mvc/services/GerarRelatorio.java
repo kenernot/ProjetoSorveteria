@@ -13,19 +13,18 @@ import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author Pedro Enju
- */
+*/
 public class GerarRelatorio {
 
     public static void main(String[] args) {
-        
+    
         /*
             Relatório de Pedido
             param: DATAI = Data Inicial, DATAF = Data Final
         
             Relatório de Caixa
-            param: ID_USUARIO = ID do Usuário, DATA_ABERTURA = Data de Abertura, DATA_FECHAMENTO = Data de Fechamento
-        */
-        
+            param: ID_USUARIO = ID do Usuário, DATAA = Data de Abertura == yyyy-mm-dd 00:00:00, DATAF = Data de Fechamento == yyyy-mm-dd 23:59:59
+         */
         try {
             HashMap<String, Object> param = new HashMap<>();
             GerarRelatorio.create("Cliente", param, Conexao.getInstance().getConn());
@@ -46,7 +45,7 @@ public class GerarRelatorio {
             /* Indica os parâmetros do Relatório */
             JasperPrint fillRep = JasperFillManager.fillReport(rep, param, conn);
 
-            /* Cria o Relatório */ /* false = Para evitar que ele feche a aplicação inteira */
+            /* Cria o Relatório   false = Para evitar que ele feche a aplicação inteira */
             JasperViewer jrv = new JasperViewer(fillRep, false);
 
             /* Abre o Relatório */

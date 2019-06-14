@@ -15,6 +15,7 @@ import javafx.mvc.dao.CaixaDao;
 import javafx.mvc.model.CaixaModel;
 import javafx.mvc.services.CaixaAberto;
 import javafx.mvc.services.Conexao;
+import javafx.mvc.services.UsuarioLogado;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
@@ -48,7 +49,8 @@ public class AberturaCaixaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+      this.caixa = new CaixaModel();
+      this.caixa.setIdUsuario(UsuarioLogado.getInstance().getUser().getIdUsuario());
     }    
     
 }

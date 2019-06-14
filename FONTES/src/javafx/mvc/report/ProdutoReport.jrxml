@@ -3,6 +3,12 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<style name="striped">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></conditionExpression>
+			<style backcolor="#EEEEEE" fill="Solid"/>
+		</conditionalStyle>
+	</style>
 	<queryString>
 		<![CDATA[SELECT
      produto.`idProduto` AS produto_idProduto,
@@ -108,6 +114,12 @@ ORDER BY produto.`status`, produto.`nomeProduto`]]>
 	</columnHeader>
 	<detail>
 		<band height="20">
+			<rectangle>
+				<reportElement style="striped" x="0" y="0" width="555" height="20" uuid="1f847348-0bad-4a13-8ae2-b45eb319ca2c"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="3f65ba04-f846-4481-86fb-e597b184b122"/>
 			</line>

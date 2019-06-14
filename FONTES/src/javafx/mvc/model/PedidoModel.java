@@ -1,5 +1,7 @@
 package javafx.mvc.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Pedro Enju
@@ -16,6 +18,7 @@ public class PedidoModel {
     private double valorPagar;
     private int qtdTotal;
     private String status;
+    private ArrayList<ItemPedidoModel> listaItemPedido;
 
     public int getIdPedido() {
         return idPedido;
@@ -97,4 +100,12 @@ public class PedidoModel {
         this.status = status;
     }
 
+    public ArrayList<ItemPedidoModel> getListaItemPedido() {
+        return listaItemPedido;
+    }
+
+    public void setListaItemPedido(ArrayList<ItemPedidoModel> listaItemPedido) {
+        this.listaItemPedido = listaItemPedido;
+    }
+    
 }
