@@ -8,7 +8,7 @@ package javafx.mvc.events;
 public class LoginEfetuado extends EventoOcorrido {
     
     public LoginEfetuado() {
-        setNome("JAVAFX.MVC.EVENTS.LOGINEFETUADO");
+        setNome("LOGIN_EFETUADO");
     }
     
 }
