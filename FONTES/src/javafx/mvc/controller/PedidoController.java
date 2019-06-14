@@ -148,6 +148,8 @@ public class PedidoController implements Initializable {
                 tableViewPedido.setItems(listaObserver);
 
                 txtValorTotalPedido.setText(String.valueOf(getSomaValorTotal()));
+                txtIDProdPedido.clear();
+                txtQtdPedido.clear();
             }
         }
     }
@@ -198,7 +200,7 @@ public class PedidoController implements Initializable {
     //--------------FINALIZAR OK--------------
     @FXML
     void btFinalizarClickPedido(ActionEvent event) throws Exception {
-        if (lista.size() != 0 && Double.parseDouble(txtValorTotalPedido.getText()) > 0)  {
+        if (lista.size() != 0 && Double.parseDouble(txtValorTotalPedido.getText()) > 0) {
             if (txtValorDescPedido.getText().trim().isEmpty()) {
                 txtValorDescPedido.setText("0");
             }
@@ -289,19 +291,18 @@ public class PedidoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        lista = new ArrayList<ItemPedidoModel>();
+        listaObserver = FXCollections.observableArrayList(lista);
         btEnabled(1);
         camposEnabled(true);
-        limparCampos();
 
         this.pd = new ProdutoDao(Conexao.getInstance().getConn());
-
-        lista = new ArrayList<ItemPedidoModel>();
 
         comboPedido.getItems().clear();
         comboPedido.getItems().add("Finalizado");
         comboPedido.getItems().add("Aberto");
         comboPedido.getItems().add("Em andamento");
-
+        limparCampos();
     }
 
     private void listarProdutos() throws Exception {
@@ -376,6 +377,8 @@ public class PedidoController implements Initializable {
         txtQtdPedido.setText("");
         txtValorDescPedido.setText("");
         txtValorTotalPedido.setText("");
+        lista.clear();
+        listaObserver.clear();
     }
 
     private boolean showDialog() throws IOException {
