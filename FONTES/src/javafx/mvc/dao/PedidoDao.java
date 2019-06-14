@@ -6,7 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import javafx.mvc.model.ItemPedidoModel;
 import javafx.mvc.model.PedidoModel;
+import javafx.mvc.services.Conexao;
 
 /**
  *
@@ -47,14 +50,32 @@ public class PedidoDao implements InterfaceDAO {
             ps.setInt(9, model.getIdPedido());
             ps.setString(10, model.getStatus());
             ps.execute();
-            
+
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 model.setIdPedido(rs.getInt(1));
             }
-            
+
             rs.close();
             ps.close();
+            
+            ItemPedidoDao itemDao = new ItemPedidoDao(Conexao.getInstance().getConn());
+            
+            ArrayList<ItemPedidoModel> listaItemPedido = model.getListaItemPedido();
+            
+            for (ItemPedidoModel item : listaItemPedido) {
+                item.setIdPedido(model.getIdPedido());
+                itemDao.salvar(item);
+            }
+            
+            ArrayList<ItemPedidoModel> itemsPedidosBanco = itemDao.buscar("idPedido = " + model.getIdPedido());
+            
+            itemsPedidosBanco.removeAll(listaItemPedido);
+            
+            for (ItemPedidoModel item : itemsPedidosBanco) {
+                itemDao.excluir(item);
+            }
+            
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
@@ -81,7 +102,7 @@ public class PedidoDao implements InterfaceDAO {
 
     @Override
     public ArrayList<PedidoModel> buscar(String w) throws SQLException {
-         String sql = "select * from pedido";
+        String sql = "select * from pedido";
 
         if (!w.isEmpty()) {
             sql += " where " + w;
@@ -91,7 +112,7 @@ public class PedidoDao implements InterfaceDAO {
         try {
             PreparedStatement ps = this.conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 PedidoModel model = new PedidoModel();
                 model.setIdPedido(rs.getInt("idPedido"));
@@ -106,7 +127,7 @@ public class PedidoDao implements InterfaceDAO {
                 model.setStatus(rs.getString("status"));
                 al.add(model);
             }
-            
+
             rs.close();
             ps.close();
         } catch (SQLException e) {
