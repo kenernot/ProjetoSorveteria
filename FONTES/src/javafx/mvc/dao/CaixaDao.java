@@ -82,12 +82,12 @@ public class CaixaDao implements InterfaceDAO {
         if (!w.isEmpty()) {
             sql += " where " + w;
         }
-        System.out.println(sql);
+        
         ArrayList<CaixaModel> al = new ArrayList();
         try {
             PreparedStatement ps = this.conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            System.out.println("Entrou");
+            
             while (rs.next()) {
                 CaixaModel model = new CaixaModel();
                 model.setIdCaixa(rs.getInt("idCaixa"));
