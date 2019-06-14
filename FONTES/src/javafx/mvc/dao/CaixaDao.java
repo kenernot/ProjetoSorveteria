@@ -48,7 +48,7 @@ public class CaixaDao implements InterfaceDAO {
             if (rs.next()) {
                 model.setIdCaixa(rs.getInt(1));
             }
-
+            
             rs.close();
             ps.close();
         } catch (SQLException e) {
@@ -82,12 +82,12 @@ public class CaixaDao implements InterfaceDAO {
         if (!w.isEmpty()) {
             sql += " where " + w;
         }
-
+        System.out.println(sql);
         ArrayList<CaixaModel> al = new ArrayList();
         try {
             PreparedStatement ps = this.conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-
+            System.out.println("Entrou");
             while (rs.next()) {
                 CaixaModel model = new CaixaModel();
                 model.setIdCaixa(rs.getInt("idCaixa"));
@@ -96,7 +96,8 @@ public class CaixaDao implements InterfaceDAO {
                 model.setValorAbertura(rs.getDouble("valorAbertura"));
                 model.setValorFinal(rs.getDouble("valorFinal"));
                 model.setInformarSaldo(rs.getDouble("informarSaldo"));
-                model.setDataFechamento(rs.getDate("dataFechamento").toString());
+                if(rs.getDate("dataFechamento") != null)
+                    model.setDataFechamento(rs.getDate("dataFechamento").toString());
                 al.add(model);
             }
 

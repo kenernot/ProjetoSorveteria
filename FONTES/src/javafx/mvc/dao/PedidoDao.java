@@ -58,18 +58,18 @@ public class PedidoDao implements InterfaceDAO {
 
             rs.close();
             ps.close();
-            
+
             ItemPedidoDao itemDao = new ItemPedidoDao(Conexao.getInstance().getConn());
-            
+
             ArrayList<ItemPedidoModel> listaItemPedido = model.getListaItemPedido();
-            
+
             for (ItemPedidoModel item : listaItemPedido) {
                 item.setIdPedido(model.getIdPedido());
                 itemDao.salvar(item);
             }
             
             ArrayList<ItemPedidoModel> itemsPedidosBanco = itemDao.buscar("idPedido = " + model.getIdPedido());
-            
+
             itemsPedidosBanco.removeAll(listaItemPedido);
             
             for (ItemPedidoModel item : itemsPedidosBanco) {
