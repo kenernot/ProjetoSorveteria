@@ -13,6 +13,24 @@ public class ItemPedidoModel {
     private double valorUnitario;
     private double valorDesconto;
     private double valorTotal;
+    private String nomeProduto;
+    private double valorVenda;
+
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
+
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+
+    public double getValorVenda() {
+        return valorVenda;
+    }
+
+    public void setValorVenda(double valorVenda) {
+        this.valorVenda = valorVenda;
+    }
 
     public int getIdItemPedido() {
         return idItemPedido;

@@ -196,10 +196,7 @@ public class PrincipalController implements Initializable, Ouvinte {
 
     public void chamaTela(String nomeTela) {
         Scene get = this.sceneList.get(nomeTela);
-
-        if (anchorPane.getChildren().indexOf(get.getRoot()) != -1) {
-            fecharTela(nomeTela);
-        }
+        this.anchorPane.getChildren().clear();
         this.anchorPane.getChildren().add(get.getRoot());
 
     }
