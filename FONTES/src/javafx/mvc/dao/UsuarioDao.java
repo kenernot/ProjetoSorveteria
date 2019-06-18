@@ -39,7 +39,7 @@ public class UsuarioDao implements InterfaceDAO {
             */
             sql = "update usuario set nomeFuncionario = ?, nomeUsuario = ?, senhaUsuario = ?, status = ?, cliente = ?, usuario = ?, produto = ? where idUsuario = ?";
         } else {
-            sql = "insert into usuario (nomeFuncionario, nomeUsuario, senhaUsuario, status, cliente, usuario, produto, idUsuario) values (?,?,SHA2(?,'256'),?,?,?,?,?)";
+            sql = "insert into usuario (nomeFuncionario, nomeUsuario, senhaUsuario, status, cliente, usuario, produto, idUsuario) values (?,?,?,?,?,?,?,?)";
         }
 
         try {
