@@ -147,9 +147,10 @@ public class UsuarioController implements Initializable {
     @FXML
     void btSalvarClickUsuario(ActionEvent event) throws Exception{
         UsuarioModel usuario = new UsuarioModel();
-        usuario.setNomeFuncionario(txtCadNomeUsuario.getText());
-        usuario.setNomeUsuario(txtCadUsuario.getText());
-        usuario.setSenhaUsuario(txtCadSenhaUsuario.getText());
+        usuario.setNomeFuncionario(txtCadNomeUsuario.getText().trim().toUpperCase());
+        usuario.setNomeUsuario(txtCadUsuario.getText().trim().toUpperCase());
+        usuario.setSenhaUsuario(txtCadSenhaUsuario.getText().trim().toUpperCase());
+        btnAlteraSenha.setDisable(true);
         usuario.setStatus(comboCadUsuario.getValue().substring(0, 1).toUpperCase()); 
        usuario.setCliente(Boolean.valueOf(checkPermitirCliente.isSelected()).toString().substring(0, 1).toUpperCase());
       usuario.setUsuario(Boolean.valueOf(checkPermitirUsuario.isSelected()).toString().substring(0, 1).toUpperCase());
@@ -269,7 +270,7 @@ public class UsuarioController implements Initializable {
         if (event.getClickCount()>=2) { 
             UsuarioModel selectedItem = TableViewUsuario.getSelectionModel().getSelectedItem(); 
             txtCadNomeUsuario.setText(selectedItem.getNomeFuncionario());
-            //fazer botão para chamar tela de alteração de senha.
+            btnAlteraSenha.setDisable(false);
             txtCadUsuario.setText(selectedItem.getNomeUsuario()); 
             txtIDCadUsuario.setText(Integer.toString(selectedItem.getIdUsuario())); 
             comboCadUsuario.setValue(selectedItem.getStatus()); 
