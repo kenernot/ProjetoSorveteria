@@ -23,6 +23,7 @@ import javafx.mvc.model.CaixaModel;
 import javafx.mvc.model.ItemCaixaModel;
 import javafx.mvc.services.CaixaAberto;
 import javafx.mvc.services.Conexao;
+import javafx.mvc.services.UsuarioLogado;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
@@ -61,7 +62,7 @@ public class FechamentoCaixaController implements Initializable {
 
     @FXML
     void btnCancelarClick(ActionEvent event) {
-        
+
     }
 
     private CaixaModel caixa;
@@ -75,28 +76,26 @@ public class FechamentoCaixaController implements Initializable {
         } catch (SQLException ex) {
             System.out.println("Deu ruimzao");
         }
-        
+
         this.caixa = CaixaAberto.getInstance().getCaixa();
         ItemCaixaDao icd = new ItemCaixaDao(Conexao.getInstance().getConn());
-
-        try {
-            icd.buscar("idCaixa=" + this.caixa.getIdCaixa());
-            List<ItemCaixaModel> resultadosDao = (List<ItemCaixaModel>) icd.buscar("idCaixa=" + this.caixa.getIdCaixa());
-        } catch (SQLException ex) {
-            Logger.getLogger(FechamentoCaixaController.class.getName()).log(Level.SEVERE, null, ex);
+        if (this.caixa != null) {
+            try {
+                icd.buscar("idCaixa=" + this.caixa.getIdCaixa());
+                List<ItemCaixaModel> resultadosDao = (List<ItemCaixaModel>) icd.buscar("idCaixa=" + this.caixa.getIdCaixa());
+            } catch (SQLException ex) {
+                Logger.getLogger(FechamentoCaixaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
-    
-    private void setSingletonCaixa() throws SQLException{
+    private void setSingletonCaixa() throws SQLException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date hoje = new Date();
         String dHoje = sdf.format(hoje);
-        
+
         ArrayList<CaixaModel> arrayCaixa = new ArrayList<>();
-       
-        arrayCaixa = cd.buscar("dataAbertura like '%"+dHoje+"%' order by dataAbertura DESC limit 1");
-        
+        arrayCaixa = cd.buscar("dataAbertura like '%" + dHoje + "%' AND idUsuario = " + UsuarioLogado.getInstance().getUser().getIdUsuario() + " limit 1 ");
         if (arrayCaixa.size() > 0) {
             CaixaAberto.getInstance().setCaixa(arrayCaixa.get(0));
             System.out.println(arrayCaixa.get(0).getIdCaixa());
