@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package javafx.mvc.model;
 
 /**
@@ -91,6 +86,12 @@ public class ItemPedidoModel {
 
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        ItemPedidoModel ipm = (ItemPedidoModel) obj;
+        return this.idItemPedido == ipm.getIdItemPedido();
     }
 
 }

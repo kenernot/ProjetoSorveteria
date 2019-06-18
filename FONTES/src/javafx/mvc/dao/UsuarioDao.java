@@ -29,14 +29,17 @@ public class UsuarioDao implements InterfaceDAO {
         String sql;
 
         if (model.getIdUsuario() > 0) {
-            sql = "update usuario set nomeFuncionario = ?, nomeUsuario = ?, "
+            /* DEADCODE
+                sql = "update usuario set nomeFuncionario = ?, nomeUsuario = ?, "
                     //
                     + "senhaUsuario = case when senhaUsuario = '" + model.getSenhaUsuario() + "'"
                     + "then SHA2(?,'256') else senhaUsuario = senhaUsuario end, "
                     //
                     + "status = ?, cliente = ?, usuario = ?, produto = ? where idUsuario = ?";
+            */
+            sql = "update usuario set nomeFuncionario = ?, nomeUsuario = ?, senhaUsuario = ?, status = ?, cliente = ?, usuario = ?, produto = ? where idUsuario = ?";
         } else {
-            sql = "insert into usuario (nomeFuncionario, nomeUsuario, senhaUsuario, status, cliente, usuario, produto, idUsuario) values (?,?,SHA2(?,'256'),?,?,?,?,?)";
+            sql = "insert into usuario (nomeFuncionario, nomeUsuario, senhaUsuario, status, cliente, usuario, produto, idUsuario) values (?,?,?,?,?,?,?,?)";
         }
 
         try {
