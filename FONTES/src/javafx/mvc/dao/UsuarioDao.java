@@ -91,7 +91,8 @@ public class UsuarioDao implements InterfaceDAO {
 
         if (!w.isEmpty()) {
             sql += " where " + w;
-        }
+        } 
+        System.out.println(sql);
 
         ArrayList<UsuarioModel> al = new ArrayList();
         try {
