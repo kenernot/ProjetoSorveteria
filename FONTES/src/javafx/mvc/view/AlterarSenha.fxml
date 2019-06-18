@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="295.0" prefWidth="465.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="javafx.mvc.controller.AlterarSenhaController">
+  <children>
+    <VBox prefHeight="313.0" prefWidth="389.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <Pane prefHeight="121.0" prefWidth="465.0">
+          <children>
+            <FlowPane layoutX="38.0" layoutY="28.0" prefHeight="58.0" prefWidth="389.0">
+              <children>
+                <Label text="Nova Senha:" />
+                <TextField fx:id="txtSenha" prefWidth="200.0" />
+              </children>
+            </FlowPane>
+          </children>
+        </Pane>
+        <Pane prefHeight="136.0" prefWidth="465.0">
+          <children>
+            <FlowPane layoutX="38.0" layoutY="22.0" prefHeight="58.0" prefWidth="389.0">
+              <children>
+                <Label text="Confirmar Senha:" />
+                <TextField fx:id="txtConfirma" prefWidth="200.0" />
+              </children>
+            </FlowPane>
+          </children>
+        </Pane>
+        <Pane prefHeight="119.0" prefWidth="321.0">
+          <children>
+            <FlowPane layoutX="79.0" layoutY="0.0" prefHeight="44.999977929684974" prefWidth="338.0">
+              <children>
+                <Button fx:id="btnConfirma" mnemonicParsing="false" onAction="#btnConfirmaClicked" text="Confirma" />
+                <Button fx:id="btnCancela" mnemonicParsing="false" onAction="#btnCancelaClicked" text="Cancelar" />
+              </children>
+            </FlowPane>
+          </children>
+        </Pane>
+      </children>
+    </VBox>
+  </children>
+</AnchorPane>
