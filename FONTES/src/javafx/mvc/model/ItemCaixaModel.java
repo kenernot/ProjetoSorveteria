@@ -5,7 +5,7 @@ package javafx.mvc.model;
  * @author Pedro Enju
  */
 public class ItemCaixaModel {
-    
+
     private int idItemCaixa;
     private int idCaixa;
     private int idPedido;
@@ -60,5 +60,5 @@ public class ItemCaixaModel {
     public void setValor(double valor) {
         this.valor = valor;
     }
-    
+
 }

@@ -3,6 +3,12 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<style name="striped" fill="Solid">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></conditionExpression>
+			<style backcolor="#EEEEEE" fill="Solid"/>
+		</conditionalStyle>
+	</style>
 	<parameter name="DATAI" class="java.lang.String">
 		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
 	</parameter>
@@ -20,7 +26,8 @@
      pedido.`valorPagar` AS pedido_valorPagar
 FROM
      `pedido` pedido
-WHERE pedido.`dataPedido` BETWEEN $P{DATAI} and $P{DATAF}]]>
+WHERE pedido.`dataPedido` BETWEEN $P{DATAI} and $P{DATAF}
+ORDER BY pedido.`status` ASC]]>
 	</queryString>
 	<field name="pedido_idPedido" class="java.lang.Integer"/>
 	<field name="pedido_dataPedido" class="java.sql.Date"/>
@@ -29,6 +36,26 @@ WHERE pedido.`dataPedido` BETWEEN $P{DATAI} and $P{DATAF}]]>
 	<field name="pedido_valorTotal" class="java.math.BigDecimal"/>
 	<field name="pedido_valorDesconto" class="java.math.BigDecimal"/>
 	<field name="pedido_valorPagar" class="java.math.BigDecimal"/>
+	<variable name="PRECO_MEDIO" class="java.math.BigDecimal" calculation="Average">
+		<variableExpression><![CDATA[$F{pedido_valorTotal}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="TOTAL_DESCONTO" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{pedido_valorDesconto}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="TOTAL_PAGO" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[($F{pedido_qtdTotal} * $F{pedido_valorTotal}) - $F{pedido_valorDesconto} ]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
+	<variable name="QTD_TOTAL" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{pedido_qtdTotal}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="TICKET_VENDA" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{TOTAL_PAGO} / $V{QTD_TOTAL}]]></variableExpression>
+		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
+	</variable>
 	<background>
 		<band/>
 	</background>
@@ -69,16 +96,16 @@ WHERE pedido.`dataPedido` BETWEEN $P{DATAI} and $P{DATAF}]]>
 				<text><![CDATA[ID Pedido]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="57" y="0" width="65" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="6da7db7c-14c2-4c8f-908a-48ac630dd11e"/>
+				<reportElement mode="Opaque" x="57" y="0" width="96" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="6da7db7c-14c2-4c8f-908a-48ac630dd11e"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Data]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="122" y="0" width="148" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="5081db18-2fff-4207-a982-628d58c7bdd0"/>
-				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
+				<reportElement mode="Opaque" x="153" y="0" width="117" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="5081db18-2fff-4207-a982-628d58c7bdd0"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="true" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[Descrição]]></text>
 			</staticText>
@@ -113,7 +140,13 @@ WHERE pedido.`dataPedido` BETWEEN $P{DATAI} and $P{DATAF}]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="20">
+		<band height="21">
+			<rectangle>
+				<reportElement style="striped" x="0" y="0" width="555" height="20" uuid="b9ea3f5b-eb77-4cb0-b4ec-9fb73209e576"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="fc963739-0f5e-4c15-815f-ebfef39c5a4c"/>
 			</line>
@@ -125,14 +158,14 @@ WHERE pedido.`dataPedido` BETWEEN $P{DATAI} and $P{DATAF}]]>
 				<textFieldExpression><![CDATA[$F{pedido_idPedido}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="57" y="0" width="65" height="20" uuid="a5550822-5fb2-40dd-958d-7bf69b8d19e0"/>
+				<reportElement x="57" y="0" width="96" height="20" uuid="a5550822-5fb2-40dd-958d-7bf69b8d19e0"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{pedido_dataPedido}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="122" y="0" width="148" height="20" uuid="06e46605-0fd1-4b6c-bd69-05974a06f228"/>
+				<reportElement x="153" y="0" width="117" height="20" uuid="06e46605-0fd1-4b6c-bd69-05974a06f228"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -157,7 +190,7 @@ WHERE pedido.`dataPedido` BETWEEN $P{DATAI} and $P{DATAF}]]>
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{pedido_valorPagar}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{pedido_qtdTotal} * $F{pedido_valorTotal}) - $F{pedido_valorDesconto} ]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="270" y="0" width="48" height="20" uuid="dc778d93-c8ab-4336-afb3-c2de42e6e841"/>
@@ -189,6 +222,49 @@ WHERE pedido.`dataPedido` BETWEEN $P{DATAI} and $P{DATAF}]]>
 		</band>
 	</pageFooter>
 	<summary>
-		<band/>
+		<band height="40">
+			<textField>
+				<reportElement x="397" y="0" width="79" height="20" uuid="6d5f677a-a42d-4313-9ba5-e4c9efc7b7b2"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TOTAL_DESCONTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="476" y="0" width="79" height="20" uuid="f8b070ab-1eb3-4fc9-988e-74b40bf87c3b"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TOTAL_PAGO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="318" y="0" width="79" height="20" uuid="55e84aa3-8bed-4aab-b21c-b7e47d316c92"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PRECO_MEDIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="0" width="48" height="20" uuid="1d5f6c3a-a1b3-40d5-a851-bc57b8de2599"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{QTD_TOTAL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="100" y="20" width="100" height="20" uuid="f6e54880-b18c-46d4-a38a-0e2ea7280add"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TICKET_VENDA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="100" height="20" uuid="251dd5f6-d5a9-4745-bcf3-3511d634f7d2"/>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ticket Medio ]]></text>
+			</staticText>
+		</band>
 	</summary>
 </jasperReport>

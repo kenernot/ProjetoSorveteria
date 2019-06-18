@@ -20,6 +20,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.mvc.controller.PrincipalController;
 import javafx.mvc.events.EventoOcorrido;
+import javafx.mvc.events.EventoPedidoFinalizado;
+import javafx.mvc.events.LoginEfetuado;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 
@@ -91,6 +93,10 @@ public class Main extends Application {
         } else {
             c.setLabelUsuario();
             c.setScenes();
+            
+            EventoOcorrido evt = new LoginEfetuado();
+            evt.setSource(this);
+            avisaOuvintes(evt);
         }
 
     }
