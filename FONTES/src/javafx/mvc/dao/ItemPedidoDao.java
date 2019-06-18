@@ -49,10 +49,10 @@ public class ItemPedidoDao implements InterfaceDAO {
             if (rs.next()) {
                 model.setIdItemPedido(rs.getInt(1));
             }
-            
+
             rs.close();
             ps.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new SQLException(e.getMessage());
         }
         return model;
