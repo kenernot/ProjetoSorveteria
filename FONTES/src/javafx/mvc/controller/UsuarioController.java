@@ -19,7 +19,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.mvc.Main;
 import javafx.mvc.dao.UsuarioDao;
+import javafx.mvc.events.EventoOcorrido;
+import javafx.mvc.events.EventoTrocarTela;
 import javafx.mvc.model.UsuarioModel;
 import javafx.mvc.services.Conexao;
 import javafx.scene.Scene;
@@ -134,7 +137,11 @@ public class UsuarioController implements Initializable {
     
      @FXML
     void btnAlteraSenhaClick(ActionEvent event) throws IOException {
-        this.chama(um);
+        //this.chama(um);
+         EventoOcorrido eo = new EventoOcorrido(); 
+         eo.setNome("AlterarSenha");
+         eo.setDados(um); 
+         Main.avisaOuvintes(eo); 
     }
 
     @FXML
