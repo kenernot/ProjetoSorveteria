@@ -11,21 +11,21 @@
   <children>
     <Pane prefHeight="599.0" prefWidth="695.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
-        <Label layoutX="145.0" layoutY="64.0" text="Data" />
-        <Label layoutX="89.0" layoutY="151.0" text="ID Produto" />
-        <Label layoutX="36.0" layoutY="109.0" text="ID Cliente" />
-        <Label layoutX="36.0" layoutY="67.0" text="ID Pedido" />
-        <Label layoutX="195.0" layoutY="151.0" text="Quantidade" />
-        <TextField id="txtId" fx:id="txtIDPedido" layoutX="36.0" layoutY="83.0" prefWidth="100.0" />
-        <TextField id="txtIDCliente" fx:id="txtIDCliPedido" layoutX="36.0" layoutY="125.0" prefWidth="100.0" />
-        <TextField fx:id="txtIDProdPedido" layoutX="86.0" layoutY="167.0" prefWidth="100.0" />
-        <TextField fx:id="txtDataPedido" layoutX="145.0" layoutY="80.0" prefWidth="200.0" />
-        <TextField fx:id="txtQtdPedido" layoutX="195.0" layoutY="167.0" onKeyReleased="#txtQtdPedidoReleased" prefWidth="100.0" />
-        <Label layoutX="36.0" layoutY="193.0" text="Valor Desconto" />
-        <Label layoutX="145.0" layoutY="193.0" text="Valor Total" />
-        <TextField fx:id="txtValorDescPedido" layoutX="36.0" layoutY="209.0" onKeyReleased="#txtDescPedidoReleased" prefWidth="100.0" />
-        <TextField fx:id="txtValorTotalPedido" layoutX="145.0" layoutY="209.0" prefWidth="200.0" />
-        <TableView fx:id="tableViewPedido" layoutX="14.0" layoutY="323.0" prefHeight="262.0" prefWidth="667.0">
+        <Label layoutX="144.0" layoutY="54.0" text="Data" />
+        <Label layoutX="94.0" layoutY="162.0" text="ID Produto" />
+        <Label layoutX="94.0" layoutY="109.0" text="ID Cliente" />
+        <Label layoutX="36.0" layoutY="57.0" text="ID Pedido" />
+        <Label layoutX="94.0" layoutY="203.0" text="Quantidade" />
+        <TextField id="txtId" fx:id="txtIDPedido" layoutX="36.0" layoutY="73.0" prefWidth="100.0" />
+        <TextField id="txtIDCliente" fx:id="txtIDCliPedido" layoutX="94.0" layoutY="125.0" prefWidth="100.0" />
+        <TextField fx:id="txtIDProdPedido" layoutX="94.0" layoutY="178.0" prefWidth="100.0" />
+        <TextField fx:id="txtDataPedido" layoutX="144.0" layoutY="73.0" prefWidth="100.00009999999747" />
+        <TextField fx:id="txtQtdPedido" layoutX="94.0" layoutY="219.0" onKeyReleased="#txtQtdPedidoReleased" prefWidth="100.0" />
+        <Label layoutX="36.0" layoutY="254.0" text="Valor Desconto" />
+        <Label layoutX="152.0" layoutY="254.0" text="Valor Total" />
+        <TextField fx:id="txtValorDescPedido" layoutX="36.0" layoutY="270.0" onKeyReleased="#txtDescPedidoReleased" prefWidth="100.0" />
+        <TextField fx:id="txtValorTotalPedido" layoutX="152.0" layoutY="270.0" prefWidth="200.0" />
+        <TableView fx:id="tableViewPedido" layoutX="14.0" layoutY="300.0" prefHeight="285.5" prefWidth="667.0">
           <columns>
             <TableColumn prefWidth="75.0" text="ID produto" fx:id="TableViewColumnID" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="90.0" text="Nome" fx:id="TableViewColumnNome" />
@@ -34,12 +34,12 @@
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="128.0" text="Valor Total" fx:id="TableViewColumnValorTotal" />
           </columns>
         </TableView>
-        <Button fx:id="btNovoPedido" layoutX="36.0" layoutY="14.0" mnemonicParsing="false" onAction="#btNovoClickPedido" prefHeight="40.0" prefWidth="100.0" text="Novo" />
-        <Button fx:id="btFinalizarPedido" layoutX="399.0" layoutY="14.0" mnemonicParsing="false" onAction="#btFinalizarClickPedido" prefHeight="61.0390625" prefWidth="134.0" text="Finalizar" />
-        <Button id="btCancelaPedido" fx:id="btCancelarPedido" layoutX="145.0" layoutY="14.0" mnemonicParsing="false" onAction="#btCancelarClickPedido" prefHeight="40.0" prefWidth="100.0" text="Cancelar" />
-        <Label layoutX="37.0" layoutY="236.0" text="Status" />
-        <Button fx:id="btPesquisarPedido" layoutX="37.0" layoutY="151.0" mnemonicParsing="false" onAction="#btPesquisarClickPedido" prefHeight="37.9609375" text="Pesq." />
-        <ComboBox fx:id="comboPedido" layoutX="37.0" layoutY="262.0" prefHeight="21.0" prefWidth="158.0">
+        <Button fx:id="btNovoPedido" layoutX="36.0" layoutY="7.0" mnemonicParsing="false" onAction="#btNovoClickPedido" prefHeight="40.0" prefWidth="100.0" text="Novo" />
+        <Button fx:id="btFinalizarPedido" layoutX="517.0" layoutY="270.0" minHeight="15.9609375" mnemonicParsing="false" onAction="#btFinalizarClickPedido" prefHeight="20.9609375" prefWidth="82.0" text="Finalizar" />
+        <Button id="btCancelaPedido" fx:id="btCancelarPedido" layoutX="145.0" layoutY="7.0" mnemonicParsing="false" onAction="#btCancelarClickPedido" prefHeight="40.0" prefWidth="100.0" text="Cancelar" />
+        <Label layoutX="252.0" layoutY="57.0" text="Status" />
+        <Button fx:id="btPesquisarPedido" layoutX="35.0" layoutY="162.0" mnemonicParsing="false" onAction="#btPesquisarClickPedido" prefHeight="37.960837500002526" text="Pesq." />
+        <ComboBox fx:id="comboPedido" layoutX="252.0" layoutY="74.0" prefHeight="21.0" prefWidth="127.0">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -48,8 +48,11 @@
             </FXCollections>
           </items>
         </ComboBox>
-        <Button fx:id="btDeletarItemPedido" layoutX="505.0" layoutY="279.0" mnemonicParsing="false" onAction="#btDeletarItemClickPedido" text="Deletar Item" />
-        <Button fx:id="btAdicionarItemPedido" layoutX="317.0" layoutY="164.0" mnemonicParsing="false" onAction="#btAdicionarItemClickPedido" text="Adicionar" />
+        <Button fx:id="btDeletarItemPedido" layoutX="393.0" layoutY="270.0" mnemonicParsing="false" onAction="#btDeletarItemClickPedido" text="Deletar Item" />
+        <Button fx:id="btAdicionarItemPedido" layoutX="200.0" layoutY="219.0" mnemonicParsing="false" onAction="#btAdicionarItemClickPedido" text="Adicionar" />
+        <Label layoutX="200.0" layoutY="162.0" text="Descrição" />
+        <TextField fx:id="txtDescPedido" layoutX="200.0" layoutY="178.0" prefWidth="193.0" />
+        <Button fx:id="btPesquisarCliente" layoutX="35.0" layoutY="109.0" mnemonicParsing="false" onAction="#btPesquisarClickCliente" prefHeight="37.960845947265625" prefWidth="48.0" text="Pesq." />
       </children>
     </Pane>
   </children>

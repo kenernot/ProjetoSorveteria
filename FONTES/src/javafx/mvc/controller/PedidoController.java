@@ -82,6 +82,9 @@ public class PedidoController implements Initializable {
 
     @FXML
     private Button btNovoPedido;
+    
+    @FXML
+    private Button btPesquisarCliente;
 
     @FXML
     private Button btPesquisarPedido;
@@ -91,6 +94,9 @@ public class PedidoController implements Initializable {
 
     @FXML
     private TextField txtDataPedido;
+    
+    @FXML
+    private TextField txtDescPedido;
 
     @FXML
     private TextField txtIDCliPedido;
@@ -186,6 +192,10 @@ public class PedidoController implements Initializable {
                 lista.remove(obj);
             }
         }
+    }
+    
+    @FXML
+    void btPesquisarClickCliente(ActionEvent event) {
     }
 
     //--------------CANCELAR OK--------------
@@ -337,6 +347,7 @@ public class PedidoController implements Initializable {
         txtQtdPedido.setDisable(b);
         txtValorDescPedido.setDisable(b);
         txtValorTotalPedido.setDisable(true);
+        txtDescPedido.setDisable(true);
         comboPedido.setDisable(true);
         tableViewPedido.setDisable(b);
     }
@@ -350,6 +361,7 @@ public class PedidoController implements Initializable {
                 btPesquisarPedido.setDisable(true);
                 btAdicionarItemPedido.setDisable(true);
                 btDeletarItemPedido.setDisable(true);
+                btPesquisarCliente.setDisable(true);
                 break;
             case 2:
                 btNovoPedido.setDisable(true);
@@ -358,12 +370,14 @@ public class PedidoController implements Initializable {
                 btPesquisarPedido.setDisable(false);
                 btAdicionarItemPedido.setDisable(false);
                 btDeletarItemPedido.setDisable(false);
+                btPesquisarCliente.setDisable(false);
                 break;
             default:
                 btNovoPedido.setDisable(false);
                 btCancelarPedido.setDisable(true);
                 btFinalizarPedido.setDisable(true);
                 btPesquisarPedido.setDisable(true);
+                btPesquisarCliente.setDisable(true);
                 btAdicionarItemPedido.setDisable(true);
                 btDeletarItemPedido.setDisable(true);
         }
@@ -377,6 +391,7 @@ public class PedidoController implements Initializable {
         txtQtdPedido.setText("");
         txtValorDescPedido.setText("");
         txtValorTotalPedido.setText("");
+        txtDescPedido.setText("");
         lista.clear();
         listaObserver.clear();
     }
