@@ -205,6 +205,8 @@ public class PrincipalController implements Initializable, Ouvinte {
     public void avisandoAqui(EventoOcorrido evento) {
         if (evento.getNome().equals("FECHAR_TELA")) {
             fecharTela((String) evento.getDados());
+        } else if (evento.getNome().equals("TROCA_TELA")) {
+            chamaTela((String) evento.getDados());
         }
     }
 
