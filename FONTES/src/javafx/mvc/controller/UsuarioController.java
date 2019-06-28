@@ -138,10 +138,12 @@ public class UsuarioController implements Initializable {
      @FXML
     void btnAlteraSenhaClick(ActionEvent event) throws IOException {
         //this.chama(um);
+        EventoTrocarTela et = new EventoTrocarTela("AlterarSenha"); 
          EventoOcorrido eo = new EventoOcorrido(); 
          eo.setNome("AlterarSenha");
          eo.setDados(um); 
          Main.avisaOuvintes(eo); 
+         Main.avisaOuvintes(et); 
     }
 
     @FXML

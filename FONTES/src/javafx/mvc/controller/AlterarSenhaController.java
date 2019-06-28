@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.mvc.Main;
 import javafx.mvc.contracts.Ouvinte;
+import javafx.mvc.events.EventoFecharTela;
 import javafx.mvc.events.EventoOcorrido;
 import javafx.mvc.model.UsuarioModel;
 import javafx.mvc.services.Conexao;
@@ -54,10 +55,11 @@ public class AlterarSenhaController implements Ouvinte {
     boolean btnConfirmaClicked(ActionEvent event) {
         if (this.altera(Senha)) {
             
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("Alterado com Sucesso!");
         alert.show(); 
-        this.dialogStage.close();
+        EventoFecharTela ft = new EventoFecharTela("AlterarSenha");
+        Main.avisaOuvintes(ft);
         
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -88,7 +90,7 @@ public class AlterarSenhaController implements Ouvinte {
         try {
             
             Connection conn = Conexao.getInstance().getConn();
-            sql = "UPDATE usuario SET senha =? WHERE idUsuario=?";
+            sql = "UPDATE usuario SET senha = SHA2(?,'256') WHERE idUsuario=?";
             PreparedStatement ps;
             ps = conn.prepareStatement(sql);
             ps.setString(1, Senha);
