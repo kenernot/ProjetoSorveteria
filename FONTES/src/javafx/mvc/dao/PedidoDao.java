@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collections;
 import javafx.mvc.model.ItemPedidoModel;
 import javafx.mvc.model.PedidoModel;
 import javafx.mvc.services.Conexao;
