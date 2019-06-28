@@ -267,7 +267,7 @@ create procedure pedidoSeed()
     Declare c int default 1;
     while (c <= 10) do 
 		Insert into `pedido` (idCliente, idUsuario, dataPedido, descricaoPedido, valorTotal, valorDesconto, valorPagar, qtdTotal,status)
-		Values (1,1,now(), concat('Pedido ',c), 0.00, 0.00,0.00,c,'A');
+		Values (1,1,now(), concat('Pedido ',c), c, c, c,c,'A');
 		Set c = c+1;
 	end while;
     End;
