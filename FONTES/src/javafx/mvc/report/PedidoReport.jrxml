@@ -23,11 +23,14 @@
      pedido.`qtdTotal` AS pedido_qtdTotal,
      pedido.`valorTotal` AS pedido_valorTotal,
      pedido.`valorDesconto` AS pedido_valorDesconto,
-     pedido.`valorPagar` AS pedido_valorPagar
+     pedido.`valorPagar` AS pedido_valorPagar,
+     cliente.`nomeCliente` AS cliente_nomeCliente
 FROM
-     `pedido` pedido
-WHERE pedido.`dataPedido` BETWEEN $P{DATAI} and $P{DATAF}
-ORDER BY pedido.`status` ASC]]>
+     `cliente` cliente INNER JOIN `pedido` pedido ON cliente.`idCliente` = pedido.`idCliente`
+WHERE
+     pedido.`dataPedido` BETWEEN $P{DATAI}and$P{DATAF}
+ORDER BY
+     pedido.`status` ASC]]>
 	</queryString>
 	<field name="pedido_idPedido" class="java.lang.Integer"/>
 	<field name="pedido_dataPedido" class="java.sql.Date"/>
@@ -36,6 +39,7 @@ ORDER BY pedido.`status` ASC]]>
 	<field name="pedido_valorTotal" class="java.math.BigDecimal"/>
 	<field name="pedido_valorDesconto" class="java.math.BigDecimal"/>
 	<field name="pedido_valorPagar" class="java.math.BigDecimal"/>
+	<field name="cliente_nomeCliente" class="java.lang.String"/>
 	<variable name="PRECO_MEDIO" class="java.math.BigDecimal" calculation="Average">
 		<variableExpression><![CDATA[$F{pedido_valorTotal}]]></variableExpression>
 		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
@@ -45,7 +49,7 @@ ORDER BY pedido.`status` ASC]]>
 		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
 	</variable>
 	<variable name="TOTAL_PAGO" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[($F{pedido_qtdTotal} * $F{pedido_valorTotal}) - $F{pedido_valorDesconto} ]]></variableExpression>
+		<variableExpression><![CDATA[($F{pedido_qtdTotal} * $F{pedido_valorTotal}) - $F{pedido_valorDesconto}]]></variableExpression>
 		<initialValueExpression><![CDATA[0.00]]></initialValueExpression>
 	</variable>
 	<variable name="QTD_TOTAL" class="java.lang.Integer" calculation="Sum">
@@ -96,46 +100,53 @@ ORDER BY pedido.`status` ASC]]>
 				<text><![CDATA[ID Pedido]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="57" y="0" width="96" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="6da7db7c-14c2-4c8f-908a-48ac630dd11e"/>
+				<reportElement mode="Opaque" x="57" y="0" width="77" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="6da7db7c-14c2-4c8f-908a-48ac630dd11e"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Data]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="153" y="0" width="117" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="5081db18-2fff-4207-a982-628d58c7bdd0"/>
+				<reportElement mode="Opaque" x="210" y="0" width="117" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="5081db18-2fff-4207-a982-628d58c7bdd0"/>
 				<textElement textAlignment="Left">
 					<font size="12" isBold="true" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[Descrição]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="318" y="0" width="79" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="fbafa258-1d6f-40e7-a504-00f759203263"/>
+				<reportElement mode="Opaque" x="375" y="0" width="58" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="fbafa258-1d6f-40e7-a504-00f759203263"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Valor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="397" y="0" width="79" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="9a44a1b9-5459-4c15-bd61-9abce1f67df9"/>
+				<reportElement mode="Opaque" x="433" y="0" width="56" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="9a44a1b9-5459-4c15-bd61-9abce1f67df9"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Desconto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="476" y="0" width="79" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="f0968ea6-e2d4-4042-88c3-b113255a8f9d"/>
+				<reportElement mode="Opaque" x="489" y="0" width="66" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="f0968ea6-e2d4-4042-88c3-b113255a8f9d"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="270" y="0" width="48" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="eb384551-7ee6-488e-81b0-35185343c7e6"/>
+				<reportElement mode="Opaque" x="327" y="0" width="48" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="eb384551-7ee6-488e-81b0-35185343c7e6"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Qtd]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="134" y="0" width="76" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="ea91a684-9a00-4725-b1b7-aa45572e6697"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Cliente]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -153,51 +164,55 @@ ORDER BY pedido.`status` ASC]]>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="0" y="0" width="57" height="20" uuid="12c27ccd-b2bb-4834-be02-bb9a23a26ff4"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{pedido_idPedido}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="57" y="0" width="96" height="20" uuid="a5550822-5fb2-40dd-958d-7bf69b8d19e0"/>
+				<reportElement x="57" y="0" width="77" height="20" uuid="a5550822-5fb2-40dd-958d-7bf69b8d19e0"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{pedido_dataPedido}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="153" y="0" width="117" height="20" uuid="06e46605-0fd1-4b6c-bd69-05974a06f228"/>
+				<reportElement x="210" y="0" width="117" height="20" uuid="06e46605-0fd1-4b6c-bd69-05974a06f228"/>
 				<textElement>
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{pedido_descricaoPedido}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="318" y="0" width="79" height="20" uuid="69b9cf57-605f-40b8-b031-c43c9dfa9de6"/>
+				<reportElement x="375" y="0" width="58" height="20" uuid="69b9cf57-605f-40b8-b031-c43c9dfa9de6"/>
 				<textElement textAlignment="Right">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{pedido_valorTotal}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="397" y="0" width="79" height="20" uuid="dc405685-2ab8-4c23-8e04-a0cdb12735a5"/>
+				<reportElement x="433" y="0" width="56" height="20" uuid="dc405685-2ab8-4c23-8e04-a0cdb12735a5"/>
 				<textElement textAlignment="Right">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{pedido_valorDesconto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="476" y="0" width="79" height="20" uuid="db2d0cb9-ea0e-425f-a86a-8489ee4ce0f2"/>
+				<reportElement x="489" y="0" width="66" height="20" uuid="db2d0cb9-ea0e-425f-a86a-8489ee4ce0f2"/>
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{pedido_qtdTotal} * $F{pedido_valorTotal}) - $F{pedido_valorDesconto} ]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{pedido_qtdTotal} * $F{pedido_valorTotal}) - $F{pedido_valorDesconto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="270" y="0" width="48" height="20" uuid="dc778d93-c8ab-4336-afb3-c2de42e6e841"/>
+				<reportElement x="327" y="0" width="48" height="20" uuid="dc778d93-c8ab-4336-afb3-c2de42e6e841"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{pedido_qtdTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="134" y="0" width="76" height="21" uuid="6ace271e-79aa-4691-97a6-52624a9c457c"/>
+				<textFieldExpression><![CDATA[$F{cliente_nomeCliente}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -224,30 +239,30 @@ ORDER BY pedido.`status` ASC]]>
 	<summary>
 		<band height="40">
 			<textField>
-				<reportElement x="397" y="0" width="79" height="20" uuid="6d5f677a-a42d-4313-9ba5-e4c9efc7b7b2"/>
+				<reportElement x="433" y="0" width="56" height="20" uuid="6d5f677a-a42d-4313-9ba5-e4c9efc7b7b2"/>
 				<textElement textAlignment="Right">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{TOTAL_DESCONTO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="476" y="0" width="79" height="20" uuid="f8b070ab-1eb3-4fc9-988e-74b40bf87c3b"/>
+				<reportElement x="489" y="0" width="66" height="20" uuid="f8b070ab-1eb3-4fc9-988e-74b40bf87c3b"/>
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{TOTAL_PAGO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="318" y="0" width="79" height="20" uuid="55e84aa3-8bed-4aab-b21c-b7e47d316c92"/>
+				<reportElement x="375" y="0" width="58" height="20" uuid="55e84aa3-8bed-4aab-b21c-b7e47d316c92"/>
 				<textElement textAlignment="Right">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{PRECO_MEDIO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="270" y="0" width="48" height="20" uuid="1d5f6c3a-a1b3-40d5-a851-bc57b8de2599"/>
+				<reportElement x="327" y="0" width="48" height="20" uuid="1d5f6c3a-a1b3-40d5-a851-bc57b8de2599"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{QTD_TOTAL}]]></textFieldExpression>
 			</textField>

@@ -126,49 +126,49 @@ ORDER BY usuario.`status`, usuario.`nomeUsuario`]]>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="0" y="0" width="79" height="20" uuid="b55f344d-9f0e-48a9-ba71-18335344dd34"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuario_idUsuario}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="79" y="0" width="175" height="20" uuid="e55da8f1-8018-465f-a969-0fc1e9729f2a"/>
 				<textElement>
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuario_nomeFuncionario}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="254" y="0" width="90" height="20" uuid="a721b2ca-77b1-46bc-83bc-4e28380cda72"/>
 				<textElement>
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuario_nomeUsuario}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="344" y="0" width="50" height="20" uuid="6c71b264-4fc6-48c8-abaf-03f9f9ab16e4"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuario_cliente}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="394" y="0" width="54" height="20" uuid="77aba0ee-9cfd-461d-8657-f7af84eb0181"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuario_usuario}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="448" y="0" width="59" height="20" uuid="c4e20ab2-a6b2-4fa2-99e7-bf8b4251da8b"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuario_produto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="507" y="0" width="48" height="20" uuid="11b76484-4e96-4d53-b631-d4d728b404bd"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuario_status}]]></textFieldExpression>
 			</textField>
