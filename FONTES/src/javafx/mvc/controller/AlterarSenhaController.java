@@ -13,8 +13,10 @@ import javafx.mvc.Main;
 import javafx.mvc.contracts.Ouvinte;
 import javafx.mvc.events.EventoFecharTela;
 import javafx.mvc.events.EventoOcorrido;
+import javafx.mvc.events.EventoTrocarTela;
 import javafx.mvc.model.UsuarioModel;
 import javafx.mvc.services.Conexao;
+import javafx.mvc.services.HashSHA2;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -48,25 +50,34 @@ public class AlterarSenhaController implements Ouvinte {
 
     @FXML
     void btnCancelaClicked(ActionEvent event) {
-        this.dialogStage.close();
+        this.tirarTela();
     }
 
-    @FXML
-    boolean btnConfirmaClicked(ActionEvent event) {
-        if (this.altera(Senha)) {
-            
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("Alterado com Sucesso!");
-        alert.show(); 
+    private void tirarTela(){
         EventoFecharTela ft = new EventoFecharTela("AlterarSenha");
         Main.avisaOuvintes(ft);
+        EventoTrocarTela et = new EventoTrocarTela("Usuario"); 
+        Main.avisaOuvintes(et);
         
+    }
+    
+    @FXML
+    void btnConfirmaClicked(ActionEvent event) {
+        if (txtSenha.getText().equals(txtConfirmaSenha.getText())) {
+                    
+      String senha = HashSHA2.hashSHA2(txtSenha.getText());
+      EventoOcorrido ec = new EventoOcorrido(); 
+      ec.setNome("senhaAlterada");
+      ec.setDados(senha);
+      Main.avisaOuvintes(ec);
+        this.tirarTela();
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Não foi possivel alterar a senha!");
-            alert.show();
+            
+            Alert alerta = new Alert(Alert.AlertType.ERROR); 
+            alerta.setContentText("Os dois campos de senha precisam ser iguais!");
+            alerta.show();
         }
-        return false;
+        
     }
     
     @FXML
@@ -84,16 +95,17 @@ public class AlterarSenhaController implements Ouvinte {
         Main.subscribe(this);
     }
     
-    private boolean altera (String Senha){
+    private boolean altera (){
+        String senha = HashSHA2.hashSHA2(txtSenha.getText()); 
         boolean alterado = false;
         String sql;
         try {
             
             Connection conn = Conexao.getInstance().getConn();
-            sql = "UPDATE usuario SET senha = SHA2(?,'256') WHERE idUsuario=?";
+            sql = "UPDATE usuario SET senhaUsuario = ? WHERE idUsuario=?";
             PreparedStatement ps;
             ps = conn.prepareStatement(sql);
-            ps.setString(1, Senha);
+            ps.setString(1, senha);
             ps.setInt(2, this.um.getIdUsuario());
             ps.executeUpdate();
             return true; 

@@ -147,7 +147,6 @@
                                 <Insets right="5.0" fx:id="x2" />
                               </GridPane.margin>
                             </Label>
-                            <TextField id="txtCadSenha" fx:id="txtCadSenhaUsuario" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" />
                             <Label text="Nome Usuario:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                               <GridPane.margin>
                                 <Insets right="5.0" fx:id="x2" />
@@ -178,7 +177,7 @@
                               </GridPane.margin>
                             </Label>
                             <CheckBox id="checkSim" fx:id="checkPermitirProduto" mnemonicParsing="false" text="Permitir" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                            <Button fx:id="btnAlteraSenha" mnemonicParsing="false" onAction="#btnAlteraSenhaClick" prefHeight="33.0" prefWidth="79.0" text="Alterar" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                            <Button fx:id="btnAlteraSenha" mnemonicParsing="false" onAction="#btnAlteraSenhaClick" prefHeight="33.0" prefWidth="79.0" text="Alterar" GridPane.columnIndex="1" GridPane.rowIndex="4">
                               <GridPane.margin>
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
                               </GridPane.margin>
