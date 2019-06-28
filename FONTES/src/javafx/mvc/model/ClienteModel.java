@@ -12,7 +12,7 @@ public class ClienteModel {
     private String rg;
     private String genero;
     private String celular;
-    private String status;
+    private String status;      
 
     public int getIdCliente() {
         return idCliente;
