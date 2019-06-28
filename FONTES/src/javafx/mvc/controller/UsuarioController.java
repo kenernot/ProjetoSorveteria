@@ -20,6 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.mvc.Main;
+import javafx.mvc.contracts.Ouvinte;
 import javafx.mvc.dao.UsuarioDao;
 import javafx.mvc.events.EventoOcorrido;
 import javafx.mvc.events.EventoTrocarTela;
@@ -48,7 +49,7 @@ import javax.swing.JOptionPane;
  *
  * @author Marlon
  */
-public class UsuarioController implements Initializable {
+public class UsuarioController implements Initializable, Ouvinte {
 
  
     @FXML
@@ -155,17 +156,17 @@ public class UsuarioController implements Initializable {
     
     @FXML
     void btSalvarClickUsuario(ActionEvent event) throws Exception{
-        UsuarioModel usuario = new UsuarioModel();
-        usuario.setNomeFuncionario(txtCadNomeUsuario.getText().trim().toUpperCase());
-        usuario.setNomeUsuario(txtCadUsuario.getText().trim().toUpperCase());
-        usuario.setSenhaUsuario(txtCadSenhaUsuario.getText().trim().toUpperCase());
+        
+        this.um.setNomeFuncionario(txtCadNomeUsuario.getText().trim());
+        this.um.setNomeUsuario(txtCadUsuario.getText().trim());
+        //usuario.setSenhaUsuario(txtCadSenhaUsuario.getText().trim().toUpperCase());
         btnAlteraSenha.setDisable(true);
-        usuario.setStatus(comboCadUsuario.getValue().substring(0, 1).toUpperCase()); 
-       usuario.setCliente(Boolean.valueOf(checkPermitirCliente.isSelected()).toString().substring(0, 1).toUpperCase());
-      usuario.setUsuario(Boolean.valueOf(checkPermitirUsuario.isSelected()).toString().substring(0, 1).toUpperCase());
-       usuario.setProduto(Boolean.valueOf(checkPermitirProduto.isSelected()).toString().substring(0, 1).toUpperCase());
+        this.um.setStatus(comboCadUsuario.getValue().substring(0, 1).toUpperCase()); 
+       this.um.setCliente(Boolean.valueOf(checkPermitirCliente.isSelected()).toString().substring(0, 1).toUpperCase());
+      this.um.setUsuario(Boolean.valueOf(checkPermitirUsuario.isSelected()).toString().substring(0, 1).toUpperCase());
+       this.um.setProduto(Boolean.valueOf(checkPermitirProduto.isSelected()).toString().substring(0, 1).toUpperCase());
                 
-       this.ud.salvar(usuario);
+       this.ud.salvar(this.um);
 
     }
 
@@ -220,6 +221,7 @@ public class UsuarioController implements Initializable {
         this.ComboPesquisarUsuario.getItems().add("Ativo"); 
         this.ComboPesquisarUsuario.getItems().add("Inativo"); 
         this.ComboPesquisarUsuario.getItems().add("Todos"); 
+        Main.subscribe(this);
         
     }
     
@@ -282,11 +284,15 @@ public class UsuarioController implements Initializable {
             btnAlteraSenha.setDisable(false);
             txtCadUsuario.setText(selectedItem.getNomeUsuario()); 
             txtIDCadUsuario.setText(Integer.toString(selectedItem.getIdUsuario())); 
-            comboCadUsuario.setValue(selectedItem.getStatus()); 
+            if (selectedItem.getStatus().equals("A")) {
+                comboCadUsuario.setValue("Ativo");
+            } else {
+            comboCadUsuario.setValue("Inativo"); }
             checkPermitirCliente.setSelected(selectedItem.getCliente().equals("T"));
             checkPermitirProduto.setSelected(selectedItem.getProduto().equals("T")); 
             checkPermitirUsuario.setSelected(selectedItem.getUsuario().equals("T"));
             TabPane.getSelectionModel().select(1);
+            um = selectedItem;
         }
     }
     
@@ -309,5 +315,12 @@ public class UsuarioController implements Initializable {
     private boolean isOkClicked() {
         
         return okClicked; 
+    }
+
+    @Override
+    public void avisandoAqui(EventoOcorrido evento) {
+        if (evento.getNome().equals("senhaAlterada")) {
+            this.um.setSenhaUsuario((String)evento.getDados());
+        }
     }
 }
