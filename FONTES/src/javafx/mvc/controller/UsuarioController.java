@@ -19,7 +19,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.mvc.Main;
 import javafx.mvc.dao.UsuarioDao;
+import javafx.mvc.events.EventoOcorrido;
+import javafx.mvc.events.EventoTrocarTela;
 import javafx.mvc.model.UsuarioModel;
 import javafx.mvc.services.Conexao;
 import javafx.scene.Scene;
@@ -134,7 +137,11 @@ public class UsuarioController implements Initializable {
     
      @FXML
     void btnAlteraSenhaClick(ActionEvent event) throws IOException {
-        this.chama(um);
+        //this.chama(um);
+         EventoOcorrido eo = new EventoOcorrido(); 
+         eo.setNome("AlterarSenha");
+         eo.setDados(um); 
+         Main.avisaOuvintes(eo); 
     }
 
     @FXML
@@ -147,9 +154,10 @@ public class UsuarioController implements Initializable {
     @FXML
     void btSalvarClickUsuario(ActionEvent event) throws Exception{
         UsuarioModel usuario = new UsuarioModel();
-        usuario.setNomeFuncionario(txtCadNomeUsuario.getText());
-        usuario.setNomeUsuario(txtCadUsuario.getText());
-        usuario.setSenhaUsuario(txtCadSenhaUsuario.getText());
+        usuario.setNomeFuncionario(txtCadNomeUsuario.getText().trim().toUpperCase());
+        usuario.setNomeUsuario(txtCadUsuario.getText().trim().toUpperCase());
+        usuario.setSenhaUsuario(txtCadSenhaUsuario.getText().trim().toUpperCase());
+        btnAlteraSenha.setDisable(true);
         usuario.setStatus(comboCadUsuario.getValue().substring(0, 1).toUpperCase()); 
        usuario.setCliente(Boolean.valueOf(checkPermitirCliente.isSelected()).toString().substring(0, 1).toUpperCase());
       usuario.setUsuario(Boolean.valueOf(checkPermitirUsuario.isSelected()).toString().substring(0, 1).toUpperCase());
@@ -269,7 +277,7 @@ public class UsuarioController implements Initializable {
         if (event.getClickCount()>=2) { 
             UsuarioModel selectedItem = TableViewUsuario.getSelectionModel().getSelectedItem(); 
             txtCadNomeUsuario.setText(selectedItem.getNomeFuncionario());
-            //fazer botão para chamar tela de alteração de senha.
+            btnAlteraSenha.setDisable(false);
             txtCadUsuario.setText(selectedItem.getNomeUsuario()); 
             txtIDCadUsuario.setText(Integer.toString(selectedItem.getIdUsuario())); 
             comboCadUsuario.setValue(selectedItem.getStatus()); 
