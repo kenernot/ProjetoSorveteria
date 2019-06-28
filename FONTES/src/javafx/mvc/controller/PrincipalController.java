@@ -153,6 +153,7 @@ public class PrincipalController implements Initializable, Ouvinte {
         listaNomes.add("AberturaCaixa");
         listaNomes.add("ItemCaixa");
         listaNomes.add("Pedido");
+        
 
         // Burger R$10
         UsuarioModel user = UsuarioLogado.getInstance().getUser();
@@ -164,6 +165,7 @@ public class PrincipalController implements Initializable, Ouvinte {
         //System.out.println(user.getUsuario());
         if (user.getUsuario().equals("1")) {
             listaNomes.add("Usuario");
+            listaNomes.add("AlterarSenha");
             this.menuItemCadastroUsuario.setVisible(true);
         }
         if (user.getProduto().equals("1")) {
@@ -205,6 +207,8 @@ public class PrincipalController implements Initializable, Ouvinte {
     public void avisandoAqui(EventoOcorrido evento) {
         if (evento.getNome().equals("FECHAR_TELA")) {
             fecharTela((String) evento.getDados());
+        } else if (evento.getNome().equals("TROCA_TELA")) {
+            chamaTela((String) evento.getDados());
         }
     }
 
