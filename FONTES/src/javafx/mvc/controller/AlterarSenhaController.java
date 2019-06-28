@@ -63,12 +63,20 @@ public class AlterarSenhaController implements Ouvinte {
     
     @FXML
     void btnConfirmaClicked(ActionEvent event) {
+        if (txtSenha.getText().equals(txtConfirmaSenha.getText())) {
+                    
       String senha = HashSHA2.hashSHA2(txtSenha.getText());
       EventoOcorrido ec = new EventoOcorrido(); 
       ec.setNome("senhaAlterada");
       ec.setDados(senha);
       Main.avisaOuvintes(ec);
         this.tirarTela();
+        } else {
+            
+            Alert alerta = new Alert(Alert.AlertType.ERROR); 
+            alerta.setContentText("Os dois campos de senha precisam ser iguais!");
+            alerta.show();
+        }
         
     }
     
